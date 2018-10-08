@@ -23,6 +23,7 @@ export {
   default as HighlightsBarSlider
 } from "./components/HighlightsBarSlider/HighlightsBarSlider";
 export { default as HighlightStrip } from "./components/HighLightStrip/index";
+export { default as ListCard } from "./components/ListCard/ListCard";
 export {
   default as MenuDropdown
 } from "./components/MenuDropdown/MenuDropdown";
