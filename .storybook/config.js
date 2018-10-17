@@ -2,7 +2,7 @@ import { setDefaults, withInfo } from '@storybook/addon-info';
 import { addDecorator, configure } from '@storybook/react';
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
-import { GlobalStyle } from '../src/styles/GlobalStyle';
+import { GlobalStyle } from './styles/GlobalStyle';
 import { GlobalStyle as StorybookGlobalStyle } from './styles/GlobalStyle';
 
 const styles = {
