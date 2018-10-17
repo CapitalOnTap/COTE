@@ -97,12 +97,14 @@ class Tabs extends Component {
 Tabs.propTypes = {
   onTabClicked: PropTypes.func,
   children: PropTypes.arrayOf(PropTypes.node),
-  contentMargin: PropTypes.string
+  contentMargin: PropTypes.string,
+  activeIndex: PropTypes.number,
 };
 
 Tabs.defaultProps = {
   onTabClicked: null,
-  children: []
+  children: [],
+  activeIndex: 0,
 };
 
 export default Tabs;
