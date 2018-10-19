@@ -30,6 +30,7 @@ const ToggleIcon = styled(Icon)`
   transition: transform 350ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   ${props => props.isOpen && rotate};
   cursor: pointer;
+  overflow: hidden;
 `;
 
 const Content = styled.div`
@@ -44,6 +45,16 @@ const Content = styled.div`
   transition: max-height 350ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
 
   ${props => !props.isOpen && closed};
+`;
+
+const IconWrapper = styled.div`
+  width: 24px;
+`;
+
+const StyledTitle = styled(Title)`
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
 
 class ExpansionPanel extends PureComponent {
@@ -61,9 +72,11 @@ class ExpansionPanel extends PureComponent {
     return (
       <Wrapper>
         <Header>
-          <Title>{title}</Title>
+          <StyledTitle>{title}</StyledTitle>
           {icon && (
-            <ToggleIcon isOpen={isOpen} name={icon} onClick={this.toggleOpen} />
+            <IconWrapper>
+              <ToggleIcon isOpen={isOpen} name={icon} onClick={this.toggleOpen} />
+            </IconWrapper>
           )}
         </Header>
         <Content isOpen={isOpen}>{children}</Content>
