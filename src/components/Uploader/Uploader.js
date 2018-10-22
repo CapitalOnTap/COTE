@@ -30,7 +30,7 @@ const ContentWrapper = styled.div`
   }
 `;
 
-const Uploader = ({ icon, theme, buttonText, title,subtitle, ...props }) => {
+const Uploader = ({ icon, theme, buttonText, title, subtitle, ...props }) => {
   return (
     <StyledDropZone
       {...props}
@@ -46,7 +46,7 @@ const Uploader = ({ icon, theme, buttonText, title,subtitle, ...props }) => {
       <ContentWrapper>
         <Icon name={icon} primary />
         <Title bold>{title}</Title>
-        <Title>{subtitle}</Title>
+        <p>{subtitle}</p>
         <p>or</p>
       </ContentWrapper>
       <Button primary solid type="button">
