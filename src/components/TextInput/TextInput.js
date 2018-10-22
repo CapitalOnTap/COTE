@@ -61,6 +61,7 @@ const TooltipIcon = styled(Icon)`
 
 const TextInput = ({
   labelText,
+  subLabelText,
   placeholder,
   mask,
   guide,
@@ -103,6 +104,9 @@ const TextInput = ({
           </Tooltip>
         )}
       </div>
+      {subLabelText && (
+          <Caption required={required} text={subLabelText} />
+      )}
       <Input
         className={className}
         placeholder={placeholder}
@@ -136,6 +140,8 @@ TextInput.propTypes = {
   guide: PropTypes.bool,
   /** Label for input */
   labelText: PropTypes.string,
+  /** subLabel for input */
+  subLabelText: PropTypes.string,
   /** Input name */
   name: PropTypes.string,
   tooltip: PropTypes.shape({

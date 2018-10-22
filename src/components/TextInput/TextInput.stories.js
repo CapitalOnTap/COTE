@@ -19,6 +19,9 @@ storiesOf("Text Input", module)
   .add("With Label", () => (
     <TextInput placeholder="Placeholder value" labelText="Label" />
   ))
+  .add("With subLabel", () => (
+    <TextInput placeholder="Placeholder value" labelText="Label" subLabelText="subLabel" />
+  ))
   .add("With info", () => <TextInput info="This is an info to help user." />)
   .add("With info and error", () => (
     <TextInput
