@@ -30,7 +30,7 @@ const ContentWrapper = styled.div`
   }
 `;
 
-const Uploader = ({ icon, theme, buttonText, title, ...props }) => {
+const Uploader = ({ icon, theme, buttonText, title, subtitle, ...props }) => {
   return (
     <StyledDropZone
       {...props}
@@ -46,6 +46,7 @@ const Uploader = ({ icon, theme, buttonText, title, ...props }) => {
       <ContentWrapper>
         <Icon name={icon} primary />
         <Title bold>{title}</Title>
+        <p>{subtitle}</p>
         <p>or</p>
       </ContentWrapper>
       <Button primary solid type="button">
@@ -60,7 +61,8 @@ Uploader.propTypes = {};
 Uploader.defaultProps = {
   icon: 'add_circle_outline',
   buttonText: 'Choose files',
-  title: 'Drag and drop files here'
+  title: 'Drag and drop files here',
+  subtitle:'',
 };
 
 export default Uploader;
