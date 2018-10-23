@@ -62,7 +62,7 @@ Uploader.defaultProps = {
   icon: 'add_circle_outline',
   buttonText: 'Choose files',
   title: 'Drag and drop files here',
-  subtitle:'(PDFs)',
+  subtitle:'',
 };
 
 export default Uploader;
