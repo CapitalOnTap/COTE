@@ -1,13 +1,11 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import styled from "styled-components";
-import { colors as defaultColors } from "../../styles/defaults";
-import Icon from "../atoms/Icon/Icon";
-import Paper from "../Paper/Paper";
-import OutsideAlerter from "../OutsideAlerter/OutsideAlerter";
-import { Caption } from "../atoms/Typography";
-import { Label } from "../atoms/Typography";
-import ResultsList from "../ResultsList/ResultsList";
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
+import styled from 'styled-components';
+import { colors as defaultColors } from '../../styles/defaults';
+import Icon from '../atoms/Icon/Icon';
+import { Caption, Label } from '../atoms/Typography';
+import OutsideAlerter from '../OutsideAlerter/OutsideAlerter';
+import ResultsList from '../ResultsList/ResultsList';
 
 const ArrowIcon = styled(Icon)`
   position: absolute;
@@ -22,7 +20,7 @@ const ArrowIcon = styled(Icon)`
 const Wrapper = styled.div`
   position: relative;
   min-width: 66px;
-  width: ${props => (props.full ? "100%" : "232px")};
+  width: ${props => (props.full ? '100%' : '232px')};
   border: ${props => {
     if (props.error && props.theme)
       return `1px solid ${props.theme.colorDanger}`;
@@ -39,7 +37,7 @@ class Dropdown extends Component {
     super(props);
     this.state = {
       isOpen: false,
-      selectedOption: null
+      selectedOption: this.props.selectedOption
     };
   }
 
@@ -103,7 +101,16 @@ Dropdown.propTypes = {
   /** Title of select box */
   title: PropTypes.string.isRequired,
   /** Possible options and their values */
-  options: PropTypes.arrayOf(PropTypes.object),
+  options: PropTypes.arrayOf(
+    PropTypes.shape({
+      title: PropTypes.string.isRequired,
+      value: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number,
+        PropTypes.bool
+      ]).isRequired
+    })
+  ),
   /** Callback to retrieve value of option selected */
   handleValueChange: PropTypes.func,
   /** If true dropdown takes full width of parent */
@@ -111,15 +118,30 @@ Dropdown.propTypes = {
   /** Text label */
   label: PropTypes.string,
   /** An item added at the end of the results list - can be used tor "can't find my option" scenarios */
-  lastOption: PropTypes.shape({ title: PropTypes.string, value: PropTypes.any })
+  lastOption: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    value: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number,
+      PropTypes.bool
+    ]).isRequired
+  }),
+  selectedOption: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    value: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number,
+      PropTypes.bool
+    ]).isRequired
+  })
 };
 
 Dropdown.defaultProps = {
-  title: "Select an option",
-  options: [{ title: "Option 1", value: 1 }, { title: "Option 2", value: 2 }],
+  title: 'Select an option',
+  options: [{ title: 'Option 1', value: 1 }, { title: 'Option 2', value: 2 }],
   handleValueChange: value => console.log(value),
   full: false,
-  label: "",
+  label: '',
   lastOption: null
 };
 
