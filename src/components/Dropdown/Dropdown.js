@@ -37,7 +37,7 @@ class Dropdown extends Component {
     super(props);
     this.state = {
       isOpen: false,
-      selectedOption: this.props.selectedOption
+      selectedOption: props.selectedOption
     };
   }
 
