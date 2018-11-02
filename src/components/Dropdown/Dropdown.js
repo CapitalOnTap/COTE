@@ -30,7 +30,7 @@ const Wrapper = styled.div`
   }};
   border-radius: 4px;
   padding: 9px 16px;
-  cursor: pointer;
+  cursor: ${props => (props.disabled ? 'default': 'pointer')};
 `;
 class Dropdown extends Component {
   constructor(props) {
@@ -49,7 +49,9 @@ class Dropdown extends Component {
   };
 
   handleClick = () => {
-    this.setState({ isOpen: !this.state.isOpen });
+    if (!this.props.disabled) {
+      this.setState({ isOpen: !this.state.isOpen });
+    }
   };
 
   handleClickOutsideDropdown = () => {
@@ -58,7 +60,7 @@ class Dropdown extends Component {
 
   render() {
     const { isOpen, selectedOption } = this.state;
-    const { options, title, error, full, label, lastOption, id } = this.props;
+    const { options, title, error, full, label, lastOption, id, disabled } = this.props;
     return (
       <OutsideAlerter
         handleClickOutsideElement={this.handleClickOutsideDropdown}
@@ -77,10 +79,10 @@ class Dropdown extends Component {
           ) : (
             <span>{title}</span>
           )}
-          {!isOpen && (
+          {!isOpen && !disabled && (
             <ArrowIcon name="keyboard_arrow_down" onClick={this.handleClick} />
           )}
-          {isOpen ? (
+          {isOpen && !disabled ? (
             <div>
               <ResultsList
                 handleResultSelected={this.handleOptionChange}
@@ -108,7 +110,7 @@ Dropdown.propTypes = {
         PropTypes.string,
         PropTypes.number,
         PropTypes.bool
-      ]).isRequired
+      ])
     })
   ),
   /** Callback to retrieve value of option selected */
@@ -117,14 +119,14 @@ Dropdown.propTypes = {
   full: PropTypes.bool,
   /** Text label */
   label: PropTypes.string,
-  /** An item added at the end of the results list - can be used tor "can't find my option" scenarios */
+  /** An item added at the end of the results list - can be used for "can't find my option" scenarios */
   lastOption: PropTypes.shape({
     title: PropTypes.string.isRequired,
     value: PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.number,
       PropTypes.bool
-    ]).isRequired
+    ])
   }),
   selectedOption: PropTypes.shape({
     title: PropTypes.string.isRequired,
@@ -132,8 +134,9 @@ Dropdown.propTypes = {
       PropTypes.string,
       PropTypes.number,
       PropTypes.bool
-    ]).isRequired
-  })
+    ])
+  }),
+  disabled: PropTypes.bool,
 };
 
 Dropdown.defaultProps = {
@@ -142,7 +145,9 @@ Dropdown.defaultProps = {
   handleValueChange: value => console.log(value),
   full: false,
   label: '',
-  lastOption: null
+  lastOption: null,
+  selectedOption: null,
+  disabled: false,
 };
 
 export default Dropdown;

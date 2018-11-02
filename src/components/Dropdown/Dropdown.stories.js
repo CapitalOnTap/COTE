@@ -125,4 +125,5 @@ storiesOf('Dropdown', module)
       options={[]}
       lastOption={{ title: "Can't find my option", value: 0 }}
     />
-  ));
+  ))
+  .add('Disabled', () => <Dropdown options={test} disabled />);
