@@ -30,7 +30,7 @@ const Wrapper = styled.div`
   }};
   border-radius: 4px;
   padding: 9px 16px;
-  cursor: pointer;
+  cursor: ${props => (props.disabled ? 'normal': 'pointer')};
 `;
 class Dropdown extends Component {
   constructor(props) {
@@ -58,7 +58,7 @@ class Dropdown extends Component {
 
   render() {
     const { isOpen, selectedOption } = this.state;
-    const { options, title, error, full, label, lastOption, id } = this.props;
+    const { options, title, error, full, label, lastOption, id, disabled } = this.props;
     return (
       <OutsideAlerter
         handleClickOutsideElement={this.handleClickOutsideDropdown}
@@ -66,7 +66,7 @@ class Dropdown extends Component {
         {label && <Label required={error} text={label} />}
 
         <Wrapper
-          onClick={this.handleClick}
+          onClick={!disabled && this.handleClick}
           error={error}
           full={full}
           id={id}
@@ -77,7 +77,7 @@ class Dropdown extends Component {
           ) : (
             <span>{title}</span>
           )}
-          {!isOpen && (
+          {!isOpen && !disabled && (
             <ArrowIcon name="keyboard_arrow_down" onClick={this.handleClick} />
           )}
           {isOpen ? (
@@ -133,7 +133,8 @@ Dropdown.propTypes = {
       PropTypes.number,
       PropTypes.bool
     ]).isRequired
-  })
+  }),
+  disabled: PropTypes.bool,
 };
 
 Dropdown.defaultProps = {
@@ -142,7 +143,8 @@ Dropdown.defaultProps = {
   handleValueChange: value => console.log(value),
   full: false,
   label: '',
-  lastOption: null
+  lastOption: null,
+  disabled: false,
 };
 
 export default Dropdown;
