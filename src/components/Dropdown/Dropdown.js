@@ -49,7 +49,9 @@ class Dropdown extends Component {
   };
 
   handleClick = () => {
-    this.setState({ isOpen: !this.state.isOpen });
+    if (!this.props.disabled) {
+      this.setState({ isOpen: !this.state.isOpen });
+    }
   };
 
   handleClickOutsideDropdown = () => {
@@ -66,7 +68,7 @@ class Dropdown extends Component {
         {label && <Label required={error} text={label} />}
 
         <Wrapper
-          onClick={!disabled && this.handleClick}
+          onClick={this.handleClick}
           error={error}
           full={full}
           id={id}
