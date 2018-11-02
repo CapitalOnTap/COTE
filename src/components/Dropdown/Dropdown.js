@@ -110,7 +110,7 @@ Dropdown.propTypes = {
         PropTypes.string,
         PropTypes.number,
         PropTypes.bool
-      ]).isRequired
+      ])
     })
   ),
   /** Callback to retrieve value of option selected */
@@ -119,14 +119,14 @@ Dropdown.propTypes = {
   full: PropTypes.bool,
   /** Text label */
   label: PropTypes.string,
-  /** An item added at the end of the results list - can be used tor "can't find my option" scenarios */
+  /** An item added at the end of the results list - can be used for "can't find my option" scenarios */
   lastOption: PropTypes.shape({
     title: PropTypes.string.isRequired,
     value: PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.number,
       PropTypes.bool
-    ]).isRequired
+    ])
   }),
   selectedOption: PropTypes.shape({
     title: PropTypes.string.isRequired,
@@ -134,7 +134,7 @@ Dropdown.propTypes = {
       PropTypes.string,
       PropTypes.number,
       PropTypes.bool
-    ]).isRequired
+    ])
   }),
   disabled: PropTypes.bool,
 };
@@ -146,6 +146,7 @@ Dropdown.defaultProps = {
   full: false,
   label: '',
   lastOption: null,
+  selectedOption: null,
   disabled: false,
 };
 
