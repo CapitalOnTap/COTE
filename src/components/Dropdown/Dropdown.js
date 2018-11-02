@@ -30,7 +30,7 @@ const Wrapper = styled.div`
   }};
   border-radius: 4px;
   padding: 9px 16px;
-  cursor: ${props => (props.disabled ? 'normal': 'pointer')};
+  cursor: ${props => (props.disabled ? 'default': 'pointer')};
 `;
 class Dropdown extends Component {
   constructor(props) {
