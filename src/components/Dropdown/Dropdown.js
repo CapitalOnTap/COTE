@@ -82,7 +82,7 @@ class Dropdown extends Component {
           {!isOpen && !disabled && (
             <ArrowIcon name="keyboard_arrow_down" onClick={this.handleClick} />
           )}
-          {isOpen ? (
+          {isOpen && !disabled ? (
             <div>
               <ResultsList
                 handleResultSelected={this.handleOptionChange}
