@@ -63,10 +63,6 @@ const Checkmark = styled.span`
   }
 `;
 
-const InputLabel = styled.span`
-  color: ${props => (props.checked ? "initial" : "inherit")};
-`;
-
 const RadioButton = ({ label, name, checked, onChange, value, ...props }) => {
   return (
     <div>
@@ -86,7 +82,7 @@ const RadioButton = ({ label, name, checked, onChange, value, ...props }) => {
 };
 
 RadioButton.propTypes = {
-  label: PropTypes.string,
+  label: PropTypes.node,
   name: PropTypes.string,
   checked: PropTypes.bool,
   /** Returns value of radio button */
