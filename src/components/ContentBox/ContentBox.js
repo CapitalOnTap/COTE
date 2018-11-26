@@ -35,7 +35,8 @@ const ContentBox = ({ children, title, className, id, noPadding, ...props }) => 
 ContentBox.propTypes = {
   title: PropTypes.string,
   /** What to render inside the content area of the box */
-  children: PropTypes.node
+  children: PropTypes.node,
+  noPadding: PropTypes.bool,
 };
 
 ContentBox.defaultProps = {
