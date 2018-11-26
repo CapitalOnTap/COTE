@@ -44,11 +44,19 @@ const TabsContainer = styled.div`
 `;
 
 class Tabs extends Component {
+  static getDerivedStateFromProps(nextProps, state) {
+    if (nextProps.activeIndex !== state.activeIndex) {
+      return { activeIndex: nextProps.activeIndex }
+    } else {
+      return null
+    }
+  }
+
   constructor(props) {
     super(props);
 
     this.state = {
-      activeIndex: props.activeIndex
+      activeIndex: 0
     };
   }
 
@@ -56,7 +64,7 @@ class Tabs extends Component {
     if (this.props.onTabClicked) {
       this.props.onTabClicked(index);
     }
-    
+
     this.setState({ activeIndex: index });
   };
 
@@ -95,8 +103,13 @@ class Tabs extends Component {
 }
 
 Tabs.propTypes = {
+  /** Active index to enable control of active tab */
+  activeIndex: PropTypes.number,
+  /** Handler to run when the tab is clicked */
   onTabClicked: PropTypes.func,
+  /** Child nodes */
   children: PropTypes.arrayOf(PropTypes.node),
+  /** Optional margin to apply to tabs container */
   contentMargin: PropTypes.string
 };
 
