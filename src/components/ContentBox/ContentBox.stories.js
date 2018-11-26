@@ -7,6 +7,7 @@ import Dropdown from "../Dropdown/Dropdown";
 
 storiesOf("ContentBox", module)
   .add("Empty", () => <ContentBox />)
+  .add("No Padding", () => <ContentBox noPadding='true'/>)
   .add("With a button inside", () => (
     <ContentBox title="Content box with a button">
       <Button>Click me</Button>
