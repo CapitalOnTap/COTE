@@ -13,7 +13,7 @@ const Wrapper = styled.div`
 `;
 
 const ContentWrapper = styled.div`
-  padding: 24px;
+  padding: ${props => props.noPadding ? null : '24px'};
 `;
 
 const TitleWrapper = styled.div`
@@ -21,13 +21,13 @@ const TitleWrapper = styled.div`
   border-bottom: 1px solid #f3f3f3;
 `;
 
-const ContentBox = ({ children, title, className, id, ...props }) => {
+const ContentBox = ({ children, title, className, id, noPadding, ...props }) => {
   return (
     <Wrapper className={className} {...props} id={id}>
       <TitleWrapper>
         <Title bold>{title}</Title>
       </TitleWrapper>
-      <ContentWrapper>{children}</ContentWrapper>
+      <ContentWrapper noPadding={noPadding}>{children}</ContentWrapper>
     </Wrapper>
   );
 };
@@ -35,7 +35,8 @@ const ContentBox = ({ children, title, className, id, ...props }) => {
 ContentBox.propTypes = {
   title: PropTypes.string,
   /** What to render inside the content area of the box */
-  children: PropTypes.node
+  children: PropTypes.node,
+  noPadding: PropTypes.bool,
 };
 
 ContentBox.defaultProps = {
