@@ -40,7 +40,7 @@ class MyComponent extends Component {
     return (
       <Fragment>
         <WidgetBox>
-          <Tabs onTabClicked={this.handleTabClicked} activeIndex={this.state.selectedTab}>
+          <Tabs onTabClicked={this.handleTabClicked} controlledActiveIndex={this.state.selectedTab}>
             <Tab title="Redeem cash">
               <InputWrapper>
                 <TextInput
