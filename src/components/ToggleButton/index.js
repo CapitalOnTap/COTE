@@ -59,14 +59,14 @@ class ToggleButton extends PureComponent {
     isActive: false
   };
 
-  handleButtonClicked = () => {
+  handleButtonClicked = e => {
     const { disabled } = this.props;
 
     if (disabled) return;
 
     this.setState(
       { isActive: !this.state.isActive },
-      this.props.onButtonClicked(!this.state.isActive)
+      this.props.onButtonClicked(!this.state.isActive, e)
     );
   };
 
