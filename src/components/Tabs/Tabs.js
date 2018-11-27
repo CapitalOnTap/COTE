@@ -36,7 +36,7 @@ const TabsHeaders = styled.div`
   display: flex;
   position: relative;
 `;
- 
+
 const TabsContainer = styled.div`
   margin: ${props => props.margin || '1.4rem'};
   display: flex;
@@ -45,8 +45,9 @@ const TabsContainer = styled.div`
 
 class Tabs extends Component {
   static getDerivedStateFromProps(nextProps, state) {
-    if (nextProps.activeIndex !== state.activeIndex) {
-      return { activeIndex: nextProps.activeIndex }
+    const { controlledActiveIndex } = nextProps
+    if (typeof controlledActiveIndex == 'number' && controlledActiveIndex !== state.activeIndex) {
+      return { activeIndex: controlledActiveIndex }
     } else {
       return null
     }
@@ -56,7 +57,7 @@ class Tabs extends Component {
     super(props);
 
     this.state = {
-      activeIndex: 0
+      activeIndex: props.activeIndex
     };
   }
 
@@ -103,8 +104,10 @@ class Tabs extends Component {
 }
 
 Tabs.propTypes = {
-  /** Active index to enable control of active tab */
+  /** Initial active index to show on component mount */
   activeIndex: PropTypes.number,
+  /** Optional index to control active tab from outside of the component */
+  controlledActiveIndex: PropTypes.number,
   /** Handler to run when the tab is clicked */
   onTabClicked: PropTypes.func,
   /** Child nodes */
@@ -114,6 +117,7 @@ Tabs.propTypes = {
 };
 
 Tabs.defaultProps = {
+  activeIndex: 0,
   onTabClicked: null,
   children: []
 };
