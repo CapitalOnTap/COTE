@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import styled from 'styled-components';
 import { colors } from '../../styles/defaults';
 import Icon from '../atoms/Icon/Icon';
@@ -140,9 +140,9 @@ class SideNav extends Component {
               {logoUrl &&
                 (renderLink ? (
                   renderLink(
-                    <a>
+                    <Fragment>
                       <Logo src={logoUrl} />
-                    </a>,
+                    </Fragment>,
                     '/'
                   )
                 ) : (
@@ -155,14 +155,14 @@ class SideNav extends Component {
                   <ListItem key={`snav-${i}`} selected={item.isSelected}>
                     {renderLink ? (
                       renderLink(
-                        <Link>
+                        <Fragment>
                           {item.icon && <Icon name={item.icon} />}
                           {!iconsOnly && <span>{item.title}</span>}
-                        </Link>,
+                        </Fragment>,
                         item.pathname
                       )
                     ) : (
-                      <Link href={item.pathname}>
+                      <Link href={item.pathname} target={item.target ? item.target : "_self"}>
                         {item.icon && <Icon name={item.icon} />}
                         {!iconsOnly && <span>{item.title}</span>}
                       </Link>
@@ -233,6 +233,13 @@ SideNav.defaultProps = {
       pathname: '/premium',
       isSelected: false,
       icon: 'money'
+    },
+    {
+      title: 'Support',
+      pathname: 'https://support.capitalontap.com/en/support/home',
+      isSelected: false,
+      icon: 'help',
+      target: '_blank'
     }
   ],
   iconsOnly: false,
