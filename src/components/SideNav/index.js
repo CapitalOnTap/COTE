@@ -151,24 +151,30 @@ class SideNav extends Component {
                   </a>
                 ))}
               <List>
-                {navItems.map((item, i) => (
-                  <ListItem key={`snav-${i}`} selected={item.isSelected}>
-                    {renderLink ? (
-                      renderLink(
-                        <Fragment>
+                {navItems.map((item, i) => {
+                  if (item.target === '_blank' && item.rel === undefined) {
+                    // Set rel tp prevent "reverse tabnabbing" in older browsers, can be overridden if needed
+                    item.rel = 'noopener noreferrer';
+                  }
+                  return (
+                    <ListItem key={`snav-${i}`} selected={item.isSelected}>
+                      {renderLink ? (
+                        renderLink(
+                          <Fragment>
+                            {item.icon && <Icon name={item.icon} />}
+                            {!iconsOnly && <span>{item.title}</span>}
+                          </Fragment>,
+                          item.pathname
+                        )
+                      ) : (
+                        <Link href={item.pathname} target={item.target} rel={item.rel}>
                           {item.icon && <Icon name={item.icon} />}
                           {!iconsOnly && <span>{item.title}</span>}
-                        </Fragment>,
-                        item.pathname
-                      )
-                    ) : (
-                      <Link href={item.pathname} target={item.target ? item.target : "_self"}>
-                        {item.icon && <Icon name={item.icon} />}
-                        {!iconsOnly && <span>{item.title}</span>}
-                      </Link>
-                    )}
-                  </ListItem>
-                ))}
+                        </Link>
+                      )}
+                    </ListItem>
+                  )
+                })}
               </List>
             </Content>
           </Nav>
@@ -186,8 +192,11 @@ SideNav.propTypes = {
   navItems: PropTypes.arrayOf(
     PropTypes.shape({
       title: PropTypes.string,
-      url: PropTypes.string,
-      isSelected: PropTypes.bool
+      pathname: PropTypes.string,
+      isSelected: PropTypes.bool,
+      icon: PropTypes.string,
+      target: PropTypes.string,
+      rel: PropTypes.string
     })
   ),
   iconsOnly: PropTypes.bool,
