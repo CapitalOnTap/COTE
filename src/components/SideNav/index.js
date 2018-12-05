@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import styled from 'styled-components';
 import { colors } from '../../styles/defaults';
 import Icon from '../atoms/Icon/Icon';
@@ -20,7 +20,7 @@ const List = styled.ul`
 
 const ListItem = styled.li`
   display: flex;
-  align-items: center;
+  align-items: left;
   color: ${props => (props.selected ? colors.primary : colors.darkGrey)};
   padding: 1rem;
   background-color: ${props => (props.selected ? colors.lightGrey : null)};
@@ -29,9 +29,15 @@ const ListItem = styled.li`
   a {
     text-decoration: none;
     color: inherit;
+    height: 100%;
+    width: 100%;
+    :hover {
+      color: ${colors.primary}
+    }
   }
   i {
     color: inherit;
+    margin-right:4px;
   }
 `;
 
@@ -44,7 +50,6 @@ const Logo = styled.img`
 const Link = styled.a`
   display: flex;
   align-items: center;
-  justify-content: space-between;
   > span ~ i {
     padding-right: 1rem;
   }
@@ -140,9 +145,9 @@ class SideNav extends Component {
               {logoUrl &&
                 (renderLink ? (
                   renderLink(
-                    <a>
+                    <Fragment>
                       <Logo src={logoUrl} />
-                    </a>,
+                    </Fragment>,
                     '/'
                   )
                 ) : (
@@ -151,24 +156,30 @@ class SideNav extends Component {
                   </a>
                 ))}
               <List>
-                {navItems.map((item, i) => (
-                  <ListItem key={`snav-${i}`} selected={item.isSelected}>
-                    {renderLink ? (
-                      renderLink(
-                        <Link>
+                {navItems.map((item, i) => {
+                  if (item.target === '_blank' && item.rel === undefined) {
+                    // Set rel to prevent "reverse tabnabbing" in older browsers, can be overridden if needed
+                    item.rel = 'noopener noreferrer';
+                  }
+                  return (
+                    <ListItem key={`snav-${item.pathname}`} selected={item.isSelected}>
+                      {renderLink ? (
+                        renderLink(
+                          <Fragment>
+                            {item.icon && <Icon name={item.icon} />}
+                            {!iconsOnly && <span>{item.title}</span>}
+                          </Fragment>,
+                          item.pathname
+                        )
+                      ) : (
+                        <Link href={item.pathname} target={item.target} rel={item.rel}>
                           {item.icon && <Icon name={item.icon} />}
                           {!iconsOnly && <span>{item.title}</span>}
-                        </Link>,
-                        item.pathname
-                      )
-                    ) : (
-                      <Link href={item.pathname}>
-                        {item.icon && <Icon name={item.icon} />}
-                        {!iconsOnly && <span>{item.title}</span>}
-                      </Link>
-                    )}
-                  </ListItem>
-                ))}
+                        </Link>
+                      )}
+                    </ListItem>
+                  )
+                })}
               </List>
             </Content>
           </Nav>
@@ -186,8 +197,11 @@ SideNav.propTypes = {
   navItems: PropTypes.arrayOf(
     PropTypes.shape({
       title: PropTypes.string,
-      url: PropTypes.string,
-      isSelected: PropTypes.bool
+      pathname: PropTypes.string,
+      isSelected: PropTypes.bool,
+      icon: PropTypes.string,
+      target: PropTypes.string,
+      rel: PropTypes.string
     })
   ),
   iconsOnly: PropTypes.bool,
@@ -233,6 +247,13 @@ SideNav.defaultProps = {
       pathname: '/premium',
       isSelected: false,
       icon: 'money'
+    },
+    {
+      title: 'Support',
+      pathname: 'https://support.capitalontap.com/en/support/home',
+      isSelected: false,
+      icon: 'help',
+      target: '_blank'
     }
   ],
   iconsOnly: false,
