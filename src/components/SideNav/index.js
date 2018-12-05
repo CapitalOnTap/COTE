@@ -162,7 +162,7 @@ class SideNav extends Component {
                     item.rel = 'noopener noreferrer';
                   }
                   return (
-                    <ListItem key={`snav-${i}`} selected={item.isSelected}>
+                    <ListItem key={`snav-${item.pathname}`} selected={item.isSelected}>
                       {renderLink ? (
                         renderLink(
                           <Fragment>
