@@ -153,7 +153,7 @@ class SideNav extends Component {
               <List>
                 {navItems.map((item, i) => {
                   if (item.target === '_blank' && item.rel === undefined) {
-                    // Set rel tp prevent "reverse tabnabbing" in older browsers, can be overridden if needed
+                    // Set rel to prevent "reverse tabnabbing" in older browsers, can be overridden if needed
                     item.rel = 'noopener noreferrer';
                   }
                   return (
