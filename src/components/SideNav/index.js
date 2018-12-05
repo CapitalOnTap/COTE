@@ -20,7 +20,7 @@ const List = styled.ul`
 
 const ListItem = styled.li`
   display: flex;
-  align-items: center;
+  align-items: left;
   color: ${props => (props.selected ? colors.primary : colors.darkGrey)};
   padding: 1rem;
   background-color: ${props => (props.selected ? colors.lightGrey : null)};
@@ -29,12 +29,15 @@ const ListItem = styled.li`
   a {
     text-decoration: none;
     color: inherit;
+    height: 100%;
+    width: 100%;
+    :hover {
+      color: ${colors.primary}
+    }
   }
   i {
     color: inherit;
-  }
-  > a:hover {
-    color: ${colors.primary}
+    margin-right:4px;
   }
 `;
 
@@ -47,7 +50,6 @@ const Logo = styled.img`
 const Link = styled.a`
   display: flex;
   align-items: center;
-  justify-content: space-between;
   > span ~ i {
     padding-right: 1rem;
   }
