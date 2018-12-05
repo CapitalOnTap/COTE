@@ -33,6 +33,9 @@ const ListItem = styled.li`
   i {
     color: inherit;
   }
+  > a:hover {
+    color: ${colors.primary}
+  }
 `;
 
 const Logo = styled.img`
