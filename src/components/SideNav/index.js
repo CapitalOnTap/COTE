@@ -43,7 +43,7 @@ const ListItem = styled.li`
 
 const Logo = styled.img`
   width: 64px;
-
+  height: 100%;
   margin-bottom: 4rem;
 `;
 
