@@ -9,6 +9,30 @@ import ExpansionPanel from './index';
 // `;
 
 storiesOf('ExpansionPanel', module)
+.add('Single - Danger', () => (
+  <ExpansionPanel danger>
+    <p>
+      Pariatur eiusmod quis eiusmod deserunt mollit cupidatat duis irure qui
+      excepteur consequat. In occaecat excepteur proident eiusmod. Lorem
+      deserunt nostrud consequat exercitation veniam non incididunt ipsum est
+      irure. Fugiat eiusmod consectetur commodo mollit ut non. Ex sit mollit
+      elit exercitation. Magna laborum nulla reprehenderit incididunt nisi
+      exercitation sunt quis eiusmod fugiat nulla sunt laborum.
+    </p>
+  </ExpansionPanel>
+))
+.add('Single - Primary', () => (
+  <ExpansionPanel primary>
+    <p>
+      Pariatur eiusmod quis eiusmod deserunt mollit cupidatat duis irure qui
+      excepteur consequat. In occaecat excepteur proident eiusmod. Lorem
+      deserunt nostrud consequat exercitation veniam non incididunt ipsum est
+      irure. Fugiat eiusmod consectetur commodo mollit ut non. Ex sit mollit
+      elit exercitation. Magna laborum nulla reprehenderit incididunt nisi
+      exercitation sunt quis eiusmod fugiat nulla sunt laborum.
+    </p>
+  </ExpansionPanel>
+))
   .add('Single with content', () => (
     <ExpansionPanel>
       <p>
