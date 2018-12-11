@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
 import styled, { css } from 'styled-components';
 import { colors } from '../../styles/defaults';
+import { hexToRgbA } from '../../utils';
 import Icon from '../atoms/Icon/Icon';
 import { Title } from '../atoms/Typography';
 
@@ -12,8 +13,18 @@ const closed = css`
   max-height: 0;
 `;
 
+const primary = css`
+  background: ${props => hexToRgbA(props.theme.colorPrimary, 0.1)};
+`;
+
+const danger = css`
+  background: ${props => hexToRgbA(props.theme.colorDanger, 0.1)};
+`;
+
 const Wrapper = styled.div`
   padding: 0;
+  ${props => props.primary && primary}
+  ${props => props.danger && danger}
 `;
 
 const Header = styled.header`
@@ -70,12 +81,12 @@ class ExpansionPanel extends PureComponent {
     const { isOpen } = this.state;
 
     return (
-      <Wrapper>
-        <Header>
-          <StyledTitle>{title}</StyledTitle>
+      <Wrapper {...this.props}>
+        <Header onClick={this.toggleOpen}>
+          <StyledTitle bold>{title}</StyledTitle>
           {icon && (
             <IconWrapper>
-              <ToggleIcon isOpen={isOpen} name={icon} onClick={this.toggleOpen} />
+              <ToggleIcon isOpen={isOpen} name={icon} />
             </IconWrapper>
           )}
         </Header>
@@ -88,13 +99,16 @@ class ExpansionPanel extends PureComponent {
 ExpansionPanel.propTypes = {
   title: PropTypes.string,
   /** Icon name per material design icons */
-  icon: PropTypes.string
+  icon: PropTypes.string,
+  primary: PropTypes.bool,
+  danger: PropTypes.bool
 };
 
 ExpansionPanel.defaultProps = {
   title: 'Expansion Panel 1',
-  icon: 'keyboard_arrow_down'
-  //   iconOpen: 'keyboard_arrow_up'
+  icon: 'keyboard_arrow_down',
+  primary: false,
+  danger: false
 };
 
 export default ExpansionPanel;
