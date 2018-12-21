@@ -1,32 +1,33 @@
-import PropTypes from "prop-types";
-import React from "react";
-import MaskedInput from "react-text-mask";
-import { Tooltip } from "react-tippy";
-import "react-tippy/dist/tippy.css";
-import styled from "styled-components";
-import { colors as defaultColors } from "../../styles/defaults";
-import Icon from "../atoms/Icon/Icon";
-import { Caption, Label } from "../atoms/Typography";
-import TooltipContent from "../TooltipContent";
+import PropTypes from 'prop-types';
+import React from 'react';
+import MaskedInput from 'react-text-mask';
+// @ts-ignore
+import { Tooltip } from 'react-tippy';
+import 'react-tippy/dist/tippy.css';
+import styled from 'styled-components';
+import { colors as defaultColors } from '../../styles/defaults';
+import Icon from '../atoms/Icon/Icon';
+import { Caption, Label } from '../atoms/Typography';
+import TooltipContent from '../TooltipContent';
 
 export const StyledInput = styled.input`
   &::placeholder {
     color: lightgrey;
   }
-  margin-bottom: ${props => (props.invalid ? "8px" : null)};
+  margin-bottom: ${props => (props.invalid ? '8px' : null)};
   color: ${defaultColors.colorDarkBlue};
   border: ${props => {
     if (props.invalid && props.theme.colorDanger)
       return `1px solid ${props.theme.colorDanger}`;
 
-    if (props.invalid) return "solid 1px red";
+    if (props.invalid) return 'solid 1px red';
 
     return `solid 1px ${defaultColors.black}`;
   }};
 
   border-radius: 4px;
   padding: 9px 16px;
-  width: ${props => (props.full ? "100%" : null)};
+  width: ${props => (props.full ? '100%' : null)};
   height: 38px;
 `;
 
@@ -34,25 +35,25 @@ const Input = styled(MaskedInput)`
   &::placeholder {
     color: lightgrey;
   }
-  margin-bottom: ${props => (props.invalid ? "8px" : null)};
+  margin-bottom: ${props => (props.invalid ? '8px' : null)};
   color: ${defaultColors.colorDarkBlue};
   border: ${props => {
     if (props.invalid && props.theme.colorDanger)
       return `1px solid ${props.theme.colorDanger}`;
 
-    if (props.invalid) return "solid 1px red";
+    if (props.invalid) return 'solid 1px red';
 
     return `solid 1px ${defaultColors.black}`;
   }};
 
   border-radius: 4px;
   padding: 9px 16px;
-  width: ${props => (props.full ? "100%" : null)};
+  width: ${props => (props.full ? '100%' : null)};
   height: 38px;
 `;
 
 const InputWrapper = styled.div`
-  width: ${props => (props.full ? "100%" : null)};
+  width: ${props => (props.full ? '100%' : null)};
 `;
 
 const TooltipIcon = styled(Icon)`
@@ -80,9 +81,9 @@ const TextInput = ({
     <InputWrapper full={full}>
       <div
         style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between"
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between'
         }}
       >
         {labelText && (
@@ -104,9 +105,7 @@ const TextInput = ({
           </Tooltip>
         )}
       </div>
-      {subLabelText && (
-          <Caption required={required} text={subLabelText} />
-      )}
+      {subLabelText && <Caption required={required} text={subLabelText} />}
       <Input
         className={className}
         placeholder={placeholder}
@@ -117,11 +116,11 @@ const TextInput = ({
         guide={guide}
         full={full ? 1 : 0}
         onChange={onChange}
-        autoComplete={isAutoComplete ? "on" : "new-password"}
+        autoComplete={isAutoComplete ? 'on' : 'new-password'}
       />
 
       {error && <Caption required={required} text={error} />}
-      {info && <Caption style={{ marginTop: "8px" }} text={info} />}
+      {info && <Caption style={{ marginTop: '8px' }} text={info} />}
     </InputWrapper>
   );
 };
@@ -151,17 +150,17 @@ TextInput.propTypes = {
 };
 
 TextInput.defaultProps = {
-  placeholder: "Type something",
-  error: "",
-  info: "",
+  placeholder: 'Type something',
+  error: '',
+  info: '',
   full: false,
   guide: false,
-  labelText: "",
+  labelText: '',
   mask: false,
-  name: "",
+  name: '',
   tooltip: null
 };
 
-TextInput.displayName = "TextInput";
+TextInput.displayName = 'TextInput';
 
 export default TextInput;

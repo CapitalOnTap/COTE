@@ -1,6 +1,6 @@
 import { storiesOf } from '@storybook/react';
 import React from 'react';
-import HighlightStrip from '.';
+import HighlightStrip from './';
 
 storiesOf('HighlightStrip', module)
   .add('With text inside', () => (
