@@ -62,3 +62,4 @@ typings/
 /dist
 /.out-storybook
 /*.zip
+/lib

@@ -1,11 +1,11 @@
-import React from "react";
-import PropTypes from "prop-types";
-import styled from "styled-components";
-import Paper from "../Paper/Paper";
-import Icon from "../atoms/Icon/Icon";
-import { Title } from "../atoms/Typography/Heading";
-import { colors } from "../../styles/defaults";
-import Button from "../atoms/Button/Button";
+import PropTypes from 'prop-types';
+import React from 'react';
+import styled from 'styled-components';
+import { colors } from '../../styles/defaults';
+import Button from '../atoms/Button/Button';
+import Icon from '../atoms/Icon/Icon';
+import { Title } from '../atoms/Typography/Heading';
+import Paper from '../Paper/Paper';
 
 const Header = styled.div`
   display: flex;
@@ -40,9 +40,9 @@ const Toast = ({
   ...props
 }) => {
   return (
-    <Paper key={this}>
+    <Paper>
       <Header>
-        <StyledIcon name={icon} error={error} primary={!error} />{" "}
+        <StyledIcon name={icon} error={error} primary={!error} />{' '}
         <StyledTitle error={error}>
           <b>{title}</b>
         </StyledTitle>
@@ -65,12 +65,12 @@ Toast.propTypes = {
 };
 
 Toast.defaultProps = {
-  icon: "check_circle",
-  buttonText: "Dismiss",
+  icon: 'check_circle',
+  buttonText: 'Dismiss',
   error: false,
-  title: "Toast title",
-  message: "Toast message",
-  onButtonClick: () => alert("Button clicked")
+  title: 'Toast title',
+  message: 'Toast message',
+  onButtonClick: () => alert('Button clicked')
 };
 
 export default Toast;

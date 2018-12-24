@@ -30,7 +30,14 @@ const ContentWrapper = styled.div`
   }
 `;
 
-const Uploader = ({ icon, theme, buttonText, title, subtitle, ...props }) => {
+const Uploader: React.SFC<Props> = ({
+  icon,
+  theme,
+  buttonText,
+  title,
+  subtitle,
+  ...props
+}) => {
   return (
     <StyledDropZone
       {...props}
@@ -44,7 +51,7 @@ const Uploader = ({ icon, theme, buttonText, title, subtitle, ...props }) => {
       }}
     >
       <ContentWrapper>
-        <Icon name={icon} primary />
+        <Icon name={icon} />
         <Title bold>{title}</Title>
         <p>{subtitle}</p>
         <p>or</p>
@@ -56,13 +63,22 @@ const Uploader = ({ icon, theme, buttonText, title, subtitle, ...props }) => {
   );
 };
 
-Uploader.propTypes = {};
+interface Props {
+  icon: string;
+  theme: {
+    colorPrimary: string;
+    colorDanger: string;
+  };
+  buttonText: string;
+  title: string;
+  subtitle: string;
+}
 
 Uploader.defaultProps = {
   icon: 'add_circle_outline',
   buttonText: 'Choose files',
   title: 'Drag and drop files here',
-  subtitle:'',
+  subtitle: ''
 };
 
 export default Uploader;
