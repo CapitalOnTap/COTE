@@ -1,10 +1,10 @@
-import React from 'react';
+import * as React from 'react';
 import Dropzone from 'react-dropzone';
 import styled from 'styled-components';
 import { colors as defaultColors } from '../../styles/defaults';
 import Button from '../atoms/Button/Button';
 import Icon from '../atoms/Icon/Icon';
-import { Title } from '../atoms/Typography';
+import { Title } from '../atoms/Typography/index';
 
 const StyledDropZone = styled(Dropzone)`
   display: flex;
@@ -30,14 +30,7 @@ const ContentWrapper = styled.div`
   }
 `;
 
-const Uploader: React.SFC<Props> = ({
-  icon,
-  theme,
-  buttonText,
-  title,
-  subtitle,
-  ...props
-}) => {
+const Uploader = ({ icon, theme, buttonText, title, subtitle, ...props }) => {
   return (
     <StyledDropZone
       {...props}
@@ -62,17 +55,6 @@ const Uploader: React.SFC<Props> = ({
     </StyledDropZone>
   );
 };
-
-interface Props {
-  icon: string;
-  theme: {
-    colorPrimary: string;
-    colorDanger: string;
-  };
-  buttonText: string;
-  title: string;
-  subtitle: string;
-}
 
 Uploader.defaultProps = {
   icon: 'add_circle_outline',

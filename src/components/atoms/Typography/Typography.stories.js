@@ -1,8 +1,7 @@
-import React from "react";
 import { storiesOf } from "@storybook/react";
-import { Heading1, Heading2, Title, Subtitle } from "./Heading";
+import * as React from "react";
 import Caption from "./Caption";
-import Small from "./Small";
+import { Heading1, Heading2, Subtitle, Title } from "./Heading";
 import Label from "./Label";
 
 // storiesOf("Typography", module).add();
@@ -24,9 +23,12 @@ storiesOf("Typography/Headings", module)
   .add("Subtitle", () => <Subtitle>Subtitle</Subtitle>);
 
 storiesOf("Typography/Label", module)
+  //  @ts-ignore
   .add("Normal", () => <Label />)
+  //  @ts-ignore
   .add("Required", () => <Label required />);
 
 storiesOf("Typography/Caption", module)
+  //  @ts-ignore
   .add("Normal", () => <Caption text="Caption" />)
   .add("Error", () => <Caption text="Caption" required />);

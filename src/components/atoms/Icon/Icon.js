@@ -1,8 +1,8 @@
-import React from 'react';
+import * as React from 'react';
 import styled from 'styled-components';
 import { colors } from '../../../styles/defaults';
 
-const StyledIcon = styled.i<{ reverse: boolean; solid: boolean }>`
+const StyledIcon = styled.i`
   font-size: 24px;
   color: ${props => {
     if (props.reverse || props.solid) return '#fff';
@@ -34,40 +34,41 @@ const StyledIcon = styled.i<{ reverse: boolean; solid: boolean }>`
   }};
 `;
 
-interface Props {
-  /** Render icon with primary color if defined in the theme */
-  primary: boolean;
+// interface Props {
+//   /** Render icon with primary color if defined in the theme */
+//   primary: boolean;
+//   name: string;
+//   /** Render icon in a circle shape */
+//   circle: boolean;
+//   error: boolean;
+//   solid: boolean;
+//   className: string;
+// }
 
-  name: string;
-  /** Render icon in a circle shape */
-  circle: boolean;
-  error: boolean;
-  solid: boolean;
-  className: string;
-}
-
-const Icon: React.SFC<Props> = ({
-  name,
-  primary,
-  error,
-  circle,
-  solid,
-  className,
-  ...props
-}) => {
+const Icon = props => {
   return (
     <StyledIcon
-      className={`material-icons ${className}`}
-      primary={primary}
-      circle={circle}
-      solid={solid}
-      error={error}
+      className={`material-icons ${props.className}`}
+      primary={props.primary}
+      circle={props.circle}
+      solid={props.solid}
+      error={props.error}
       {...props}
     >
-      {name}
+      {props.name}
     </StyledIcon>
   );
 };
+
+const defaultProps = {
+  className: '',
+  name: '',
+  circle: false,
+  error: false,
+  primary: false,
+  solid: false
+};
+Icon.defaultProps = defaultProps;
 
 Icon.displayName = 'Icon';
 
