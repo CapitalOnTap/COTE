@@ -102,6 +102,7 @@ const TextInput = ({
           </Tooltip>
         )}
       </div>
+      {subLabelText && <Caption required={required} text={subLabelText} />}
       <Input
         className={className}
         placeholder={placeholder}
@@ -112,6 +113,7 @@ const TextInput = ({
         guide={guide}
         full={full ? 1 : 0}
         onChange={onChange}
+        autoComplete={isAutoComplete ? 'on' : 'new-password'}
       />
 
       {error && <Caption required={required} text={error} />}

@@ -1,9 +1,9 @@
-import styled from "styled-components";
-import { colors as defaultColors, fontWeights } from "../../../styles/defaults";
+import styled from 'styled-components';
+import { colors as defaultColors, fontWeights } from '../../../styles/defaults';
 
 const Heading = styled.h1`
   color: ${props => {
-    if (props.inverse) return "#fff";
+    if (props.inverse) return '#fff';
 
     if (props.highlight && props.theme) return props.theme.colorPrimary;
 
@@ -16,26 +16,26 @@ const Heading = styled.h1`
 `;
 
 export const Heading1 = Heading;
-Heading1.displayName = "Heading1";
+Heading1.displayName = 'Heading1';
 
-export const Heading2 = styled(Heading.withComponent("h2"))`
+export const Heading2 = styled(Heading.withComponent('h2'))`
   font-size: 30px;
 `;
-Heading2.displayName = "Heading2";
+Heading2.displayName = 'Heading2';
 
-export const Heading3 = styled(Heading.withComponent("h3"))`
+export const Heading3 = styled(Heading.withComponent('h3'))`
   font-size: 22px;
 `;
-Heading3.displayName = "Heading3";
+Heading3.displayName = 'Heading3';
 
-export const Subheading = styled(Heading.withComponent("h4"))`
+export const Subheading = styled(Heading.withComponent('h4'))`
   font-size: 18px;
 `;
-Heading3.displayName = "Subheading";
+Heading3.displayName = 'Subheading';
 
-export const Title = styled(Heading.withComponent("h5"))`
+export const Title = styled(Heading.withComponent('h5'))`
   font-size: 16px;
-  font-weight:${props => {
+  font-weight: ${props => {
     if (props.light) return fontWeights.light;
 
     if (props.bold) return fontWeights.bold;
@@ -43,12 +43,12 @@ export const Title = styled(Heading.withComponent("h5"))`
     return fontWeights.normal;
   }};
 `;
-Title.displayName = "Title";
+Title.displayName = 'Title';
 
-export const Subtitle = styled(Heading.withComponent("h6"))`
+export const Subtitle = styled(Heading.withComponent('h6'))`
   font-size: 15px;
   font-weight: ${fontWeights.light};
 `;
-Subtitle.displayName = "Subtitle";
+Subtitle.displayName = 'Subtitle';
 
 export default Heading;

@@ -1,9 +1,8 @@
+import * as React from "react";
 import styled from "styled-components";
-import React, { Component } from "react";
-import PropTypes from "prop-types";
 import { colors } from "../../../styles/defaults";
 
-const StyledIcon = styled.i`
+const StyledIcon = styled.i<{ reverse: boolean; solid: boolean } & any>`
   font-size: 24px;
   color: ${props => {
     if (props.reverse || props.solid) return "#fff";
@@ -35,7 +34,27 @@ const StyledIcon = styled.i`
   }};
 `;
 
-const Icon = ({ name, primary, error, circle, solid, className, ...props }) => {
+interface Props {
+  /** Render icon with primary color if defined in the theme */
+  primary: boolean;
+
+  name: string;
+  /** Render icon in a circle shape */
+  circle: boolean;
+  error: boolean;
+  solid: boolean;
+  className: string;
+}
+
+const Icon: React.SFC<Props> = ({
+  name,
+  primary,
+  error,
+  circle,
+  solid,
+  className,
+  ...props
+}) => {
   return (
     <StyledIcon
       className={`material-icons ${className}`}
@@ -50,19 +69,6 @@ const Icon = ({ name, primary, error, circle, solid, className, ...props }) => {
   );
 };
 
-Icon.propTypes = {
-  /** Render icon with primary color if defined in the theme */
-  primary: PropTypes.bool,
-  /** Material design name of the icon, e.g. face */
-  name: PropTypes.string.isRequired,
-  /** Render icon in a circle shape */
-  circle: PropTypes.bool
-};
-
-Icon.defaultProps = {
-  primary: false,
-  name: "face",
-  circle: false
-};
+Icon.displayName = "Icon";
 
 export default Icon;

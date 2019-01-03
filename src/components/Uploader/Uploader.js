@@ -1,10 +1,10 @@
-import React from 'react';
+import * as React from 'react';
 import Dropzone from 'react-dropzone';
 import styled from 'styled-components';
 import { colors as defaultColors } from '../../styles/defaults';
 import Button from '../atoms/Button/Button';
 import Icon from '../atoms/Icon/Icon';
-import { Title } from '../atoms/Typography';
+import { Title } from '../atoms/Typography/index';
 
 const StyledDropZone = styled(Dropzone)`
   display: flex;
@@ -44,7 +44,7 @@ const Uploader = ({ icon, theme, buttonText, title, subtitle, ...props }) => {
       }}
     >
       <ContentWrapper>
-        <Icon name={icon} primary />
+        <Icon name={icon} />
         <Title bold>{title}</Title>
         <p>{subtitle}</p>
         <p>or</p>
@@ -56,13 +56,11 @@ const Uploader = ({ icon, theme, buttonText, title, subtitle, ...props }) => {
   );
 };
 
-Uploader.propTypes = {};
-
 Uploader.defaultProps = {
   icon: 'add_circle_outline',
   buttonText: 'Choose files',
   title: 'Drag and drop files here',
-  subtitle:'',
+  subtitle: ''
 };
 
 export default Uploader;
