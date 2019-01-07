@@ -61,7 +61,9 @@ const TooltipIcon = styled(Icon)`
 
 const TextInput = ({
   labelText,
+  subLabelText,
   placeholder,
+  isAutoComplete,
   mask,
   guide,
   full,
@@ -134,6 +136,8 @@ TextInput.propTypes = {
   full: PropTypes.bool,
   /** Show guides for user to know how many characters left */
   guide: PropTypes.bool,
+  /** subLabel for input */
+  subLabelText: PropTypes.string,
   /** Label for input */
   labelText: PropTypes.string,
   /** Input name */
@@ -141,7 +145,8 @@ TextInput.propTypes = {
   tooltip: PropTypes.shape({
     title: PropTypes.string,
     description: PropTypes.string
-  })
+  }),
+  isAutoComplete: PropTypes.bool
 };
 
 TextInput.defaultProps = {
@@ -153,7 +158,8 @@ TextInput.defaultProps = {
   labelText: '',
   mask: false,
   name: '',
-  tooltip: null
+  tooltip: null,
+  isAutoComplete: false
 };
 
 TextInput.displayName = 'TextInput';

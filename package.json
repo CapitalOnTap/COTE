@@ -53,6 +53,7 @@
     "react-docgen-typescript-webpack-plugin": "^1.1.0",
     "react-dom": "^16.5.2",
     "react-dropzone": "4.2.3",
+    "react-ripples": "^1.1.2",
     "react-text-mask": "5.4.1",
     "react-tippy": "^1.2.3",
     "rimraf": "^2.6.2",

@@ -1,9 +1,8 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import styled, { css, keyframes } from 'styled-components';
-import withRipple from '../../../hocs/withRipple';
+import styled, { css, keyframes, withTheme } from 'styled-components';
+import withRipples from '../../../hocs/withRipples';
 import elevationMixin from '../../../mixins/elevation';
-import rippleMixin from '../../../mixins/ripple';
 import { hexToRgbA } from '../../../utils';
 import Icon from '../Icon/Icon';
 
@@ -133,6 +132,7 @@ export const StyledButton = styled.button`
   box-sizing: border-box;
   -webkit-appearance: none;
   transition: all 250ms ease;
+  background-color: transparent;
 
   &:hover {
     cursor: pointer;
@@ -174,7 +174,7 @@ ${props => props.full && `width: 100%;`}
     pointer-events: none;
   `}
 
-  ${rippleMixin()}
+  ${props => props.elevation && elevationMixin(props.elevation)}
 `;
 
 export const StyledLinkButton = StyledButton.withComponent('a');
@@ -202,7 +202,22 @@ const LoadingWrapper = styled.span`
   justify-content: center;
 `;
 
-const ButtonWithRipple = withRipple(StyledButton);
+const getRippleColor = buttonProps => {
+  if (buttonProps.primary && buttonProps.solid)
+    return buttonProps.theme.colorPrimary;
+  if (buttonProps.danger && buttonProps.solid)
+    return buttonProps.theme.colorDanger;
+  if (!buttonProps.danger && !buttonProps.primary && buttonProps.solid)
+    return buttonProps.theme.colorDarkGrey;
+
+  if (buttonProps.danger) return buttonProps.theme.colorDanger;
+  if (buttonProps.primary) return buttonProps.theme.colorPrimary;
+
+  return 'rgba(0, 0, 0, 0.06)';
+};
+
+const ButtonWithRipple = withRipples(StyledButton);
+
 class Button extends Component {
   render() {
     const {
@@ -232,7 +247,12 @@ class Button extends Component {
     }
 
     return (
-      <ButtonWithRipple {...this.props} disabled={disabled || loading} id={id}>
+      <ButtonWithRipple
+        {...this.props}
+        disabled={disabled || loading}
+        id={id}
+        color={getRippleColor(this.props)}
+      >
         {loading && (
           <LoadingWrapper>
             <LoadingIcon name="refresh" withText={!!loadingText} />{' '}
@@ -262,17 +282,22 @@ Button.propTypes = {
   /** Shows a loading animated icon */
   loading: PropTypes.bool,
   /** Text visible when loading animation is set */
-  loadingText: PropTypes.string
+  loadingText: PropTypes.string,
+  //** Adds material design shadow elevation */
+  elevation: PropTypes.number,
+  danger: PropTypes.bool
 };
 
 Button.defaultProps = {
+  elevation: 0,
   primary: false,
   solid: false,
   href: '',
   type: 'button',
   disabled: false,
   icon: '',
-  full: false
+  full: false,
+  danger: false
 };
 
-export default Button;
+export default withTheme(Button);
