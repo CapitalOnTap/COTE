@@ -47,7 +47,6 @@ const ButtonGroupWrapper = styled.div`
   }
   button {
     border-radius: 0px;
-    /* padding: 0.68em 1em; */
   }
   & button:last-child {
     border-top-left-radius: 0;
@@ -145,7 +144,7 @@ class ButtonGroup extends Component {
               buttonWidth={100 / options.length}
               solid={selectedIndex === i}
               onClick={e => {
-                // e.preventDefault();
+                e.preventDefault();
                 this.setState({ selectedIndex: i });
                 handleOptionSelected(options[i].value);
               }}
