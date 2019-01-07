@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import MaskedInput from 'react-text-mask';
-// @ts-ignore
 import { Tooltip } from 'react-tippy';
 import 'react-tippy/dist/tippy.css';
 import styled from 'styled-components';
@@ -28,7 +27,7 @@ export const StyledInput = styled.input`
   border-radius: 4px;
   padding: 9px 16px;
   width: ${props => (props.full ? '100%' : null)};
-  height: 38px;
+  height: 36px;
 `;
 
 const Input = styled(MaskedInput)`
@@ -49,7 +48,7 @@ const Input = styled(MaskedInput)`
   border-radius: 4px;
   padding: 9px 16px;
   width: ${props => (props.full ? '100%' : null)};
-  height: 38px;
+  height: 36px;
 `;
 
 const InputWrapper = styled.div`
@@ -64,6 +63,7 @@ const TextInput = ({
   labelText,
   subLabelText,
   placeholder,
+  isAutoComplete,
   mask,
   guide,
   full,
@@ -74,7 +74,6 @@ const TextInput = ({
   name,
   onChange,
   tooltip,
-  isAutoComplete,
   ...props
 }) => {
   return (
@@ -137,16 +136,17 @@ TextInput.propTypes = {
   full: PropTypes.bool,
   /** Show guides for user to know how many characters left */
   guide: PropTypes.bool,
-  /** Label for input */
-  labelText: PropTypes.string,
   /** subLabel for input */
   subLabelText: PropTypes.string,
+  /** Label for input */
+  labelText: PropTypes.string,
   /** Input name */
   name: PropTypes.string,
   tooltip: PropTypes.shape({
     title: PropTypes.string,
     description: PropTypes.string
-  })
+  }),
+  isAutoComplete: PropTypes.bool
 };
 
 TextInput.defaultProps = {
@@ -158,7 +158,8 @@ TextInput.defaultProps = {
   labelText: '',
   mask: false,
   name: '',
-  tooltip: null
+  tooltip: null,
+  isAutoComplete: false
 };
 
 TextInput.displayName = 'TextInput';

@@ -1,20 +1,19 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import styled from "styled-components";
-import Button from "../atoms/Button/Button";
-import { Label } from "../atoms/Typography";
-
-import { colors as defaultColors } from "../../styles/defaults";
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
+import styled from 'styled-components';
+import { colors as defaultColors } from '../../styles/defaults';
+import Button from '../atoms/Button/Button';
 
 const StyledButton = styled(Button)`
   width: ${props => `${props.buttonWidth}%`};
+  /* 
   background-color: ${props => {
     if (props.solid && props.theme && props.primary)
       return props.theme.colorPrimary;
 
     if (props.solid) return defaultColors.black;
 
-    return "transparent";
+    return 'transparent';
   }};
   &:hover {
     background-color: ${props => {
@@ -23,13 +22,14 @@ const StyledButton = styled(Button)`
 
       if (props.solid) return defaultColors.black;
 
-      return "transparent";
+      return 'transparent';
     }};
   }
-
+  */
   @media (max-width: 640px) {
-    width: ${props => (props.wrap ? "50%" : null)};
-  }
+    width: ${props => (props.shouldWrap ? '50%' : null)};
+  } 
+
 `;
 
 const ButtonGroupWrapper = styled.div`
@@ -40,54 +40,58 @@ const ButtonGroupWrapper = styled.div`
     border-left: none;
   }
   & button:first-child {
-    border-top-left-radius: 4px;
+    border-top-left-radius: 2px;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
-    border-bottom-left-radius: 4px;
+    border-bottom-left-radius: 2px;
   }
   button {
     border-radius: 0px;
-    padding: 0.68em 1em;
   }
   & button:last-child {
     border-top-left-radius: 0;
-    border-top-right-radius: 4px;
-    border-bottom-right-radius: 4px;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
     border-bottom-left-radius: 0;
-    border-left:none;
+    border-left: none;
   }
 
   @media (max-width: 640px) {
     & button:first-child {
-      border-top-left-radius: 4px;
+      border-top-left-radius: 2px;
       border-top-right-radius: 0;
       border-bottom-right-radius: 0;
-      border-bottom-left-radius: ${props => (props.wrap ? 0 : "4px")};
+      border-bottom-left-radius: ${props => (props.shouldWrap ? 0 : '2px')};
     }
 
     & button:nth-child(2) {
       ${props =>
-        props.wrap
+        props.shouldWrap
           ? `border-top-left-radius: 0;
-      border-top-right-radius: 4px;
+      border-top-right-radius: 2px;
       border-bottom-right-radius: 0;
       border-bottom-left-radius: 0;
       border-right: ${
         props.solid || props.disabled
-          ? "none"
-          : `1px solid ${defaultColors.black}`
+          ? 'none'
+          : `1px solid ${props.theme.colorBlack}`
       };`
           : null};
     }
 
     & button:nth-child(3) {
       ${props =>
-        props.wrap
+        props.shouldWrap
           ? `border-top: 0;
       border-top-left-radius: 0;
       border-top-right-radius: 0;
       border-bottom-right-radius: 0;
-      border-bottom-left-radius: 4px;`
+      border-bottom-left-radius: 2px;
+      border-left: ${
+        props.solid || props.disabled
+          ? 'none'
+          : `1px solid ${props.theme.colorBlack} !important`
+      };`
           : null};
     }
 
@@ -96,7 +100,7 @@ const ButtonGroupWrapper = styled.div`
       border-left: 0;
       border-top-left-radius: 0;
       border-top-right-radius: 0;
-      border-bottom-right-radius: 4px;
+      border-bottom-right-radius: 2px;
       border-bottom-left-radius: 0;
     }
   }
@@ -123,16 +127,18 @@ class ButtonGroup extends Component {
       error,
       primary,
       id,
-      wrap
+      shouldWrap
     } = this.props;
     const { selectedIndex } = this.state;
 
     return (
       <Wrapper id={id}>
         {label && <Label required={error} text={label} />}
-        <ButtonGroupWrapper wrap={wrap}>
+        <ButtonGroupWrapper shouldWrap={shouldWrap}>
           {options.map((option, i) => (
             <StyledButton
+              small
+              outline
               key={i}
               primary={primary}
               buttonWidth={100 / options.length}
@@ -142,7 +148,7 @@ class ButtonGroup extends Component {
                 this.setState({ selectedIndex: i });
                 handleOptionSelected(options[i].value);
               }}
-              wrap={wrap}
+              shouldWrap={shouldWrap}
             >
               {option.title}
             </StyledButton>
@@ -165,20 +171,20 @@ ButtonGroup.propTypes = {
   ),
   handleOptionSelected: PropTypes.func,
   selectedIndex: PropTypes.number,
-  wrap: PropTypes.bool
+  shouldWrap: PropTypes.bool
 };
 
 ButtonGroup.defaultProps = {
-  label: "",
+  label: '',
   options: [
-    { title: "LLP", value: "LLP" },
-    { title: "Limited", value: "Limited" },
-    { title: "Partnership", value: "partnership" },
-    { title: "Sole Trader", value: "Sole Trader" }
+    { title: 'LLP', value: 'LLP' },
+    { title: 'Limited', value: 'Limited' },
+    { title: 'Partnership', value: 'partnership' },
+    { title: 'Sole Trader', value: 'Sole Trader' }
   ],
   handleOptionSelected: i => console.log(i),
   selectedIndex: 0,
-  wrap: false
+  shouldWrap: false
 };
 
 export default ButtonGroup;

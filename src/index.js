@@ -51,4 +51,5 @@ export { default as Uploader } from './components/Uploader/Uploader';
 export { default as UspList } from './components/UspList/index';
 export { default as Widget } from './components/Widget/Widget';
 export { default as WidgetBox } from './components/WidgetBox/WidgetBox';
-export { default as GlobalStyle } from "./styles/GlobalStyle";
+export { theme as defaultTheme } from './styles/defaults';
+export { default as GlobalStyle } from './styles/GlobalStyle';

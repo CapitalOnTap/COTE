@@ -1,5 +1,5 @@
-import React from "react";
 import PropTypes from "prop-types";
+import React from "react";
 import styled from "styled-components";
 import { StyledLinkButton } from "../atoms/Button/Button";
 
@@ -71,7 +71,7 @@ const Navigation = ({ logo, items, logoHeight, maxWidth }) => {
         <NavRight>
           {items.map((item, i) => {
             return (
-              <NavButton key={`n-${i}`} href={item.url} onClick={item.onClick}>
+              <NavButton outline key={`n-${i}`} href={item.url} onClick={item.onClick}>
                 {item.title}
               </NavButton>
             );
