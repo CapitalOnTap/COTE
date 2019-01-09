@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { colors as defaultColors } from '../../styles/defaults';
 import Button from '../atoms/Button/Button';
+import Label from '../atoms/Typography/Label';
 
 const StyledButton = styled(Button)`
   width: ${props => `${props.buttonWidth}%`};
