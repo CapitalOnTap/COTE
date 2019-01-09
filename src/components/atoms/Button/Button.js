@@ -236,7 +236,7 @@ class Button extends Component {
         <StyledLinkButton
           {...this.props}
           disabled={disabled}
-          href={href === 3}
+          href={href}
           id={id}
         >
           {loading && <LoadingIcon name={'refresh'} />}
