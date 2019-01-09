@@ -40,6 +40,7 @@
     "@storybook/react": "^4.0.0",
     "@storybook/storybook-deployer": "^2.2.0",
     "@types/jest": "^23.3.10",
+    "@types/react-text-mask": "5.4.1",
     "@types/storybook-addon-jsx": "^5.4.0",
     "@types/storybook__addon-info": "^3.4.2",
     "@types/storybook__react": "^4.0.0",

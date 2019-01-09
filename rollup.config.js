@@ -13,7 +13,7 @@ const isProduction = process.env.NODE_ENV === 'production';
 
 const configProd = [
   {
-    input: 'src/index.js',
+    input: 'src/index.ts',
     external: ['react', 'styled-components'],
     output: [
       { file: pkg.main, format: 'cjs' },
@@ -52,7 +52,7 @@ const configProd = [
 
 const configDev = [
   {
-    input: 'src/index.js',
+    input: 'src/index.ts',
     external: ['react', 'styled-components'],
     output: [
       { file: pkg.main, format: 'cjs' },
