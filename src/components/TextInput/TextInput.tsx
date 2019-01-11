@@ -9,7 +9,12 @@ import Icon from '../atoms/Icon/Icon';
 import { Caption, Label } from '../atoms/Typography/index';
 import TooltipContent from '../TooltipContent/index';
 
-export const StyledInput = styled.input<{ invalid?: boolean; full?: boolean }>`
+interface InputProps extends React.InputHTMLAttributes<{}> {
+  invalid?: boolean;
+  full?: boolean;
+}
+
+export const StyledInput = styled.input<InputProps>`
   &::placeholder {
     color: lightgrey;
   }
@@ -61,19 +66,14 @@ const InfoCaption = styled(Caption)`
   margin-top: '8px';
 `;
 
-interface Props {
+interface Props extends InputProps {
   labelText: string;
   subLabelText?: string;
-  placeholder?: string;
   mask?: any;
   guide?: boolean;
-  full?: boolean;
   error?: boolean;
   required?: boolean;
   info?: string;
-  className?: string;
-  name?: string;
-  onChange?: (event: React.FormEvent<HTMLInputElement>) => void;
   tooltip?: { title: string; description: string };
   isAutoComplete?: boolean;
 }
