@@ -5,7 +5,7 @@ import filesize from 'rollup-plugin-filesize';
 import resolve from 'rollup-plugin-node-resolve';
 import postcss from 'rollup-plugin-postcss';
 import replace from 'rollup-plugin-replace';
-import typescript from 'rollup-plugin-typescript';
+import typescript from 'rollup-plugin-typescript2';
 import visualizer from 'rollup-plugin-visualizer';
 import pkg from './package.json';
 
@@ -13,7 +13,7 @@ const isProduction = process.env.NODE_ENV === 'production';
 
 const configProd = [
   {
-    input: 'src/index.js',
+    input: 'src/index.ts',
     external: ['react', 'styled-components'],
     output: [
       { file: pkg.main, format: 'cjs' },
@@ -52,7 +52,7 @@ const configProd = [
 
 const configDev = [
   {
-    input: 'src/index.js',
+    input: 'src/index.ts',
     external: ['react', 'styled-components'],
     output: [
       { file: pkg.main, format: 'cjs' },
