@@ -63,3 +63,5 @@ typings/
 /.out-storybook
 /*.zip
 /lib
+
+.rpt2_cache
