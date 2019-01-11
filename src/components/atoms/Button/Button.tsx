@@ -246,6 +246,7 @@ interface Props extends RippleButtonProps {
   loadingText?: string;
   id?: string;
   children?: React.ReactNode;
+  theme: Theme;
 }
 
 const Button: React.SFC<Props> = (props: Props) => {
@@ -259,6 +260,11 @@ const Button: React.SFC<Props> = (props: Props) => {
     loadingText,
     id
   } = props;
+
+  if (!props.theme) {
+    throw new Error('FUck');
+  }
+
   if (href) {
     return (
       <StyledLinkButton {...props} disabled={disabled} href={href} id={id}>
