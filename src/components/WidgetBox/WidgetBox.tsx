@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
-import { Paper } from '../../index';
+import Paper from '../Paper/Paper';
 import { Title } from '../atoms/Typography';
 
 const Wrapper = styled(Paper)<React.HTMLAttributes<{}>>`
