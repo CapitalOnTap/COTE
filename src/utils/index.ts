@@ -4,7 +4,7 @@ export const hexToRgbA = (hex: string, opacity?: number) => {
     opacity = 1;
   }
 
-  var c;
+  let c;
   if (/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)) {
     c = hex.substring(1).split('');
     if (c.length == 3) {

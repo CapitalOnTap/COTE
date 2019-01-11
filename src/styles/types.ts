@@ -16,3 +16,31 @@ export interface ThemeFontWeights {
   normal: string;
   light: string;
 }
+
+export interface Theme {
+  colorPrimary: string,
+  colorDarkGrey: string,
+  colorShadow: string,
+  colorLightBlack: string,
+  colorPrimaryDark: string,
+  colorBlack: string,
+  colorPrimaryEmphasis: string,
+  colorDanger: string,
+  colorDangerDark: string,
+  colorLightGrey: string,
+  // Elevation theme
+  elevation: {
+    // What property to use to apply depth
+    property: string,
+    // Transition for animating buttons
+    transition: {
+      duration: string,
+      effect: string,
+    },
+    colors: {
+      umbra: string,
+      penumbra: string,
+      ambient: string,
+    }
+  }
+}

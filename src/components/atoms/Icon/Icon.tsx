@@ -38,7 +38,7 @@ interface Props {
   /** Render icon with primary color if defined in the theme */
   primary?: boolean;
   reverse?: boolean;
-  name: string;
+  name?: string;
   /** Render icon in a circle shape */
   circle?: boolean;
   error?: boolean;

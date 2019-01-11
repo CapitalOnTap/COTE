@@ -27,7 +27,7 @@ export const StyledInput = styled.input<{ invalid?: boolean; full?: boolean }>`
   border-radius: 4px;
   padding: 9px 16px;
   width: ${props => (props.full ? '100%' : null)};
-  height: 38px;
+  height: 36px;
 `;
 
 const Input = styled(MaskedInput)<{ invalid?: boolean; full?: boolean }>`
@@ -48,7 +48,7 @@ const Input = styled(MaskedInput)<{ invalid?: boolean; full?: boolean }>`
   border-radius: 4px;
   padding: 9px 16px;
   width: ${props => (props.full ? '100%' : null)};
-  height: 38px;
+  height: 36px;
 `;
 
 const InputWrapper = styled.div<{ full?: boolean }>`
@@ -84,6 +84,7 @@ const TextInput: React.SFC<Props> = ({
   labelText,
   subLabelText,
   placeholder,
+  isAutoComplete,
   mask,
   guide,
   full,
@@ -94,7 +95,6 @@ const TextInput: React.SFC<Props> = ({
   name,
   onChange,
   tooltip,
-  isAutoComplete,
   ...props
 }) => {
   return (
@@ -157,16 +157,17 @@ const TextInput: React.SFC<Props> = ({
   full: PropTypes.bool,
   /** Show guides for user to know how many characters left */
   guide: PropTypes.bool,
-  /** Label for input */
-  labelText: PropTypes.string,
   /** subLabel for input */
   subLabelText: PropTypes.string,
+  /** Label for input */
+  labelText: PropTypes.string,
   /** Input name */
   name: PropTypes.string,
   tooltip: PropTypes.shape({
     title: PropTypes.string,
     description: PropTypes.string
-  })
+  }),
+  isAutoComplete: PropTypes.bool
 };
 
 (TextInput as any).defaultProps = {
@@ -178,7 +179,8 @@ const TextInput: React.SFC<Props> = ({
   labelText: '',
   mask: false,
   name: '',
-  tooltip: null
+  tooltip: null,
+  isAutoComplete: false
 };
 
 TextInput.displayName = 'TextInput';

@@ -8966,6 +8966,14 @@ react-modal@^3.6.1:
     react-lifecycles-compat "^3.0.0"
     warning "^3.0.0"
 
+react-ripples@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/react-ripples/-/react-ripples-1.1.2.tgz#059420c253b5b28255ddff4153eae9e00c2963f4"
+  integrity sha512-6lddMHlZUSseT26S/UfdcrW9jK5bzTQ7HKAgh8HMwiHxxjGQXhHvTF5Vu7mzRvNKw4h4ijvzoCBEPZqM93Hf3A==
+  dependencies:
+    prop-types "^15.6.0"
+    react "^16.2.0"
+
 react-split-pane@^0.1.84:
   version "0.1.85"
   resolved "https://registry.yarnpkg.com/react-split-pane/-/react-split-pane-0.1.85.tgz#64819946a99b617ffa2d20f6f45a0056b6ee4faa"
@@ -9029,7 +9037,7 @@ react-treebeard@^3.1.0:
     shallowequal "^1.1.0"
     velocity-react "^1.4.1"
 
-react@^16.6.3:
+react@^16.2.0, react@^16.6.3:
   version "16.7.0"
   resolved "https://registry.yarnpkg.com/react/-/react-16.7.0.tgz#b674ec396b0a5715873b350446f7ea0802ab6381"
   integrity sha512-StCz3QY8lxTb5cl2HJxjwLFOXPIFQp+p+hxQfc8WE0QiLfCtIlKj8/+5tjjKm8uSTlAW+fCPaavGFS06V9Ar3A==
