@@ -1,12 +1,11 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
 import styled from 'styled-components';
-import { Title } from '../atoms/Typography/index';
+import { Paper } from '../../index';
+import { Title } from '../atoms/Typography';
 
-const Wrapper = styled.div`
-  border-radius: 4px;
-  box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14);
-  background-color: #ffffff;
+const Wrapper = styled(Paper)<React.HTMLProps<{}>>`
+  padding: 0;
 `;
 
 const TitleWrapper = styled.div`

@@ -1,8 +1,11 @@
-import { withInfo } from "@storybook/addon-info";
-import { addDecorator, configure } from "@storybook/react";
-import LayoutDecorator from "./LayoutDecorator";
+import { withInfo } from '@storybook/addon-info';
+import { withOptions } from '@storybook/addon-options';
+import { themes } from '@storybook/components';
+import { addDecorator, configure } from '@storybook/react';
+import LayoutDecorator from './LayoutDecorator';
+
 const req = require.context(
-  "../src/components",
+  '../src/components',
   true,
   /.stories.(js|jsx|tsx)$/
 );
@@ -24,9 +27,19 @@ addDecorator(
     maxPropStringLength: 100 // Displays the first 100 characters in the default prop string,
   })
 );
+
+const newTheme = { ...themes.normal };
+
+newTheme.mainFill = '#f3f3f3';
+
+// Option defaults.
+addDecorator(
+  withOptions({
+    theme: newTheme
+  })
+);
+
 addDecorator(LayoutDecorator);
-// addDecorator(action);
-// addDecorator(withKnobs);
 
 function loadStories() {
   req.keys().forEach(req);
