@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { Paper } from '../../index';
 import { Title } from '../atoms/Typography';
 
-const Wrapper = styled(Paper)<React.HTMLProps<{}>>`
+const Wrapper = styled(Paper)<React.HTMLAttributes<{}>>`
   padding: 0;
 `;
 

@@ -5,6 +5,7 @@ import elevationMixin from '../../mixins/elevation';
 
 interface PaperWrapperProps {
   padding?: string;
+  elevation?: number;
 }
 
 export const PaperWrapper = styled.div<PaperWrapperProps>`

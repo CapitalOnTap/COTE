@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { colors } from '../../styles/defaults';
 import { Title } from '../atoms/Typography/index';
-import Tab from './Tab';
 
 const TabsWrapper = styled.div`
   position: relative;

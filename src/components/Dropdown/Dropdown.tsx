@@ -8,7 +8,7 @@ import OutsideAlerter from '../OutsideAlerter/OutsideAlerter';
 import ResultsList from '../ResultsList/ResultsList';
 import { Option } from '../types';
 
-const ArrowIcon = styled(Icon)<React.HTMLProps<{}>>`
+const ArrowIcon = styled(Icon)<React.HTMLAttributes<{}>>`
   position: absolute;
   z-index: 1;
   right: 8px;

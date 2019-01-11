@@ -9,14 +9,14 @@ const Wrapper = styled.div`
   width: 100%;
 `;
 
-const ArrowLeft = styled(Icon)<React.HTMLProps<{}>>`
+const ArrowLeft = styled(Icon)<React.HTMLAttributes<{}>>`
   position: absolute;
   left: 0;
   top: 50%;
   transform: translateY(-50%);
 `;
 
-const ArrowRight = styled(Icon)<React.HTMLProps<{}>>`
+const ArrowRight = styled(Icon)<React.HTMLAttributes<{}>>`
   position: absolute;
   right: 0;
   top: 50%;

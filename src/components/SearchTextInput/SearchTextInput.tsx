@@ -48,7 +48,7 @@ const SearchTextInput: React.SFC<Props> = ({
   );
 };
 
-SearchTextInput.propTypes = {
+(SearchTextInput as any).propTypes = {
   placeholder: PropTypes.string,
   /** Callback that returns search criteria */
   handleInputChange: PropTypes.func,

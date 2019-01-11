@@ -14,7 +14,6 @@ export const StyledInput = styled.input<{ invalid?: boolean; full?: boolean }>`
     color: lightgrey;
   }
   margin-bottom: ${props => (props.invalid ? '8px' : null)};
-  color: ${defaultColors.colorDarkBlue};
   border: ${props => {
     if (props.invalid && props.theme.colorDanger)
       return `1px solid ${props.theme.colorDanger}`;
@@ -35,7 +34,6 @@ const Input = styled(MaskedInput)<{ invalid?: boolean; full?: boolean }>`
     color: lightgrey;
   }
   margin-bottom: ${props => (props.invalid ? '8px' : null)};
-  color: ${defaultColors.colorDarkBlue};
   border: ${props => {
     if (props.invalid && props.theme.colorDanger)
       return `1px solid ${props.theme.colorDanger}`;

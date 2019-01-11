@@ -65,7 +65,7 @@ const Uploader: React.SFC<Props> = ({
         <p>{subtitle}</p>
         <p>or</p>
       </ContentWrapper>
-      <Button primary solid type="button">
+      <Button primary solid>
         {buttonText}
       </Button>
     </StyledDropZone>

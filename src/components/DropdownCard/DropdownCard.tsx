@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { colors as defaultColors } from '../../styles/defaults';
 import Icon from '../atoms/Icon/Icon';
 
-const ArrowIcon = styled(Icon)<React.HTMLProps<{}>>`
+const ArrowIcon = styled(Icon)<React.HTMLAttributes<{}>>`
   position: absolute;
   z-index: 1;
   right: 8px;
@@ -80,8 +80,11 @@ class DropdownCard extends Component<Props, State> {
   }
 
   handleOptionChange = option => {
-    this.setState({ selectedOption: option }, () =>
-      this.props.handleValueChange(option.value)
+    this.setState(
+      { selectedOption: option },
+      () =>
+        this.props.handleValueChange &&
+        this.props.handleValueChange(option.value)
     );
   };
 

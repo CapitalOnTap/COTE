@@ -238,15 +238,12 @@ const getRippleColor = (buttonProps: RippleButtonProps) => {
 
 const ButtonWithRipple = withRipples(StyledButton);
 
-interface Props extends RippleButtonProps {
+interface Props extends RippleButtonProps, React.HTMLAttributes<{}> {
   icon?: string;
   className?: string;
   href?: string;
   loading?: boolean;
   loadingText?: string;
-  id?: string;
-  children?: React.ReactNode;
-  theme: Theme;
 }
 
 const Button: React.SFC<Props> = (props: Props) => {
@@ -260,10 +257,6 @@ const Button: React.SFC<Props> = (props: Props) => {
     loadingText,
     id
   } = props;
-
-  if (!props.theme) {
-    throw new Error('FUck');
-  }
 
   if (href) {
     return (

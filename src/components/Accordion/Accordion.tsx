@@ -15,7 +15,7 @@ const Wrapper = styled.div`
   overflow: hidden;
 `;
 
-const AddIcon = styled(Icon)<React.HTMLProps<{}>>`
+const AddIcon = styled(Icon)<React.HTMLAttributes<{}>>`
   color: ${props =>
     props.theme.colorPrimary ? props.theme.colorPrimary : defaultColors.black};
 `;

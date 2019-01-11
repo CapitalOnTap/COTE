@@ -6,7 +6,7 @@ import Label from '../atoms/Typography/Label';
 import { Option } from '../types';
 
 const StyledButton = styled(Button)<
-  React.HTMLProps<{}> & { buttonWidth?: number; shouldWrap?: boolean }
+  React.HTMLAttributes<{}> & { buttonWidth?: number; shouldWrap?: boolean }
 >`
   width: ${props => `${props.buttonWidth}%`};
   @media (max-width: 640px) {

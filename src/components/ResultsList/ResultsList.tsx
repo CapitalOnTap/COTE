@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Paper from '../Paper/Paper';
 import { Option } from '../types';
 
-const Wrapper = styled(Paper)<React.HTMLProps<{}>>`
+const Wrapper = styled(Paper)<React.HTMLAttributes<{}>>`
   position: absolute;
   top: 48px;
   min-height: auto;
