@@ -238,7 +238,7 @@ const getRippleColor = (buttonProps: RippleButtonProps) => {
 
 const ButtonWithRipple = withRipples(StyledButton);
 
-interface Props extends RippleButtonProps, React.HTMLAttributes<{}> {
+interface Props extends RippleButtonProps, React.ButtonHTMLAttributes<{}> {
   icon?: string;
   className?: string;
   href?: string;
@@ -313,6 +313,7 @@ Button.defaultProps = {
   solid: false,
   href: '',
   disabled: false,
+  type: 'button',
   icon: '',
   full: false,
   danger: false

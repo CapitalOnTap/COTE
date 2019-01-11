@@ -18,7 +18,7 @@ const ArrowIcon = styled(Icon)<React.HTMLAttributes<{}>>`
   cursor: pointer;
 `;
 
-interface WrapperProps {
+interface WrapperProps extends React.HTMLAttributes<{}> {
   full?: boolean;
   error?: boolean;
   disabled?: boolean;
@@ -42,12 +42,11 @@ const Wrapper = styled.div<WrapperProps>`
 
 interface Props extends WrapperProps {
   selectedOption: Option;
-  handleValueChange: (value: any) => void;
+  handleValueChange?: (value: any) => void;
   options: Option[];
   title: string;
   label: string;
-  lastOption: Option;
-  id: string;
+  lastOption?: Option;
 }
 
 interface State {
@@ -65,8 +64,11 @@ class Dropdown extends Component<Props, State> {
   }
 
   handleOptionChange = (option: Option) => {
-    this.setState({ selectedOption: option }, () =>
-      this.props.handleValueChange(option.value)
+    this.setState(
+      { selectedOption: option },
+      () =>
+        this.props.handleValueChange &&
+        this.props.handleValueChange(option.value)
     );
   };
 
