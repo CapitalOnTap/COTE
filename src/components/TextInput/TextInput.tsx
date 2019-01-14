@@ -71,11 +71,12 @@ interface Props extends InputProps {
   subLabelText?: string;
   mask?: any;
   guide?: boolean;
-  error?: boolean;
+  error?: string;
   required?: boolean;
   info?: string;
   tooltip?: { title: string; description: string };
   isAutoComplete?: boolean;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const TextInput: React.SFC<Props> = ({
