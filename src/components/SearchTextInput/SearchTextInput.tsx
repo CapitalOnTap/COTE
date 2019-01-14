@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { StyledInput } from '../TextInput/TextInput';
+import { StyledInput, Props as InputProps } from '../TextInput/TextInput';
 import styled from 'styled-components';
 import ResultsList from '../ResultsList/ResultsList';
 import { Option } from '../types';
@@ -10,7 +10,7 @@ const Wrapper = styled.div<{ full?: boolean }>`
   width: ${props => (props.full ? null : 'fit-content')};
 `;
 
-interface Props {
+interface Props extends InputProps {
   placeholder: string;
   handleInputChange: () => void;
   results: Option[];

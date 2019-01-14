@@ -1,8 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import Paper from '../Paper/Paper';
-import { Option } from '../types';
+import React from "react";
+import PropTypes from "prop-types";
+import styled from "styled-components";
+import Paper from "../Paper/Paper";
+import { Option } from "../types";
 
 const Wrapper = styled(Paper)<React.HTMLAttributes<{}>>`
   position: absolute;
@@ -21,7 +21,7 @@ const ResultWrapper = styled.div`
   cursor: pointer;
   &:hover {
     background-color: ${props =>
-      props.theme ? props.theme.colorPrimary : 'rgba(39, 177, 97, 0.6)'};
+      props.theme ? props.theme.colorPrimary : "rgba(39, 177, 97, 0.6)"};
   }
 `;
 

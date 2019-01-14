@@ -1,7 +1,7 @@
-import PropTypes from 'prop-types';
-import React from 'react';
-import styled from 'styled-components';
-import { colors } from '../../styles/defaults';
+import PropTypes from "prop-types";
+import React from "react";
+import styled from "styled-components";
+import { colors } from "../../styles/defaults";
 
 export const Input = styled.input`
   position: absolute;
@@ -14,7 +14,7 @@ const Container = styled.label<{ checked?: boolean }>`
   position: relative;
   padding-left: 35px;
   margin-bottom: 1rem;
-  color: ${props => (props.checked ? 'initial' : colors.darkGrey)};
+  color: ${props => (props.checked ? "initial" : colors.darkGrey)};
   cursor: pointer;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -57,17 +57,17 @@ const Checkmark = styled.span`
     border-radius: 50%;
     background: ${props =>
       props.theme ? props.theme.colorPrimary : colors.primary};
-    content: '';
+    content: "";
     position: absolute;
     display: none;
   }
 `;
 
 interface Props {
-  label: string;
-  name: string;
+  label?: React.ReactNode;
+  name?: string;
   checked?: boolean;
-  onChange: (value: any) => void;
+  onChange?: (value: any) => void;
   value?: any;
 }
 
@@ -87,7 +87,7 @@ const RadioButton: React.SFC<Props> = ({
           name={name}
           checked={checked}
           value={value}
-          onChange={e => onChange(e.target.value)}
+          onChange={e => onChange && onChange(e.target.value)}
         />
         <Checkmark />
       </Container>
@@ -106,8 +106,8 @@ const RadioButton: React.SFC<Props> = ({
 };
 
 RadioButton.defaultProps = {
-  label: 'label',
-  name: 'radio',
+  label: "label",
+  name: "radio",
   onChange: value => console.log(value)
 };
 
