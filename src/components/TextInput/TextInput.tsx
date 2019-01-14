@@ -1,13 +1,13 @@
-import PropTypes from 'prop-types';
-import React from 'react';
-import MaskedInput from 'react-text-mask';
-import { Tooltip } from 'react-tippy';
-import 'react-tippy/dist/tippy.css';
-import styled from 'styled-components';
-import { colors as defaultColors } from '../../styles/defaults';
-import Icon from '../atoms/Icon/Icon';
-import { Caption, Label } from '../atoms/Typography/index';
-import TooltipContent from '../TooltipContent/index';
+import PropTypes from "prop-types";
+import React from "react";
+import MaskedInput from "react-text-mask";
+import { Tooltip } from "react-tippy";
+import "react-tippy/dist/tippy.css";
+import styled from "styled-components";
+import { colors as defaultColors } from "../../styles/defaults";
+import Icon from "../atoms/Icon/Icon";
+import { Caption, Label } from "../atoms/Typography/index";
+import TooltipContent from "../TooltipContent/index";
 
 interface InputProps extends React.InputHTMLAttributes<{}> {
   invalid?: boolean;
@@ -18,19 +18,19 @@ export const StyledInput = styled.input<InputProps>`
   &::placeholder {
     color: lightgrey;
   }
-  margin-bottom: ${props => (props.invalid ? '8px' : null)};
+  margin-bottom: ${props => (props.invalid ? "8px" : null)};
   border: ${props => {
     if (props.invalid && props.theme.colorDanger)
       return `1px solid ${props.theme.colorDanger}`;
 
-    if (props.invalid) return 'solid 1px red';
+    if (props.invalid) return "solid 1px red";
 
     return `solid 1px ${defaultColors.black}`;
   }};
 
   border-radius: 4px;
   padding: 9px 16px;
-  width: ${props => (props.full ? '100%' : null)};
+  width: ${props => (props.full ? "100%" : null)};
   height: 36px;
 `;
 
@@ -38,24 +38,24 @@ const Input = styled(MaskedInput)<{ invalid?: boolean; full?: boolean }>`
   &::placeholder {
     color: lightgrey;
   }
-  margin-bottom: ${props => (props.invalid ? '8px' : null)};
+  margin-bottom: ${props => (props.invalid ? "8px" : null)};
   border: ${props => {
     if (props.invalid && props.theme.colorDanger)
       return `1px solid ${props.theme.colorDanger}`;
 
-    if (props.invalid) return 'solid 1px red';
+    if (props.invalid) return "solid 1px red";
 
     return `solid 1px ${defaultColors.black}`;
   }};
 
   border-radius: 4px;
   padding: 9px 16px;
-  width: ${props => (props.full ? '100%' : null)};
+  width: ${props => (props.full ? "100%" : null)};
   height: 36px;
 `;
 
 const InputWrapper = styled.div<{ full?: boolean }>`
-  width: ${props => (props.full ? '100%' : null)};
+  width: ${props => (props.full ? "100%" : null)};
 `;
 
 const TooltipIcon = styled(Icon)`
@@ -63,11 +63,11 @@ const TooltipIcon = styled(Icon)`
 `;
 
 const InfoCaption = styled(Caption)`
-  margin-top: '8px';
+  margin-top: "8px";
 `;
 
 interface Props extends InputProps {
-  labelText: string;
+  labelText?: string;
   subLabelText?: string;
   mask?: any;
   guide?: boolean;
@@ -100,9 +100,9 @@ const TextInput: React.SFC<Props> = ({
     <InputWrapper full={full}>
       <div
         style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between'
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between"
         }}
       >
         {labelText && (
@@ -135,7 +135,7 @@ const TextInput: React.SFC<Props> = ({
         guide={guide}
         full={full}
         onChange={onChange}
-        autoComplete={isAutoComplete ? 'on' : 'new-password'}
+        autoComplete={isAutoComplete ? "on" : "new-password"}
       />
 
       {error && <Caption required={required} text={error} />}
@@ -170,18 +170,18 @@ const TextInput: React.SFC<Props> = ({
 };
 
 (TextInput as any).defaultProps = {
-  placeholder: 'Type something',
-  error: '',
-  info: '',
+  placeholder: "Type something",
+  error: "",
+  info: "",
   full: false,
   guide: false,
-  labelText: '',
+  labelText: "",
   mask: false,
-  name: '',
+  name: "",
   tooltip: null,
   isAutoComplete: false
 };
 
-TextInput.displayName = 'TextInput';
+TextInput.displayName = "TextInput";
 
 export default TextInput;
