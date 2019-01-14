@@ -1,12 +1,12 @@
-import PropTypes from 'prop-types';
-import React, { Component } from 'react';
-import styled from 'styled-components';
-import { colors as defaultColors } from '../../styles/defaults';
-import Icon from '../atoms/Icon/Icon';
-import { Caption, Label } from '../atoms/Typography/index';
-import OutsideAlerter from '../OutsideAlerter/OutsideAlerter';
-import ResultsList from '../ResultsList/ResultsList';
-import { Option } from '../types';
+import PropTypes from "prop-types";
+import React, { Component } from "react";
+import styled from "styled-components";
+import { colors as defaultColors } from "../../styles/defaults";
+import Icon from "../atoms/Icon/Icon";
+import { Caption, Label } from "../atoms/Typography/index";
+import OutsideAlerter from "../OutsideAlerter/OutsideAlerter";
+import ResultsList from "../ResultsList/ResultsList";
+import { Option } from "../types";
 
 const ArrowIcon = styled(Icon)<React.HTMLAttributes<{}>>`
   position: absolute;
@@ -27,7 +27,7 @@ interface WrapperProps extends React.HTMLAttributes<{}> {
 const Wrapper = styled.div<WrapperProps>`
   position: relative;
   min-width: 66px;
-  width: ${props => (props.full ? '100%' : '232px')};
+  width: ${props => (props.full ? "100%" : "232px")};
   border: ${props => {
     if (props.error && props.theme)
       return `1px solid ${props.theme.colorDanger}`;
@@ -37,21 +37,21 @@ const Wrapper = styled.div<WrapperProps>`
   }};
   border-radius: 4px;
   padding: 9px 16px;
-  cursor: ${props => (props.disabled ? 'default' : 'pointer')};
+  cursor: ${props => (props.disabled ? "default" : "pointer")};
 `;
 
 interface Props extends WrapperProps {
-  selectedOption: Option;
+  selectedOption?: Option;
   handleValueChange?: (value: any) => void;
   options: Option[];
-  title: string;
-  label: string;
+  title?: string;
+  label?: string;
   lastOption?: Option;
 }
 
 interface State {
   isOpen: boolean;
-  selectedOption: Option;
+  selectedOption?: Option;
 }
 
 class Dropdown extends Component<Props, State> {
@@ -175,11 +175,11 @@ class Dropdown extends Component<Props, State> {
 };
 
 (Dropdown as any).defaultProps = {
-  title: 'Select an option',
-  options: [{ title: 'Option 1', value: 1 }, { title: 'Option 2', value: 2 }],
+  title: "Select an option",
+  options: [{ title: "Option 1", value: 1 }, { title: "Option 2", value: 2 }],
   handleValueChange: value => console.log(value),
   full: false,
-  label: '',
+  label: "",
   lastOption: null,
   selectedOption: null,
   disabled: false

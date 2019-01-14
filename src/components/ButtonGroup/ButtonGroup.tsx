@@ -1,16 +1,16 @@
-import PropTypes from 'prop-types';
-import React, { Component } from 'react';
-import styled from 'styled-components';
-import Button from '../atoms/Button/Button';
-import Label from '../atoms/Typography/Label';
-import { Option } from '../types';
+import PropTypes from "prop-types";
+import React, { Component } from "react";
+import styled from "styled-components";
+import Button from "../atoms/Button/Button";
+import Label from "../atoms/Typography/Label";
+import { Option } from "../types";
 
 const StyledButton = styled(Button)<
   React.HTMLAttributes<{}> & { buttonWidth?: number; shouldWrap?: boolean }
 >`
   width: ${props => `${props.buttonWidth}%`};
   @media (max-width: 640px) {
-    width: ${props => (props.shouldWrap ? '50%' : null)};
+    width: ${props => (props.shouldWrap ? "50%" : null)};
   }
 `;
 
@@ -47,7 +47,7 @@ const ButtonGroupWrapper = styled.div<{
       border-top-left-radius: 2px;
       border-top-right-radius: 0;
       border-bottom-right-radius: 0;
-      border-bottom-left-radius: ${props => (props.shouldWrap ? 0 : '2px')};
+      border-bottom-left-radius: ${props => (props.shouldWrap ? 0 : "2px")};
     }
 
     & button:nth-child(2) {
@@ -59,7 +59,7 @@ const ButtonGroupWrapper = styled.div<{
       border-bottom-left-radius: 0;
       border-right: ${
         props.solid || props.disabled
-          ? 'none'
+          ? "none"
           : `1px solid ${props.theme.colorBlack}`
       };`
           : null};
@@ -75,7 +75,7 @@ const ButtonGroupWrapper = styled.div<{
       border-bottom-left-radius: 2px;
       border-left: ${
         props.solid || props.disabled
-          ? 'none'
+          ? "none"
           : `1px solid ${props.theme.colorBlack} !important`
       };`
           : null};
@@ -99,10 +99,10 @@ const Wrapper = styled.div`
 interface Props {
   options: Option[];
   handleOptionSelected: (value: any) => void;
-  label: string;
+  label?: string;
   error?: boolean;
   primary?: boolean;
-  id: string;
+  id?: string;
   shouldWrap?: boolean;
 }
 
@@ -175,12 +175,12 @@ class ButtonGroup extends Component<Props, State> {
 };
 
 (ButtonGroup as any).defaultProps = {
-  label: '',
+  label: "",
   options: [
-    { title: 'LLP', value: 'LLP' },
-    { title: 'Limited', value: 'Limited' },
-    { title: 'Partnership', value: 'partnership' },
-    { title: 'Sole Trader', value: 'Sole Trader' }
+    { title: "LLP", value: "LLP" },
+    { title: "Limited", value: "Limited" },
+    { title: "Partnership", value: "partnership" },
+    { title: "Sole Trader", value: "Sole Trader" }
   ],
   handleOptionSelected: i => console.log(i),
   selectedIndex: 0,
