@@ -1,21 +1,22 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { StyledInput, Props as InputProps } from '../TextInput/TextInput';
-import styled from 'styled-components';
-import ResultsList from '../ResultsList/ResultsList';
-import { Option } from '../types';
+import React from "react";
+import PropTypes from "prop-types";
+import { StyledInput, Props as InputProps } from "../TextInput/TextInput";
+import styled from "styled-components";
+import ResultsList from "../ResultsList/ResultsList";
+import { Option } from "../types";
 
 const Wrapper = styled.div<{ full?: boolean }>`
   position: relative;
-  width: ${props => (props.full ? null : 'fit-content')};
+  width: ${props => (props.full ? null : "fit-content")};
 `;
 
-interface Props extends InputProps {
+type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
+
+interface Props extends Omit<InputProps, "results"> {
   placeholder: string;
   handleInputChange: () => void;
   results: Option[];
   handleResultSelected;
-  error?: boolean;
   required?: boolean;
   full?: boolean;
 }
@@ -60,8 +61,8 @@ const SearchTextInput: React.SFC<Props> = ({
 };
 
 SearchTextInput.defaultProps = {
-  placeholder: 'Type something to search',
-  handleInputChange: () => console.log('input changed'),
+  placeholder: "Type something to search",
+  handleInputChange: () => console.log("input changed"),
   results: [],
   handleResultSelected: val => console.log(`Result ${val} selected`),
   full: false
