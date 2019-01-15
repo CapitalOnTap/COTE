@@ -66,7 +66,7 @@ const InfoCaption = styled(Caption)`
   margin-top: "8px";
 `;
 
-interface Props extends InputProps {
+export interface Props extends InputProps {
   labelText?: string;
   subLabelText?: string;
   mask?: any;

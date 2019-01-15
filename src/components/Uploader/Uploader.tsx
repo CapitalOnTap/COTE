@@ -1,10 +1,10 @@
-import * as React from 'react';
-import Dropzone from 'react-dropzone';
-import styled from 'styled-components';
-import { colors as defaultColors } from '../../styles/defaults';
-import Button from '../atoms/Button/Button';
-import Icon from '../atoms/Icon/Icon';
-import { Title } from '../atoms/Typography/index';
+import * as React from "react";
+import Dropzone from "react-dropzone";
+import styled from "styled-components";
+import { colors as defaultColors } from "../../styles/defaults";
+import Button from "../atoms/Button/Button";
+import Icon from "../atoms/Icon/Icon";
+import { Title } from "../atoms/Typography/index";
 
 const StyledDropZone = styled(Dropzone)`
   display: flex;
@@ -39,44 +39,52 @@ interface Props {
   subtitle?: string;
 }
 
-const Uploader: React.SFC<Props> = ({
-  icon,
-  theme,
-  buttonText,
-  title,
-  subtitle,
-  ...props
-}) => {
-  return (
-    <StyledDropZone
-      {...props}
-      activeStyle={{
-        border: `dashed 2px ${
-          theme ? theme.colorPrimary : defaultColors.success
-        }`
-      }}
-      rejectStyle={{
-        border: `dashed 2px ${theme ? theme.colorDanger : defaultColors.danger}`
-      }}
-    >
-      <ContentWrapper>
-        <Icon name={icon} />
-        <Title bold>{title}</Title>
-        <p>{subtitle}</p>
-        <p>or</p>
-      </ContentWrapper>
-      <Button primary solid>
-        {buttonText}
-      </Button>
-    </StyledDropZone>
-  );
-};
+class Uploader extends React.Component<Props> {
+  dropzone: React.Ref<any>;
 
-Uploader.defaultProps = {
-  icon: 'add_circle_outline',
-  buttonText: 'Choose files',
-  title: 'Drag and drop files here',
-  subtitle: ''
+  onOpenClick = () => {
+    this.dropzone && (this.dropzone as any).open();
+  };
+
+  render() {
+    const { icon, theme, buttonText, title, subtitle, ...props } = this.props;
+
+    return (
+      <StyledDropZone
+        {...props}
+        activeStyle={{
+          border: `dashed 2px ${
+            theme ? theme.colorPrimary : defaultColors.success
+          }`
+        }}
+        rejectStyle={{
+          border: `dashed 2px ${
+            theme ? theme.colorDanger : defaultColors.danger
+          }`
+        }}
+        ref={node => {
+          this.dropzone = node;
+        }}
+      >
+        <ContentWrapper>
+          <Icon name={icon} />
+          <Title bold>{title}</Title>
+          <p>{subtitle}</p>
+          <p>or</p>
+        </ContentWrapper>
+        <Button primary solid onClick={this.onOpenClick}>
+          {buttonText}
+        </Button>
+      </StyledDropZone>
+    );
+  }
+}
+
+(Uploader as any).defaultProps = {
+  icon: "add_circle_outline",
+  buttonText: "Choose files",
+  title: "Drag and drop files here",
+  subtitle: ""
 };
 
 export default Uploader;
