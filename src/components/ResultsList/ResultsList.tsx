@@ -44,10 +44,11 @@ interface Props {
 const ResultsList: React.SFC<Props> = ({
   results,
   handleResultSelected,
-  lastItem
+  lastItem,
+  ...props
 }) => {
   return (
-    <Wrapper>
+    <Wrapper {...props}>
       {results.map((result, i) => {
         return (
           // TODO: Fix index as key

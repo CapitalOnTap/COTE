@@ -76,11 +76,12 @@ const RadioButton: React.SFC<Props> = ({
   name,
   checked,
   onChange,
-  value
+  value,
+  ...props
 }) => {
   return (
     <div>
-      <Container checked={checked}>
+      <Container {...props} checked={checked}>
         {label}
         <Input
           type="radio"

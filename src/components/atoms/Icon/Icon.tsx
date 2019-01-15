@@ -1,11 +1,11 @@
-import * as React from 'react';
-import styled from 'styled-components';
-import { colors } from '../../../styles/defaults';
+import * as React from "react";
+import styled from "styled-components";
+import { colors } from "../../../styles/defaults";
 
 const StyledIcon = styled.i<{ reverse: boolean; solid: boolean } & any>`
   font-size: 24px;
   color: ${props => {
-    if (props.reverse || props.solid) return '#fff';
+    if (props.reverse || props.solid) return "#fff";
 
     if (props.primary && props.theme) return props.theme.colorPrimary;
 
@@ -13,7 +13,7 @@ const StyledIcon = styled.i<{ reverse: boolean; solid: boolean } & any>`
 
     return colors.darkGrey;
   }};
-  padding: ${props => (props.circle ? '8px' : null)};
+  padding: ${props => (props.circle ? "8px" : null)};
   border: ${props => {
     if (props.primary && props.theme && props.circle && !props.solid)
       return `1px solid ${props.theme.colorPrimary}`;
@@ -25,7 +25,7 @@ const StyledIcon = styled.i<{ reverse: boolean; solid: boolean } & any>`
 
     return null;
   }};
-  border-radius: ${props => (props.circle ? '50%' : null)};
+  border-radius: ${props => (props.circle ? "50%" : null)};
   background-color: ${props => {
     if (props.circle && props.solid && props.theme)
       return props.theme.colorPrimary;
@@ -34,7 +34,7 @@ const StyledIcon = styled.i<{ reverse: boolean; solid: boolean } & any>`
   }};
 `;
 
-interface Props {
+interface Props extends React.HTMLAttributes<{}> {
   /** Render icon with primary color if defined in the theme */
   primary?: boolean;
   reverse?: boolean;
@@ -53,7 +53,8 @@ const Icon: React.SFC<Props> = ({
   circle,
   solid,
   className,
-  reverse
+  reverse,
+  ...props
 }) => {
   return (
     <StyledIcon
@@ -63,12 +64,13 @@ const Icon: React.SFC<Props> = ({
       solid={solid}
       error={error}
       reverse={reverse}
+      {...props}
     >
       {name}
     </StyledIcon>
   );
 };
 
-Icon.displayName = 'Icon';
+Icon.displayName = "Icon";
 
 export default Icon;

@@ -1,7 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import { colors } from '../../../styles/defaults';
+import React from "react";
+import PropTypes from "prop-types";
+import styled from "styled-components";
+import { colors } from "../../../styles/defaults";
 
 interface Props {
   text: React.ReactNode;
@@ -23,9 +23,9 @@ const StyledLabel = styled.label<{ required?: boolean }>`
   margin-bottom: 8px;
 `;
 
-const Label: React.SFC<Props> = ({ text, required, htmlFor }) => {
+const Label: React.SFC<Props> = ({ text, required, htmlFor, ...props }) => {
   return (
-    <StyledLabel required={required} htmlFor={htmlFor}>
+    <StyledLabel required={required} htmlFor={htmlFor} {...props}>
       {text}
     </StyledLabel>
   );
@@ -36,7 +36,7 @@ Label.propTypes = {
 };
 
 Label.defaultProps = {
-  text: 'Label'
+  text: "Label"
 };
 
 export default Label;

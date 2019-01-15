@@ -72,7 +72,7 @@ class Uploader extends React.Component<Props> {
           <p>{subtitle}</p>
           <p>or</p>
         </ContentWrapper>
-        <Button primary solid onClick={this.onOpenClick}>
+        <Button primary solid type="button" onClick={this.onOpenClick}>
           {buttonText}
         </Button>
       </StyledDropZone>
