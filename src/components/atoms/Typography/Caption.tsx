@@ -1,7 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import { colors } from '../../../styles/defaults';
+import React from "react";
+import PropTypes from "prop-types";
+import styled from "styled-components";
+import { colors } from "../../../styles/defaults";
 
 interface Props {
   text: React.ReactNode;
@@ -20,8 +20,12 @@ const StyledCaption = styled.span<{ required?: boolean }>`
   display: block;
 `;
 
-const Caption: React.SFC<Props> = ({ required, text }) => {
-  return <StyledCaption required={required}>{text}</StyledCaption>;
+const Caption: React.SFC<Props> = ({ required, text, ...props }) => {
+  return (
+    <StyledCaption required={required} {...props}>
+      {text}
+    </StyledCaption>
+  );
 };
 
 Caption.propTypes = {
@@ -29,7 +33,7 @@ Caption.propTypes = {
 };
 
 Caption.defaultProps = {
-  text: ''
+  text: ""
 };
 
 export default Caption;
