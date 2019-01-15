@@ -1,8 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import Icon from '../atoms/Icon/Icon';
-import { colors } from '../../styles/defaults';
+import React from "react";
+import PropTypes from "prop-types";
+import styled from "styled-components";
+import Icon from "../atoms/Icon/Icon";
+import { colors } from "../../styles/defaults";
 
 const Wrapper = styled.div`
   display: flex;
@@ -12,7 +12,7 @@ const Wrapper = styled.div`
 
 const Step = styled.div<{ width?: number }>`
   display: flex;
-  width: ${props => props.width + '%'};
+  width: ${props => props.width + "%"};
   justify-content: center;
   align-items: center;
   flex-direction: column;
@@ -47,12 +47,12 @@ interface Props {
 const ProgressBar: React.SFC<Props> = props => {
   const { steps, progress, currentStep } = props;
   return (
-    <Wrapper>
+    <Wrapper {...props}>
       {steps.map((step, index) => {
         const iconName =
           currentStep === index + 1 || index + 1 > currentStep
             ? step.icon
-            : 'check';
+            : "check";
 
         /**if brackground of icon should be solid/selected */
         let isSolid = currentStep === index + 1;
@@ -67,7 +67,7 @@ const ProgressBar: React.SFC<Props> = props => {
               primary={isCompleted}
               circle
             />
-            <span style={{ fontWeight: 'bold' }}>{step.name}</span>
+            <span style={{ fontWeight: "bold" }}>{step.name}</span>
           </Step>
         );
       })}
@@ -87,10 +87,10 @@ const ProgressBar: React.SFC<Props> = props => {
 (ProgressBar as any).defaultProps = {
   currentStep: 1,
   steps: [
-    { icon: 'hourglass_empty', name: 'Step 1' },
-    { icon: 'person_outline', name: 'Step 2' },
-    { icon: 'person_outline', name: 'Step 3' },
-    { icon: 'credit_card', name: 'Step 4' }
+    { icon: "hourglass_empty", name: "Step 1" },
+    { icon: "person_outline", name: "Step 2" },
+    { icon: "person_outline", name: "Step 3" },
+    { icon: "credit_card", name: "Step 4" }
   ],
   progress: 75
 };

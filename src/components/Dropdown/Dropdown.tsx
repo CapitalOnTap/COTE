@@ -92,12 +92,14 @@ class Dropdown extends Component<Props, State> {
       label,
       lastOption,
       id,
-      disabled
+      disabled,
+      ...props
     } = this.props;
 
     return (
       <OutsideAlerter
         handleClickOutsideElement={this.handleClickOutsideDropdown}
+        {...props}
       >
         {label && <Label required={error} text={label} />}
 

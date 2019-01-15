@@ -1,8 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import { Title } from '../atoms/Typography/index';
-import { colors as defaultColors } from '../../styles/defaults';
+import React from "react";
+import PropTypes from "prop-types";
+import styled from "styled-components";
+import { Title } from "../atoms/Typography/index";
+import { colors as defaultColors } from "../../styles/defaults";
 
 const Wrapper = styled.div`
   border: ${props =>
@@ -17,7 +17,7 @@ interface WrapperProps {
 }
 
 const ContentWrapper = styled.div<WrapperProps>`
-  padding: ${props => (props.noPadding ? null : '24px')};
+  padding: ${props => (props.noPadding ? null : "24px")};
 `;
 
 const TitleWrapper = styled.div`
@@ -25,7 +25,7 @@ const TitleWrapper = styled.div`
   border-bottom: 1px solid #f3f3f3;
 `;
 
-interface Props extends WrapperProps {
+interface Props extends WrapperProps, React.HTMLAttributes<{}> {
   title: string;
   className?: string;
   id: string;
@@ -36,10 +36,11 @@ const ContentBox: React.SFC<Props> = ({
   title,
   className,
   id,
-  noPadding
+  noPadding,
+  ...props
 }) => {
   return (
-    <Wrapper className={className} id={id}>
+    <Wrapper className={className} {...props} id={id}>
       <TitleWrapper>
         <Title bold>{title}</Title>
       </TitleWrapper>
@@ -55,8 +56,8 @@ const ContentBox: React.SFC<Props> = ({
 };
 
 (ContentBox as any).defaultProps = {
-  title: 'Title',
-  children: 'The content goes here'
+  title: "Title",
+  children: "The content goes here"
 };
 
 export default ContentBox;
