@@ -1,6 +1,8 @@
-import { Button, Icon, Paper } from '../../';
 import * as React from 'react';
 import styled, { css } from 'styled-components';
+import Paper from '../Paper/Paper';
+import Button from '../atoms/Button/Button';
+import Icon from '../atoms/Icon/Icon';
 import { SnackbarStatus } from './types';
 
 const active = css`
