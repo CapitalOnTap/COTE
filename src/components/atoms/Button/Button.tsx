@@ -3,9 +3,9 @@ import React from 'react';
 import styled, { css, keyframes, withTheme } from 'styled-components';
 import withRipples from '../../../hocs/withRipples';
 import elevationMixin from '../../../mixins/elevation';
+import { Theme } from '../../../styles/types';
 import { hexToRgbA } from '../../../utils/index';
 import Icon from '../Icon/Icon';
-import { Theme } from '../../../styles/types';
 
 const primary = css`
   color: ${props => props.theme.colorPrimary};
@@ -86,7 +86,7 @@ const solid = css<{ primary?: boolean; danger?: boolean; disabled?: boolean }>`
     }
 
      &&:hover{
-      background-color: ${props.theme.colorPrimaryDark};
+      background-color: ${props.theme.colorPrimaryEmphasis};
     }
   `}
 
