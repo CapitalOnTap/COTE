@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { ReactNode } from 'react';
 import styled from 'styled-components';
 import Paper from '../Paper/Paper';
 import { Title } from '../atoms/Typography';
@@ -13,8 +13,13 @@ const TitleWrapper = styled.div`
   border-bottom: 1px solid #f3f3f3;
 `;
 
+const RenderTitleWrapper = styled.div`
+  border-bottom: 1px solid #f3f3f3;
+`;
+
 interface Props {
-  title: string;
+  title?: string;
+  renderTitle?: () => ReactNode;
   className?: string;
   id?: string;
 }
@@ -24,20 +29,26 @@ const WidgetBox: React.SFC<Props> = ({
   title,
   className,
   id,
+  renderTitle,
   ...props
 }) => {
   return (
     <Wrapper className={className} {...props} id={id}>
-      <TitleWrapper>
-        <Title bold>{title}</Title>
-      </TitleWrapper>
+      {renderTitle ? (
+        <RenderTitleWrapper>{renderTitle()}</RenderTitleWrapper>
+      ) : (
+        <TitleWrapper>
+          <Title bold>{title}</Title>
+        </TitleWrapper>
+      )}
       {children}
     </Wrapper>
   );
 };
 
 (WidgetBox as any).propTypes = {
-  title: PropTypes.string
+  title: PropTypes.string,
+  renderTitle: PropTypes.func
 };
 
 (WidgetBox as any).defaultProps = {
