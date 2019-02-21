@@ -13,7 +13,7 @@ const StyledCaption = styled.span<{ required?: boolean }>`
   color: ${props => {
     if (props.required) return props.theme.colorDanger;
 
-    if (props.theme) return props.theme.colorBlack;
+    if (props.theme) return props.theme.colorDefault;
 
     return defaultColors.default;
   }};

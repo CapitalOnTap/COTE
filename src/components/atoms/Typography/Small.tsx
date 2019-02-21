@@ -8,7 +8,7 @@ const Small = styled.span<{ reverse?: boolean }>`
   color: ${props => {
     if (props.reverse) return '#fff';
 
-    if (props.theme) return props.theme.colorLightBlack;
+    if (props.theme) return props.theme.colorDefaultLight;
 
     return defaultColors.defaultLight;
   }};

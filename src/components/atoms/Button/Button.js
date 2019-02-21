@@ -34,7 +34,7 @@ export const StyledButton = styled.button`
       return props.theme.colorDanger;
     }
 
-    return props.theme.colorBlack;
+    return props.theme.colorDefault;
   }};
 
   @media only screen and (min-width: 640px) {

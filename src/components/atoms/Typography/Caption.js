@@ -8,7 +8,7 @@ const StyledCaption = styled.span`
   color: ${props => {
     if (props.required) return props.theme.colorDanger;
 
-    if (props.theme) return props.theme.colorBlack;
+    if (props.theme) return props.theme.colorDefault;
 
     return defaultColors.default;
   }};

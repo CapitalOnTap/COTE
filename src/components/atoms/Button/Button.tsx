@@ -28,7 +28,7 @@ const outline = css<{
 }>`
   ${props =>
     `
-      border: 1px solid ${props.theme.colorBlack};
+      border: 1px solid ${props.theme.colorDefault};
   `};
 
   ${props =>
@@ -66,13 +66,13 @@ const solid = css<{ primary?: boolean; danger?: boolean; disabled?: boolean }>`
   ${props =>
     `
     color: white;
-    background-color: ${hexToRgbA(props.theme.colorBlack, 0.7)};
+    background-color: ${hexToRgbA(props.theme.colorDefault, 0.7)};
     &:before {
       color: black;
     }
 
     &:hover{
-      background-color: ${props.theme.colorBlack};
+      background-color: ${props.theme.colorDefault};
     }
   `}
 
@@ -125,7 +125,7 @@ interface StyledButtonProps {
 }
 
 export const StyledButton = styled.button<StyledButtonProps>`
-  color: ${props => props.theme.colorBlack};
+  color: ${props => props.theme.colorDefault};
   display: inline-block;
   position: relative;
   min-width: 88px;
@@ -150,7 +150,7 @@ export const StyledButton = styled.button<StyledButtonProps>`
 
   &:hover {
     cursor: pointer;
-    background-color: ${props => hexToRgbA(props.theme.colorBlack, 0.08)};
+    background-color: ${props => hexToRgbA(props.theme.colorDefault, 0.08)};
   }
   &::-moz-focus-inner {
     padding: 0;

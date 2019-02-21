@@ -7,7 +7,7 @@ const Heading = styled.h1`
 
     if (props.highlight && props.theme) return props.theme.colorPrimary;
 
-    if (props.theme) return props.theme.colorBlack;
+    if (props.theme) return props.theme.colorDefault;
 
     return defaultColors.default;
   }};
