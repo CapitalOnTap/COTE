@@ -15,9 +15,9 @@ const Heading = styled.h1<HeadingProps>`
   color: ${props => {
     if (props.inverse) return '#fff';
 
-    if (props.highlight && props.theme) return props.theme.colorPrimary;
+    if (props.highlight && props.theme) return props.theme.colorHighlight;
 
-    if (props.theme) return props.theme.colorDefault;
+    if (props.theme) return props.theme.colorHeading;
 
     return defaultColors.default;
   }};
