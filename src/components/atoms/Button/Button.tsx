@@ -8,9 +8,9 @@ import { hexToRgbA, isColorDark } from '../../../utils/index';
 import Icon from '../Icon/Icon';
 
 const primary = css`
-  color: ${props => props.theme.colorSecondary};
+  color: ${props => props.theme.colorPrimary};
   &:hover {
-    background-color: ${props => hexToRgbA(props.theme.colorSecondary, 0.08)};
+    background-color: ${props => hexToRgbA(props.theme.colorPrimary, 0.08)};
   }
 `;
 
@@ -79,8 +79,6 @@ const solid = css<{ primary?: boolean; secondary?: boolean; danger?: boolean; di
   &:active{
     ${elevationMixin(8)}
   }
-
-
   
   ${props => {
     if (props.disabled) {
@@ -105,7 +103,8 @@ const solid = css<{ primary?: boolean; secondary?: boolean; danger?: boolean; di
       backgroundColor = props.theme.colorDanger;
       hoverBackgroundColor = props.theme.colorDangerEmphasis;
     }
-      const textColor = isColorDark(backgroundColor) ? 'white' : props.theme.colorDefault;
+    
+    const textColor = isColorDark(backgroundColor) ? 'white' : props.theme.colorDefault;
 
     return `
   color: ${textColor};
@@ -167,11 +166,11 @@ export const StyledButton = styled.button<StyledButtonProps>`
     border: 0;
   }
 
-  ${props => props.primary && primary}
-  ${props => props.secondary && secondary}
   ${props => props.solid && solid}
-  ${props => props.danger && danger}
   ${props => props.outline && outline}
+  ${props => !props.solid && !props.outline && props.primary && primary}
+  ${props => !props.solid && !props.outline && props.secondary && secondary}
+  ${props => !props.solid && !props.outline && props.danger && danger}
   ${props =>
     props.small &&
     `padding: 0px 8px;
