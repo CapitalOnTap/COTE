@@ -27,8 +27,6 @@ export const isColorDark = (hex) => {
   var g = (rgb >>  8) & 0xff;  // extract green
   var b = (rgb >>  0) & 0xff;  // extract blue
 
-  var luma = 0.2126 * r + 0.7152 * g + 0.0722 * b; // per ITU-R BT.709
-
   // 255 = lightest, 0 = darkest
   if ((r*0.299 + g*0.587 + b*0.114) > 186) {
     return false;
