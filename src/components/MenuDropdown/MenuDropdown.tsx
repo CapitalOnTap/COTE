@@ -18,7 +18,7 @@ const ArrowIcon = styled(Icon)`
 const ArrowWrapper = styled.div<{ small?: boolean }>`
   display: inline-block;
   position: relative;
-  top: ${props => props.small ? '6px' : '2px'} ;
+  top: ${props => props.small ? '6px' : '2px'};
 `;
 
 const DropdownWrapper = styled.div`
@@ -33,12 +33,18 @@ const DropdownButton = styled.div`
   font-family: inherit;
 `;
 
-const FirstName = styled.p`
+const FirstName = styled.p<{ reverse?: boolean }>`
   position: relative;
   margin: 0 9px 0 10px;
   top: 50%;
   transform: translateY(-25%);
   display: inline-block;
+  ${props => {
+    if (props.reverse) {
+      return 'color: #fff;'
+    }
+    return null;
+  }}
 `;
 
 const BadgeWrapper = styled.div`
@@ -142,7 +148,7 @@ class MenuDropdown extends Component<Props, State> {
                 color={reverse ? theme.colorPrimary : '#fff'}
               />
             </BadgeWrapper>
-            {!small && <FirstName>{firstName}</FirstName>}
+            {!small && <FirstName reverse={reverse}>{firstName}</FirstName>}
             <ArrowWrapper small={small}>
               <ArrowIcon reverse={reverse} name="keyboard_arrow_down" />
             </ArrowWrapper>
