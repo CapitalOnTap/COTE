@@ -4,7 +4,7 @@ import styled, { css, keyframes, withTheme } from 'styled-components';
 import withRipples from '../../../hocs/withRipples';
 import elevationMixin from '../../../mixins/elevation';
 import { Theme } from '../../../styles/types';
-import { hexToRgbA } from '../../../utils/index';
+import { hexToRgbA, isColorDark } from '../../../utils/index';
 import Icon from '../Icon/Icon';
 
 const primary = css`
@@ -31,6 +31,7 @@ const danger = css`
 const outline = css<{
   disabled?: boolean;
   primary?: boolean;
+  secondary?: boolean;
   danger?: boolean;
 }>`
   ${props =>
@@ -72,7 +73,7 @@ const outline = css<{
   `};
 `;
 
-const solid = css<{ primary?: boolean; danger?: boolean; disabled?: boolean }>`
+const solid = css<{ primary?: boolean; secondary?: boolean; danger?: boolean; disabled?: boolean }>`
   ${elevationMixin(2)}
 
   &:active{
@@ -91,7 +92,6 @@ const solid = css<{ primary?: boolean; danger?: boolean; disabled?: boolean }>`
 
     let backgroundColor = hexToRgbA(props.theme.colorDefault, 0.7);
     let hoverBackgroundColor = props.theme.colorDefault;
-    let textColor;
 
     if (props.primary) {
       backgroundColor = props.theme.colorPrimary;
@@ -105,7 +105,7 @@ const solid = css<{ primary?: boolean; danger?: boolean; disabled?: boolean }>`
       backgroundColor = props.theme.colorDanger;
       hoverBackgroundColor = props.theme.colorDangerEmphasis;
     }
-      const textColor = isColorDark(backgroundColor) ? 'white' : colors.theme.colorDefault;
+      const textColor = isColorDark(backgroundColor) ? 'white' : props.theme.colorDefault;
 
     return `
   color: ${textColor};
@@ -168,6 +168,7 @@ export const StyledButton = styled.button<StyledButtonProps>`
   }
 
   ${props => props.primary && primary}
+  ${props => props.secondary && secondary}
   ${props => props.solid && solid}
   ${props => props.danger && danger}
   ${props => props.outline && outline}

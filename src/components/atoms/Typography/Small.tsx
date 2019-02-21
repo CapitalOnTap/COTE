@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { colors, fontWeights } from '../../../styles/defaults';
+import { colors as defaultColors, fontWeights } from '../../../styles/defaults';
 
 const Small = styled.span<{ reverse?: boolean }>`
   display: inline-block;
