@@ -8,9 +8,16 @@ import { hexToRgbA } from '../../../utils/index';
 import Icon from '../Icon/Icon';
 
 const primary = css`
-  color: ${props => props.theme.colorPrimary};
+  color: ${props => props.theme.colorSecondary};
   &:hover {
-    background-color: ${props => hexToRgbA(props.theme.colorPrimary, 0.08)};
+    background-color: ${props => hexToRgbA(props.theme.colorSecondary, 0.08)};
+  }
+`;
+
+const secondary = css`
+  color: ${props => props.theme.colorSecondary};
+  &:hover {
+    background-color: ${props => hexToRgbA(props.theme.colorSecondary, 0.08)};
   }
 `;
 
@@ -34,7 +41,7 @@ const outline = css<{
   ${props =>
     props.disabled &&
     `
-      border: 1px solid rgba(0, 0, 0, .26);
+      border: 1px solid ${props.theme.colorLightGrey};
   `};
 
   ${props =>
@@ -43,6 +50,15 @@ const outline = css<{
       border: 1px solid ${props.theme.colorPrimary};
       &:hover{
         background-color: ${props => hexToRgbA(props.theme.colorPrimary, 0.08)};
+      }
+  `};
+
+  ${props =>
+    props.secondary &&
+    `
+      border: 1px solid ${props.theme.colorSecondary};
+      &:hover{
+        background-color: ${props => hexToRgbA(props.theme.colorSecondary, 0.08)};
       }
   `};
 
@@ -63,57 +79,51 @@ const solid = css<{ primary?: boolean; danger?: boolean; disabled?: boolean }>`
     ${elevationMixin(8)}
   }
 
-  ${props =>
-    `
-    color: white;
-    background-color: ${hexToRgbA(props.theme.colorDefault, 0.7)};
-    &:before {
-      color: black;
+
+  
+  ${props => {
+    if (props.disabled) {
+      return `
+  background-color: rgba(0, 0, 0, .12);
+  pointer-events: none;
+`;
     }
 
-    &:hover{
-      background-color: ${props.theme.colorDefault};
-    }
-  `}
+    let backgroundColor = hexToRgbA(props.theme.colorDefault, 0.7);
+    let hoverBackgroundColor = props.theme.colorDefault;
+    let textColor;
 
-  ${props =>
-    props.primary &&
-    `
-    color: white;
-    background-color: ${props.theme.colorPrimary};
-    &:before {
-      color: black;
+    if (props.primary) {
+      backgroundColor = props.theme.colorPrimary;
+      hoverBackgroundColor = props.theme.colorPrimaryEmphasis;
     }
-
-     &&:hover{
-      background-color: ${props.theme.colorPrimaryEmphasis};
+    if (props.secondary) {
+      backgroundColor = props.theme.colorSecondary;
+      hoverBackgroundColor = props.theme.colorSecondaryEmphasis;
     }
-  `}
-
-  ${props =>
-    props.danger &&
-    `
-    color: white !important;
-    background-color: ${props.theme.colorDanger};
-    &:before {
-      color: black;
+    if (props.danger) {
+      backgroundColor = props.theme.colorDanger;
+      hoverBackgroundColor = props.theme.colorDangerEmphasis;
     }
+      const textColor = isColorDark(backgroundColor) ? 'white' : colors.theme.colorDefault;
 
-     &&:hover{
-      background-color: ${props.theme.colorDangerDark} ;
-    }
-  `}
+    return `
+  color: ${textColor};
+  background-color: ${backgroundColor};
+  &:before {
+    color: black;
+  }
 
-  ${props =>
-    props.disabled &&
-    `
-    background-color: rgba(0, 0, 0, .12);
-    pointer-events: none;
-  `}
+  &:hover{
+    background-color: ${hoverBackgroundColor};
+  }
+`;
+  }}
 `;
 
 interface StyledButtonProps {
   primary?: boolean;
+  secondary?: boolean;
   solid?: boolean;
   danger?: boolean;
   outline?: boolean;
@@ -223,15 +233,11 @@ interface RippleButtonProps extends StyledButtonProps {
 }
 
 const getRippleColor = (buttonProps: RippleButtonProps) => {
-  if (buttonProps.primary && buttonProps.solid)
-    return buttonProps.theme.colorPrimary;
-  if (buttonProps.danger && buttonProps.solid)
-    return buttonProps.theme.colorDanger;
-  if (!buttonProps.danger && !buttonProps.primary && buttonProps.solid)
-    return buttonProps.theme.colorDarkGrey;
-
   if (buttonProps.danger) return buttonProps.theme.colorDanger;
   if (buttonProps.primary) return buttonProps.theme.colorPrimary;
+  if (buttonProps.secondary) return buttonProps.theme.colorSecondary;
+  if (!buttonProps.danger && !buttonProps.primary && buttonProps.solid)
+    return buttonProps.theme.colorDarkGrey;
 
   return 'rgba(0, 0, 0, 0.06)';
 };
