@@ -14,7 +14,7 @@ const ArrowIcon = styled(Icon)<React.HTMLAttributes<{}>>`
   right: 8px;
   top: 50%;
   transform: translateY(-50%);
-  color: ${defaultColors.black};
+  color: ${defaultColors.default};
   cursor: pointer;
 `;
 
@@ -33,7 +33,7 @@ const Wrapper = styled.div<WrapperProps>`
       return `1px solid ${props.theme.colorDanger}`;
     if (props.error) return `1px solid ${defaultColors.danger}`;
 
-    return `1px solid ${defaultColors.black}`;
+    return `1px solid ${defaultColors.default}`;
   }};
   border-radius: 4px;
   padding: 9px 16px;

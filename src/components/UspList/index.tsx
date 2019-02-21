@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
-import { colors } from '../../styles/defaults';
+import { colors as defaultColors } from '../../styles/defaults';
 import Icon from '../atoms/Icon/Icon';
 import { Caption, Title } from '../atoms/Typography/index';
 
@@ -22,7 +22,7 @@ const Item = styled.li`
 `;
 
 const StyledCaption = styled(Caption)`
-  color: ${colors.darkGrey};
+  color: ${defaultColors.darkGrey};
 `;
 
 const ItemContent = styled.div``;

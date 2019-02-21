@@ -3,12 +3,7 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import { colors as defaultColors } from "../../../styles/defaults";
 
-interface Props {
-  text: React.ReactNode;
-  required?: boolean;
-}
-
-const StyledCaption = styled.span<{ required?: boolean }>`
+const StyledCaption = styled.span`
   font-size: 12px;
   color: ${props => {
     if (props.required) return props.theme.colorDanger;
@@ -20,7 +15,7 @@ const StyledCaption = styled.span<{ required?: boolean }>`
   display: block;
 `;
 
-const Caption: React.SFC<Props> = ({ required, text, ...props }) => {
+const Caption = ({ required, text, ...props }) => {
   return (
     <StyledCaption required={required} {...props}>
       {text}
@@ -29,7 +24,7 @@ const Caption: React.SFC<Props> = ({ required, text, ...props }) => {
 };
 
 Caption.propTypes = {
-  text: PropTypes.any
+  text: PropTypes.string
 };
 
 Caption.defaultProps = {

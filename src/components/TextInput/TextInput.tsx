@@ -25,7 +25,7 @@ export const StyledInput = styled.input<InputProps>`
 
     if (props.invalid) return "solid 1px red";
 
-    return `solid 1px ${defaultColors.black}`;
+    return `solid 1px ${defaultColors.default}`;
   }};
 
   border-radius: 4px;
@@ -45,7 +45,7 @@ const Input = styled(MaskedInput)<{ invalid?: boolean; full?: boolean }>`
 
     if (props.invalid) return "solid 1px red";
 
-    return `solid 1px ${defaultColors.black}`;
+    return `solid 1px ${defaultColors.default}`;
   }};
 
   border-radius: 4px;

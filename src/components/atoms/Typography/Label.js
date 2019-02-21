@@ -3,13 +3,7 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import { colors as defaultColors } from "../../../styles/defaults";
 
-interface Props {
-  text: React.ReactNode;
-  required?: boolean;
-  htmlFor?: string;
-}
-
-const StyledLabel = styled.label<{ required?: boolean }>`
+const StyledLabel = styled.label`
   color: ${props => {
     if (props.required) return props.theme.colorDanger;
 
@@ -23,20 +17,23 @@ const StyledLabel = styled.label<{ required?: boolean }>`
   margin-bottom: 8px;
 `;
 
-const Label: React.SFC<Props> = ({ text, required, htmlFor, ...props }) => {
+const Label = ({ text, required, ...props }) => {
   return (
-    <StyledLabel required={required} htmlFor={htmlFor} {...props}>
+    <StyledLabel required={required} {...props}>
       {text}
     </StyledLabel>
   );
 };
 
 Label.propTypes = {
-  text: PropTypes.any
+  text: PropTypes.string,
+  info: PropTypes.string
 };
 
 Label.defaultProps = {
-  text: "Label"
+  text: "Label",
+  info:
+    "If you have any problems, please contact us on 0208 9627 400. Monday - Friday, 9 am- 6pm."
 };
 
 export default Label;

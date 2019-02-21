@@ -2,15 +2,17 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { colors as defaultColors } from '../../styles/defaults';
-import { Title } from '../atoms/Typography/index';
+import { Title } from '../atoms/Typography';
 
 const TabsWrapper = styled.div`
+  /* display: flex; */
   position: relative;
 `;
 
-const TabMarker = styled.div<{ width: number; position: number }>`
+const TabMarker = styled.div`
   height: 2px;
   width: ${props => props.width}%;
+  /* position: absolute; */
   z-index: 2;
   background: ${defaultColors.primary};
   transition: all 250ms ease;
@@ -18,7 +20,7 @@ const TabMarker = styled.div<{ width: number; position: number }>`
   top: 30px;
 `;
 
-const TabTitle = styled(Title.withComponent('a'))<{ isActive?: boolean }>`
+const TabTitle = styled(Title.withComponent('a'))`
   cursor: pointer;
   color: ${props => (props.isActive ? defaultColors.default : defaultColors.darkGrey)};
 
@@ -35,37 +37,19 @@ const TabsHeaders = styled.div`
   position: relative;
 `;
 
-const TabsContainer = styled.div<{ margin?: string }>`
+const TabsContainer = styled.div`
   margin: ${props => props.margin || '1.4rem'};
   display: flex;
   overflow: hidden;
 `;
 
-interface TabProps {
-  title?: string;
-}
-
-interface Props {
-  controlledActiveIndex?: number;
-  onTabClicked?: (index: number) => void;
-  contentMargin?: string;
-  children: React.ReactElement<TabProps>[];
-}
-
-interface State {
-  activeIndex: number;
-}
-
-class Tabs extends Component<Props, State> {
-  static getDerivedStateFromProps(nextProps: Props, state: State) {
-    const { controlledActiveIndex } = nextProps;
-    if (
-      typeof controlledActiveIndex == 'number' &&
-      controlledActiveIndex !== state.activeIndex
-    ) {
-      return { activeIndex: controlledActiveIndex };
+class Tabs extends Component {
+  static getDerivedStateFromProps(nextProps, state) {
+    const { controlledActiveIndex } = nextProps
+    if (typeof controlledActiveIndex == 'number' && controlledActiveIndex !== state.activeIndex) {
+      return { activeIndex: controlledActiveIndex }
     } else {
-      return null;
+      return null
     }
   }
 
@@ -100,7 +84,7 @@ class Tabs extends Component<Props, State> {
       );
     });
 
-    const childTabs = React.Children.map(children, child =>
+    const childTabs = React.Children.map(children, (child, index) =>
       React.cloneElement(child, { position: activeIndex * 100 })
     );
 
@@ -119,7 +103,7 @@ class Tabs extends Component<Props, State> {
   }
 }
 
-(Tabs as any).propTypes = {
+Tabs.propTypes = {
   /** Initial active index to show on component mount */
   activeIndex: PropTypes.number,
   /** Optional index to control active tab from outside of the component */
@@ -132,7 +116,7 @@ class Tabs extends Component<Props, State> {
   contentMargin: PropTypes.string
 };
 
-(Tabs as any).defaultProps = {
+Tabs.defaultProps = {
   activeIndex: 0,
   onTabClicked: null,
   children: []

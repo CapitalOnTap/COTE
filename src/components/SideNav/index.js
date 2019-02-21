@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 import { colors as defaultColors } from '../../styles/defaults';
 import Icon from '../atoms/Icon/Icon';
@@ -18,9 +18,9 @@ const List = styled.ul`
   width: 100%;
 `;
 
-const ListItem = styled.li<{ selected?: boolean }>`
+const ListItem = styled.li`
   display: flex;
-  align-items: left;
+  align-items: center;
   color: ${props => (props.selected ? defaultColors.primary : defaultColors.darkGrey)};
   padding: 1rem;
   background-color: ${props => (props.selected ? defaultColors.lightGrey : null)};
@@ -29,36 +29,28 @@ const ListItem = styled.li<{ selected?: boolean }>`
   a {
     text-decoration: none;
     color: inherit;
-    height: 100%;
-    width: 100%;
-    :hover {
-      color: ${defaultColors.primary};
-    }
   }
   i {
     color: inherit;
-    margin-right: 4px;
   }
 `;
 
 const Logo = styled.img`
   width: 64px;
-  height: 100%;
+
   margin-bottom: 4rem;
 `;
 
 const Link = styled.a`
   display: flex;
   align-items: center;
+  justify-content: space-between;
   > span ~ i {
     padding-right: 1rem;
   }
 `;
 
-const Nav = styled(PaperWrapper.withComponent('nav'))<{
-  width: number;
-  isOpen?: boolean;
-}>`
+const Nav = styled(PaperWrapper.withComponent('nav'))`
   position: fixed;
   z-index: 10;
   width: ${props => `${props.width}px`};
@@ -77,7 +69,7 @@ const Nav = styled(PaperWrapper.withComponent('nav'))<{
   }};
 `;
 
-const Overlay = styled.div<{ isNavOpen?: boolean }>`
+const Overlay = styled.div`
   background-color: rgba(0, 0, 0, 0.5);
   bottom: 0;
   left: 0;
@@ -95,7 +87,7 @@ const Wrapper = styled.div`
   position: relative;
 `;
 
-const CloseIcon = styled(Icon)<{ navWidth: number; isNavOpen?: boolean }>`
+const CloseIcon = styled(Icon)`
   cursor: pointer;
   position: absolute;
   left: ${props => `${props.navWidth + 64}px`};
@@ -104,28 +96,7 @@ const CloseIcon = styled(Icon)<{ navWidth: number; isNavOpen?: boolean }>`
   visibility: ${props => (props.isNavOpen ? 'visible' : 'hidden')};
 `;
 
-interface Props {
-  width: number;
-  logoUrl?: string;
-  className?: string;
-  navItems: {
-    target?: string;
-    rel?: string;
-    pathname: string;
-    isSelected?: boolean;
-    icon?: string;
-    title?: string;
-  }[];
-  isOpen?: boolean;
-  iconsOnly?: boolean;
-  renderLink?: (children: React.ReactNode, path: string) => React.ReactNode;
-}
-
-interface State {
-  isOpen: boolean;
-}
-
-class SideNav extends Component<Props, State> {
+class SideNav extends Component {
   state = {
     isOpen: false
   };
@@ -141,7 +112,9 @@ class SideNav extends Component<Props, State> {
   render() {
     const {
       width,
+      openingDirection,
       logoUrl,
+      sideNavRef,
       className,
       navItems,
       isOpen,
@@ -167,9 +140,9 @@ class SideNav extends Component<Props, State> {
               {logoUrl &&
                 (renderLink ? (
                   renderLink(
-                    <Fragment>
+                    <a>
                       <Logo src={logoUrl} />
-                    </Fragment>,
+                    </a>,
                     '/'
                   )
                 ) : (
@@ -178,37 +151,24 @@ class SideNav extends Component<Props, State> {
                   </a>
                 ))}
               <List>
-                {navItems.map((item, i) => {
-                  if (item.target === '_blank' && item.rel === undefined) {
-                    // Set rel to prevent "reverse tabnabbing" in older browsers, can be overridden if needed
-                    item.rel = 'noopener noreferrer';
-                  }
-                  return (
-                    <ListItem
-                      key={`snav-${item.pathname}`}
-                      selected={item.isSelected}
-                    >
-                      {renderLink ? (
-                        renderLink(
-                          <Fragment>
-                            {item.icon && <Icon name={item.icon} />}
-                            {!iconsOnly && <span>{item.title}</span>}
-                          </Fragment>,
-                          item.pathname
-                        )
-                      ) : (
-                        <Link
-                          href={item.pathname}
-                          target={item.target}
-                          rel={item.rel}
-                        >
+                {navItems.map((item, i) => (
+                  <ListItem key={`snav-${i}`} selected={item.isSelected}>
+                    {renderLink ? (
+                      renderLink(
+                        <Link>
                           {item.icon && <Icon name={item.icon} />}
                           {!iconsOnly && <span>{item.title}</span>}
-                        </Link>
-                      )}
-                    </ListItem>
-                  );
-                })}
+                        </Link>,
+                        item.pathname
+                      )
+                    ) : (
+                      <Link href={item.pathname}>
+                        {item.icon && <Icon name={item.icon} />}
+                        {!iconsOnly && <span>{item.title}</span>}
+                      </Link>
+                    )}
+                  </ListItem>
+                ))}
               </List>
             </Content>
           </Nav>
@@ -219,18 +179,15 @@ class SideNav extends Component<Props, State> {
   }
 }
 
-(SideNav as any).propTypes = {
+SideNav.propTypes = {
   openingDirection: PropTypes.oneOf(['left-right', 'right-left']),
   width: PropTypes.number,
   logoUrl: PropTypes.string,
   navItems: PropTypes.arrayOf(
     PropTypes.shape({
       title: PropTypes.string,
-      pathname: PropTypes.string,
-      isSelected: PropTypes.bool,
-      icon: PropTypes.string,
-      target: PropTypes.string,
-      rel: PropTypes.string
+      url: PropTypes.string,
+      isSelected: PropTypes.bool
     })
   ),
   iconsOnly: PropTypes.bool,
@@ -242,7 +199,7 @@ class SideNav extends Component<Props, State> {
   renderLink: PropTypes.func
 };
 
-(SideNav as any).defaultProps = {
+SideNav.defaultProps = {
   width: 144,
   /** a logo with same size as http://via.placeholder.com/64x64 */
   logoUrl: '',
@@ -276,13 +233,6 @@ class SideNav extends Component<Props, State> {
       pathname: '/premium',
       isSelected: false,
       icon: 'money'
-    },
-    {
-      title: 'Support',
-      pathname: 'https://support.capitalontap.com/en/support/home',
-      isSelected: false,
-      icon: 'help',
-      target: '_blank'
     }
   ],
   iconsOnly: false,

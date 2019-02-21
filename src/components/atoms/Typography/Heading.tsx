@@ -19,7 +19,7 @@ const Heading = styled.h1<HeadingProps>`
 
     if (props.theme) return props.theme.colorBlack;
 
-    return defaultColors.black;
+    return defaultColors.default;
   }};
   font-size: 36px;
   font-weight: ${fontWeights.bold};

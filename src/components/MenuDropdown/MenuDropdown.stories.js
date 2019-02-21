@@ -1,14 +1,14 @@
 import { storiesOf } from '@storybook/react';
 import React from 'react';
 import styled from 'styled-components';
-import { colors } from '../../styles/defaults';
+import { colors as defaultColors } from '../../styles/defaults';
 import MenuDropdown from './MenuDropdown';
 
 const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: ${colors.primary};
+  background: ${defaultColors.primary};
 `;
 
 storiesOf('MenuDropdown', module).add('Normal', () => (

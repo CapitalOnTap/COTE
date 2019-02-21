@@ -19,7 +19,7 @@ const Wrapper = styled.div`
 const Box = styled.span<{ primary?: boolean; invalid?: boolean }>`
   color: ${props => {
     if (props.primary) return '#fff';
-    return `1px solid ${defaultColors.black}`;
+    return `1px solid ${defaultColors.default}`;
   }};
   position: relative;
   display: inline-block;

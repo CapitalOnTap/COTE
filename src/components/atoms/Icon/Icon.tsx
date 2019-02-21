@@ -1,6 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
-import { colors } from "../../../styles/defaults";
+import { colors as defaultColors } from "../../../styles/defaults";
 
 const StyledIcon = styled.i<{ reverse: boolean; solid: boolean } & any>`
   font-size: 24px;
@@ -11,7 +11,7 @@ const StyledIcon = styled.i<{ reverse: boolean; solid: boolean } & any>`
 
     if (props.error && props.theme) return props.theme.colorDanger;
 
-    return colors.darkGrey;
+    return defaultColors.darkGrey;
   }};
   padding: ${props => (props.circle ? "8px" : null)};
   border: ${props => {
@@ -19,9 +19,9 @@ const StyledIcon = styled.i<{ reverse: boolean; solid: boolean } & any>`
       return `1px solid ${props.theme.colorPrimary}`;
 
     if (props.primary && props.circle && !props.solid)
-      return `1px solid ${colors.primary}`;
+      return `1px solid ${defaultColors.primary}`;
 
-    if (props.circle && !props.solid) return `1px solid ${colors.darkGrey}`;
+    if (props.circle && !props.solid) return `1px solid ${defaultColors.darkGrey}`;
 
     return null;
   }};
@@ -29,7 +29,7 @@ const StyledIcon = styled.i<{ reverse: boolean; solid: boolean } & any>`
   background-color: ${props => {
     if (props.circle && props.solid && props.theme)
       return props.theme.colorPrimary;
-    if (props.circle && props.solid) return colors.primary;
+    if (props.circle && props.solid) return defaultColors.primary;
     return null;
   }};
 `;

@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
 import styled, { css } from 'styled-components';
-import { colors } from '../../styles/defaults';
+import { colors as defaultColors } from '../../styles/defaults';
 import { hexToRgbA } from '../../utils/index';
 import Icon from '../atoms/Icon/Icon';
 import { Title } from '../atoms/Typography/index';
@@ -30,9 +30,9 @@ const Wrapper = styled.div<{ primary?: string; danger?: string }>`
 const Header = styled.header`
   display: flex;
   justify-content: space-between;
-  border-bottom: 1px solid ${colors.lightGrey};
+  border-bottom: 1px solid ${defaultColors.lightGrey};
   ::after {
-    border-bottom: 1px solid ${colors.lightGrey};
+    border-bottom: 1px solid ${defaultColors.lightGrey};
   }
   padding: 1rem;
 `;
@@ -45,9 +45,9 @@ const ToggleIcon = styled(Icon)<{ isOpen?: boolean }>`
 `;
 
 const Content = styled.div<{ isOpen?: boolean }>`
-  border-bottom: 1px solid ${colors.lightGrey};
+  border-bottom: 1px solid ${defaultColors.lightGrey};
   ::after {
-    border-bottom: 1px solid ${colors.lightGrey};
+    border-bottom: 1px solid ${defaultColors.lightGrey};
   }
 
   height: auto;

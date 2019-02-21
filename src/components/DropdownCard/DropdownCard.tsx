@@ -10,7 +10,7 @@ const ArrowIcon = styled(Icon)<React.HTMLAttributes<{}>>`
   right: 8px;
   top: 24px;
   transform: translateY(-50%);
-  color: ${defaultColors.black};
+  color: ${defaultColors.default};
   cursor: pointer;
 `;
 
@@ -34,12 +34,12 @@ const TopWrapper = styled.div<{
   underline?: boolean;
   corners?: boolean;
 }>`
-  border: ${props => (props.border ? `1px solid ${defaultColors.black}` : '0')};
+  border: ${props => (props.border ? `1px solid ${defaultColors.default}` : '0')};
   border-bottom: ${props =>
     props.underline
       ? `1px solid #eeeeee`
       : props.border
-      ? '1px solid ${defaultColors.black}'
+      ? '1px solid ${defaultColors.default}'
       : '0'};
   border-radius: ${props => (props.corners ? '0' : '4px')};
   padding: 9px 16px;

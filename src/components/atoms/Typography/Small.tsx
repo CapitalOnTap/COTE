@@ -10,7 +10,7 @@ const Small = styled.span<{ reverse?: boolean }>`
 
     if (props.theme) return props.theme.colorLightBlack;
 
-    return colors.lightBlack;
+    return defaultColors.defaultLight;
   }};
 `;
 
