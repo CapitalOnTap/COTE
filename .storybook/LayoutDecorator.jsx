@@ -6,9 +6,10 @@ import { hexToRgbA } from '../src/utils/index';
 const theme = {
   colorHeading: "#466BAF",
   colorDefault: "#273456",
+  colorDefaultLight: "#96A6CF",
   colorShadow: "#000000",
   colorBackground: "#F5F7F8",
-  colorHighlight: "#C0DDEB",
+  colorHighlight: "#C0DDEB", 
   colorPrimary: "#466BAF",
   colorPrimaryEmphasis: "#2C436D",
   colorSecondary: "#F2C14A",

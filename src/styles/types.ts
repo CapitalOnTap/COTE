@@ -1,12 +1,15 @@
 export interface ThemeColors {
   primary: string;
   primaryEmphasis: string;
-  black: string;
-  lightBlack: string;
-  darkGrey: string;
+  secondary: string;
+  secondaryEmphasis: string;
+  default: string;
+  defaultLight: string;
   danger: string;
+  dangerEmphasis;
   success: string;
   shadow: string;
+  darkGrey: string;
   lightGrey: string;
 }
 
@@ -18,15 +21,22 @@ export interface ThemeFontWeights {
 }
 
 export interface Theme {
-  colorPrimary: string,
-  colorDarkGrey: string,
-  colorShadow: string,
-  colorDefaultLight: string,
-  colorPrimaryDark: string,
+  colorHeading: string,
   colorDefault: string,
+  colorDefaultLight: string,
+  colorShadow: string,
+  colorBackground: string,
+  colorHighlight: string,
+  colorPrimary: string,
   colorPrimaryEmphasis: string,
+  colorSecondary: string,
+  colorSecondaryEmphasis: string,
   colorDanger: string,
   colorDangerEmphasis: string,
+  colorDangerLight: string,
+  colorInfo: string,
+  colorSuccess: string,
+  colorDarkGrey: string,
   colorLightGrey: string,
   // Elevation theme
   elevation: {
