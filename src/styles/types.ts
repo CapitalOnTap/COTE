@@ -26,7 +26,7 @@ export interface Theme {
   colorDefault: string,
   colorPrimaryEmphasis: string,
   colorDanger: string,
-  colorDangerDark: string,
+  colorDangerEmphasis: string,
   colorLightGrey: string,
   // Elevation theme
   elevation: {

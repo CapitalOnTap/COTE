@@ -27,7 +27,7 @@ export const theme: Theme = {
   colorHeading: "#466BAF",
   colorDefault: "#273456",
   colorShadow: "#000000",
-  colorBackground: "#f5f7f8",
+  colorBackground: "#F5F7F8",
   colorHighlight: "#C0DDEB",
   colorPrimary: "#466BAF",
   colorPrimaryEmphasis: "#2C436D",
@@ -38,7 +38,7 @@ export const theme: Theme = {
   colorDangerLight: "#E7B1B8",
   colorInfo: "#466BAF",
   colorSuccess: "#27B161",
-  colorDarkGrey: "#696D7E",           // May not be needed
+  colorDarkGrey: "#696D7E",
   colorLightGrey: "#E8EBEE",
   // Elevation theme
   elevation: {
