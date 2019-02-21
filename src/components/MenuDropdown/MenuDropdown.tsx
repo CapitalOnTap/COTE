@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import styled from 'styled-components';
+import styled, { withTheme } from 'styled-components';
 import { colors as defaultColors } from '../../styles/defaults';
 import OutsideAlerter from '../OutsideAlerter/OutsideAlerter';
 import Badge from '../atoms/Badge/Badge';
@@ -15,10 +15,10 @@ const ArrowIcon = styled(Icon)`
   cursor: pointer;
 `;
 
-const ArrowWrapper = styled.div`
+const ArrowWrapper = styled.div<{ small?: boolean }>`
   display: inline-block;
   position: relative;
-  top: 2px;
+  top: ${props => props.small ? '6px' : '2px'} ;
 `;
 
 const DropdownWrapper = styled.div`
@@ -91,6 +91,7 @@ interface Props {
   logOutClick: () => void;
   reverse?: boolean;
   small?: boolean;
+  theme?: any;
 }
 
 interface State {
@@ -122,7 +123,8 @@ class MenuDropdown extends Component<Props, State> {
       detailUrl,
       logOutClick,
       reverse,
-      small
+      small,
+      theme
     } = this.props;
 
     const initial = firstName[0] + lastName[0];
@@ -136,12 +138,12 @@ class MenuDropdown extends Component<Props, State> {
               <Badge
                 content={initial || ''}
                 size={badgeSize}
-                background={reverse ? '#fff' : '#27b161'}
-                color={reverse ? '#27b161' : '#fff'}
+                background={reverse ? '#fff' : theme.colorPrimary}
+                color={reverse ? theme.colorPrimary : '#fff'}
               />
             </BadgeWrapper>
             {!small && <FirstName>{firstName}</FirstName>}
-            <ArrowWrapper>
+            <ArrowWrapper small={small}>
               <ArrowIcon reverse={reverse} name="keyboard_arrow_down" />
             </ArrowWrapper>
           </DropdownButton>
@@ -198,4 +200,4 @@ class MenuDropdown extends Component<Props, State> {
   lastName: ''
 };
 
-export default MenuDropdown;
+export default withTheme(MenuDropdown);

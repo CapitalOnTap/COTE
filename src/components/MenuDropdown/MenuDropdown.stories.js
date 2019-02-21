@@ -8,7 +8,7 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: ${defaultColors.primary};
+  background: ${defaultColors.default};
 `;
 
 storiesOf('MenuDropdown', module).add('Normal', () => (
