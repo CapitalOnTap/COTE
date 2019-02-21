@@ -2,8 +2,17 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
 import { StyledLinkButton } from '../atoms/Button/Button';
+import { colors as defaultColors } from '../../styles/defaults';
+import { isColorDark } from '../../utils/index';
 
 const NavButton = styled(StyledLinkButton)`
+  ${props => {
+    const backgroundColor = props.theme ? props.theme.colorDefault : defaultColors.default;
+    if (isColorDark(backgroundColor)) {
+      return 'border: 1px solid white !important;';
+    }
+    return null;
+  }}
   @media screen and (max-width: 640px) {
     height: 100%;
     border: none !important;
@@ -32,7 +41,7 @@ const Nav = styled.nav<NavProps>`
   justify-content: space-between;
   align-items: center;
   height: 72px;
-  background-color: #fff;
+  background-color: ${props => (props.theme ? props.theme.colorDefault : defaultColors.default)};
   max-width: ${props => (props.maxWidth ? props.maxWidth : '928px')};
   margin: 0 auto;
   @media only screen and (max-width: 960px) {
@@ -62,7 +71,7 @@ const NavRight = styled.div`
 
 const Container = styled.div`
   width: 100%;
-  background-color: #fff;
+  background-color: ${props => (props.theme ? props.theme.colorDefault : defaultColors.default)};
 `;
 
 interface Props extends LogoProps, NavProps {
@@ -90,6 +99,7 @@ const Navigation: React.SFC<Props> = ({
                 key={`n-${i}`}
                 href={item.url}
                 onClick={item.onClick}
+                solid
               >
                 {item.title}
               </NavButton>

@@ -21,18 +21,26 @@ const List = styled.ul`
 const ListItem = styled.li<{ selected?: boolean }>`
   display: flex;
   align-items: left;
-  color: ${props => (props.selected ? defaultColors.primary : defaultColors.darkGrey)};
+  color: ${props => {
+    if (!props.selected) {
+      return "white";
+    }
+    return props.theme ? props.theme.colorSecondary : defaultColors.secondary;
+  }}
   padding: 1rem;
-  background-color: ${props => (props.selected ? defaultColors.lightGrey : null)};
-  border-left: ${props =>
-    props.selected ? `4px solid ${defaultColors.primary}` : null};
+  border-left: ${props => {
+    if (!props.selected) {
+      return null;
+    }
+    return props.theme ? `4px solid ${props.theme.colorSecondary}` : `4px solid ${defaultColors.secondary}`;
+  }};
   a {
     text-decoration: none;
     color: inherit;
     height: 100%;
     width: 100%;
     :hover {
-      color: ${defaultColors.primary};
+      color: ${props => (props.theme ? props.theme.colorSecondary : defaultColors.secondary)};
     }
   }
   i {
@@ -67,7 +75,7 @@ const Nav = styled(PaperWrapper.withComponent('nav'))<{
   position: fixed;
   top: 0;
   bottom: 0;
-  background: #fff;
+  background: ${props => (props.theme ? props.theme.colorDefault : defaultColors.default)};
   border-radius: 0;
   ${props => {
     if (props.isOpen) {
