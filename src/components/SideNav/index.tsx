@@ -52,7 +52,8 @@ const ListItem = styled.li<{ selected?: boolean }>`
 const Logo = styled.img`
   width: 64px;
   height: 100%;
-  margin-bottom: 4rem;
+  margin-top: 2rem;
+  margin-bottom: 3rem;
 `;
 
 const Link = styled.a`
