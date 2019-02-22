@@ -73,7 +73,12 @@ const outline = css<{
   `};
 `;
 
-const solid = css<{ primary?: boolean; secondary?: boolean; danger?: boolean; disabled?: boolean }>`
+const solid = css<{
+  primary?: boolean; secondary?:
+  boolean; danger?: boolean;
+  disabled?: boolean;
+  selected?: boolean; // Set if button is part of ButtonGroup and selected
+}>`
   ${elevationMixin(2)}
 
   &:active{
@@ -88,7 +93,7 @@ const solid = css<{ primary?: boolean; secondary?: boolean; danger?: boolean; di
 `;
     }
 
-    let backgroundColor = hexToRgbA(props.theme.colorDefault, 0.7);
+    let backgroundColor = props.selected ? props.theme.colorDefault : hexToRgbA(props.theme.colorDefault, 0.7);
     let hoverBackgroundColor = props.theme.colorDefault;
 
     if (props.primary) {
@@ -131,6 +136,7 @@ interface StyledButtonProps {
   full?: boolean;
   elevation?: number;
   disabled?: boolean;
+  selected?: boolean;
 }
 
 export const StyledButton = styled.button<StyledButtonProps>`
@@ -310,7 +316,9 @@ Button.propTypes = {
   loadingText: PropTypes.string,
   //** Adds material design shadow elevation */
   elevation: PropTypes.number,
-  danger: PropTypes.bool
+  danger: PropTypes.bool,
+  //** True if in ButtonGroup and selected */
+  selected: PropTypes.bool
 };
 
 Button.defaultProps = {
@@ -322,7 +330,8 @@ Button.defaultProps = {
   type: 'button',
   icon: '',
   full: false,
-  danger: false
+  danger: false,
+  selected: false
 };
 
 export default withTheme(Button);

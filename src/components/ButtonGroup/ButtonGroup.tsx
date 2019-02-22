@@ -143,6 +143,7 @@ class ButtonGroup extends Component<Props, State> {
               primary={primary}
               buttonWidth={100 / options.length}
               solid={selectedIndex === i}
+              selected={selectedIndex === i}
               onClick={e => {
                 e.preventDefault();
                 this.setState({ selectedIndex: i });
