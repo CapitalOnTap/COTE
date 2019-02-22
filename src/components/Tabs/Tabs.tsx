@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { colors } from '../../styles/defaults';
+import { colors as defaultColors } from '../../styles/defaults';
 import { Title } from '../atoms/Typography/index';
 
 const TabsWrapper = styled.div`
@@ -12,7 +12,7 @@ const TabMarker = styled.div<{ width: number; position: number }>`
   height: 2px;
   width: ${props => props.width}%;
   z-index: 2;
-  background: ${colors.primary};
+  background: ${defaultColors.primary};
   transition: all 250ms ease;
   transform: translateX(${props => `${props.position}%`});
   top: 30px;
@@ -20,7 +20,7 @@ const TabMarker = styled.div<{ width: number; position: number }>`
 
 const TabTitle = styled(Title.withComponent('a'))<{ isActive?: boolean }>`
   cursor: pointer;
-  color: ${props => (props.isActive ? colors.black : colors.darkGrey)};
+  color: ${props => (props.isActive ? defaultColors.default : defaultColors.darkGrey)};
 
   font-weight: 700;
   padding: 8px;

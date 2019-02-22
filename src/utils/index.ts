@@ -17,3 +17,20 @@ export const hexToRgbA = (hex: string, opacity?: number) => {
   }
   throw new Error('Bad Hex');
 };
+
+// based on https://stackoverflow.com/questions/3942878/how-to-decide-font-color-in-white-or-black-depending-on-background-color
+// use this to determine if we should we use white text based on the provided background color
+export const isColorDark = (hex) => {
+  var c = hex.substring(1);      // strip #
+  var rgb = parseInt(c, 16);   // convert rrggbb to decimal
+  var r = (rgb >> 16) & 0xff;  // extract red
+  var g = (rgb >>  8) & 0xff;  // extract green
+  var b = (rgb >>  0) & 0xff;  // extract blue
+
+  // 255 = lightest, 0 = darkest
+  if ((r*0.299 + g*0.587 + b*0.114) > 186) {
+    return false;
+  }
+
+  return true;
+};

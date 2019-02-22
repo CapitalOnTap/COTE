@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import { colors } from "../../../styles/defaults";
+import { colors as defaultColors } from "../../../styles/defaults";
 
 interface Props {
   text: React.ReactNode;
@@ -13,9 +13,9 @@ const StyledCaption = styled.span<{ required?: boolean }>`
   color: ${props => {
     if (props.required) return props.theme.colorDanger;
 
-    if (props.theme) return props.theme.colorBlack;
+    if (props.theme) return props.theme.colorDefault;
 
-    return colors.black;
+    return defaultColors.default;
   }};
   display: block;
 `;

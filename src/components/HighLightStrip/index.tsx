@@ -8,7 +8,7 @@ const background = (props: { danger?: boolean } & any) => {
     return hexToRgbA(props.theme.colorDanger, 0.1);
   }
 
-  return hexToRgbA(props.theme.colorPrimary, 0.1);
+  return props.theme.colorHighlight;
 };
 
 const Wrapper = styled.div<{ danger?: boolean }>`

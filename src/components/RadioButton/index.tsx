@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import React from "react";
 import styled from "styled-components";
-import { colors } from "../../styles/defaults";
+import { colors as defaultColors } from "../../styles/defaults";
 
 export const Input = styled.input`
   position: absolute;
@@ -14,7 +14,7 @@ const Container = styled.label<{ checked?: boolean }>`
   position: relative;
   padding-left: 35px;
   margin-bottom: 1rem;
-  color: ${props => (props.checked ? "initial" : colors.darkGrey)};
+  color: ${props => (props.checked ? "initial" : defaultColors.darkGrey)};
   cursor: pointer;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -27,7 +27,7 @@ const Container = styled.label<{ checked?: boolean }>`
 
   input:checked + span {
     border: 2px solid
-      ${props => (props.theme ? props.theme.colorPrimary : colors.primary)};
+      ${props => (props.theme ? props.theme.colorPrimary : defaultColors.primary)};
   }
 
   input:checked & {
@@ -43,7 +43,7 @@ const Checkmark = styled.span`
   height: 24px;
   width: 24px;
   background-color: #fff;
-  border: 2px solid ${colors.darkGrey};
+  border: 2px solid ${defaultColors.darkGrey};
   border-radius: 50%;
   z-index: 5;
   &&:after {
@@ -56,7 +56,7 @@ const Checkmark = styled.span`
     height: 12px;
     border-radius: 50%;
     background: ${props =>
-      props.theme ? props.theme.colorPrimary : colors.primary};
+      props.theme ? props.theme.colorPrimary : defaultColors.primary};
     content: "";
     position: absolute;
     display: none;

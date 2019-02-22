@@ -4,16 +4,23 @@ import GlobalStyle from '../src/styles/GlobalStyle';
 import { hexToRgbA } from '../src/utils/index';
 
 const theme = {
-  colorPrimary: '#27B161',
-  colorDarkGrey: '#A4AAB3',
-  colorShadow: '#000000',
-  colorLightBlack: '#061F33',
-  colorPrimaryDark: '#148443',
-  colorBlack: '#061f33',
-  colorPrimaryEmphasis: '#148443',
-  colorDanger: '#FF7183',
-  colorDangerDark: '#ff001f',
-  colorLightGrey: '#f3f3f3',
+  colorHeading: "#466BAF",
+  colorDefault: "#273456",
+  colorDefaultLight: "#96A6CF",
+  colorShadow: "#000000",
+  colorBackground: "#F5F7F8",
+  colorHighlight: "#C0DDEB", 
+  colorPrimary: "#466BAF",
+  colorPrimaryEmphasis: "#2C436D",
+  colorSecondary: "#F2C14A",
+  colorSecondaryEmphasis: "#F5A623",
+  colorDanger: "#CC5767",
+  colorDangerEmphasis: "#9C303E",
+  colorDangerLight: "#E7B1B8",
+  colorInfo: "#466BAF",
+  colorSuccess: "#27B161",
+  colorDarkGrey: "#696D7E",
+  colorLightGrey: "#E8EBEE",
   // Elevation theme
   elevation: {
     // What property to use to apply depth

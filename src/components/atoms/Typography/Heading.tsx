@@ -4,6 +4,7 @@ import { colors as defaultColors, fontWeights } from '../../../styles/defaults';
 interface HeadingProps {
   inverse?: boolean;
   highlight?: boolean;
+  defaultColor?: boolean;
 }
 
 interface TitleProps {
@@ -15,11 +16,13 @@ const Heading = styled.h1<HeadingProps>`
   color: ${props => {
     if (props.inverse) return '#fff';
 
-    if (props.highlight && props.theme) return props.theme.colorPrimary;
+    if (props.highlight && props.theme) return props.theme.colorHighlight;
 
-    if (props.theme) return props.theme.colorBlack;
+    if (props.theme && props.defaultColor) return props.theme.colorDefault;
 
-    return defaultColors.black;
+    if (props.theme) return props.theme.colorHeading;
+
+    return defaultColors.default;
   }};
   font-size: 36px;
   font-weight: ${fontWeights.bold};

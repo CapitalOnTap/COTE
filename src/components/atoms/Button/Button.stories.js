@@ -5,9 +5,9 @@ import Button from './Button';
 
 storiesOf('Button/Normal', module)
   .add('Normal', () => <Button>Click me</Button>)
-  .add('Danger', () => <Button danger>Delete</Button>)
-  .add('Primary', () => <Button primary>Delete</Button>)
-
+  .add('Danger', () => <Button danger>Click me</Button>)
+  .add('Primary', () => <Button primary>Click me</Button>)
+  .add('Secondary', () => <Button secondary>Click me</Button>)
   .add('Large', () => <Button>Click me</Button>)
   .add('Disabled', () => <Button disabled>Click me</Button>)
   .add('Full width', () => <Button full>Click me</Button>)
@@ -40,7 +40,11 @@ storiesOf('Button/Outlined', module)
       Delete
     </Button>
   ))
-
+  .add('Secondary', () => (
+    <Button outline secondary>
+      Delete
+    </Button>
+  ))
   .add('Large', () => (
     <Button outline large>
       Click me
@@ -81,6 +85,11 @@ storiesOf('Button/Solid', module)
   .add('Normal', () => <Button solid>Click me</Button>)
   .add('Primary', () => (
     <Button solid primary>
+      Click me
+    </Button>
+  ))
+  .add('Secondary', () => (
+    <Button solid secondary>
       Click me
     </Button>
   ))

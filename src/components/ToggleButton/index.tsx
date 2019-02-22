@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
 import styled from 'styled-components';
-import { colors } from '../../styles/defaults';
+import { colors as defaultColors } from '../../styles/defaults';
 import Paper from '../Paper/Paper';
 
 const Wrapper = styled.div<{ disabled?: boolean; isActive?: boolean }>`
@@ -13,15 +13,15 @@ const Wrapper = styled.div<{ disabled?: boolean; isActive?: boolean }>`
   position: relative;
   background: ${props => {
     if (props.disabled) {
-      return props.theme ? props.theme.colorLightGrey : colors.lightGrey;
+      return props.theme ? props.theme.colorLightGrey : defaultColors.lightGrey;
     }
 
     if (props.isActive) {
-      return props.theme ? props.theme.colorPrimary : colors.primary;
+      return props.theme ? props.theme.colorPrimary : defaultColors.primary;
     }
-    return props.theme ? props.theme.colorDanger : colors.danger;
+    return props.theme ? props.theme.colorDanger : defaultColors.danger;
   }};
-
+  cursor: pointer;
   transition: background 150ms ease-in;
 `;
 

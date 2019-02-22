@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import Icon from "../atoms/Icon/Icon";
-import { colors } from "../../styles/defaults";
+import { colors as defaultColors } from "../../styles/defaults";
 
 const Wrapper = styled.div`
   display: flex;
@@ -35,7 +35,7 @@ const Progress = styled.div<{ value?: number }>`
   width: ${props => (props.value ? `${props.value}%` : 0)};
   height: 100%;
   background-color: ${props =>
-    props.theme ? props.theme.colorPrimary : colors.primary};
+    props.theme ? props.theme.colorPrimary : defaultColors.primary};
 `;
 
 interface Props {

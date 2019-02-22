@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
 import styled from 'styled-components';
-import { colors } from '../../styles/defaults';
+import { colors as defaultColors } from '../../styles/defaults';
 import Icon from '../atoms/Icon/Icon';
 import OutsideAlerter from '../OutsideAlerter/OutsideAlerter';
 import { PaperWrapper } from '../Paper/Paper';
@@ -21,18 +21,26 @@ const List = styled.ul`
 const ListItem = styled.li<{ selected?: boolean }>`
   display: flex;
   align-items: left;
-  color: ${props => (props.selected ? colors.primary : colors.darkGrey)};
+  color: ${props => {
+    if (!props.selected) {
+      return "white";
+    }
+    return props.theme ? props.theme.colorSecondary : defaultColors.secondary;
+  }}
   padding: 1rem;
-  background-color: ${props => (props.selected ? colors.lightGrey : null)};
-  border-left: ${props =>
-    props.selected ? `4px solid ${colors.primary}` : null};
+  border-left: ${props => {
+    if (!props.selected) {
+      return null;
+    }
+    return props.theme ? `4px solid ${props.theme.colorSecondary}` : `4px solid ${defaultColors.secondary}`;
+  }};
   a {
     text-decoration: none;
     color: inherit;
     height: 100%;
     width: 100%;
     :hover {
-      color: ${colors.primary};
+      color: ${props => (props.theme ? props.theme.colorSecondary : defaultColors.secondary)};
     }
   }
   i {
@@ -44,7 +52,8 @@ const ListItem = styled.li<{ selected?: boolean }>`
 const Logo = styled.img`
   width: 64px;
   height: 100%;
-  margin-bottom: 4rem;
+  margin-top: 2rem;
+  margin-bottom: 3rem;
 `;
 
 const Link = styled.a`
@@ -67,7 +76,7 @@ const Nav = styled(PaperWrapper.withComponent('nav'))<{
   position: fixed;
   top: 0;
   bottom: 0;
-  background: #fff;
+  background: ${props => (props.theme ? props.theme.colorDefault : defaultColors.default)};
   border-radius: 0;
   ${props => {
     if (props.isOpen) {

@@ -60,7 +60,7 @@ const ButtonGroupWrapper = styled.div<{
       border-right: ${
         props.solid || props.disabled
           ? "none"
-          : `1px solid ${props.theme.colorBlack}`
+          : `1px solid ${props.theme.colorDefault}`
       };`
           : null};
     }
@@ -76,7 +76,7 @@ const ButtonGroupWrapper = styled.div<{
       border-left: ${
         props.solid || props.disabled
           ? "none"
-          : `1px solid ${props.theme.colorBlack} !important`
+          : `1px solid ${props.theme.colorDefault} !important`
       };`
           : null};
     }
@@ -143,6 +143,7 @@ class ButtonGroup extends Component<Props, State> {
               primary={primary}
               buttonWidth={100 / options.length}
               solid={selectedIndex === i}
+              selected={selectedIndex === i}
               onClick={e => {
                 e.preventDefault();
                 this.setState({ selectedIndex: i });

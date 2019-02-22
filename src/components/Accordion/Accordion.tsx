@@ -17,7 +17,7 @@ const Wrapper = styled.div`
 
 const AddIcon = styled(Icon)<React.HTMLAttributes<{}>>`
   color: ${props =>
-    props.theme.colorPrimary ? props.theme.colorPrimary : defaultColors.black};
+    props.theme.colorPrimary ? props.theme.colorPrimary : defaultColors.default};
 `;
 
 const TopWrapper = styled.div`

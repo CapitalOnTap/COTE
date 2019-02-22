@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
-import { colors } from '../../styles/defaults';
+import { colors as defaultColors } from '../../styles/defaults';
 import Button from '../atoms/Button/Button';
 import Icon from '../atoms/Icon/Icon';
 import { Title } from '../atoms/Typography/Heading';
@@ -18,7 +18,7 @@ const StyledIcon = styled(Icon)`
 `;
 
 const StyledTitle = styled(Title)<{ error?: boolean }>`
-  color: ${props => (props.error ? colors.danger : colors.primary)};
+  color: ${props => (props.error ? defaultColors.danger : defaultColors.primary)};
 `;
 
 const Actions = styled.div`

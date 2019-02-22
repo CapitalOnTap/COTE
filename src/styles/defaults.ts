@@ -2,15 +2,19 @@ import { hexToRgbA } from '../utils/index';
 import { ThemeColors, ThemeFontWeights, Theme } from './types';
 
 export const colors: ThemeColors = {
-  primary: '#27B161',
-  primaryEmphasis: '#148443',
-  black: 'rgba(6, 31, 51, 1)',
-  lightBlack: 'rgba(6, 31, 51, 0.7)',
-  darkGrey: '#A4AAB3',
-  danger: '#FF7183',
-  success: '#27B161',
-  shadow: '#000000',
-  lightGrey: '#f3f3f3'
+  primary: "#466BAF",
+  primaryEmphasis: "#2C436D",
+  secondary: "#F2C14A",
+  secondaryEmphasis: "#F5A623",
+  default: "#273456",
+  defaultLight: "#96A6CF",
+  danger: "#CC5767",
+  dangerEmphasis: "#9C303E",
+  info: "#466BAF",
+  success: "#27B161",
+  shadow: "#000000",
+  darkGrey: "#696D7E",
+  lightGrey: "#f5f7f8"
 };
 
 export const fontWeights: ThemeFontWeights = {
@@ -21,16 +25,23 @@ export const fontWeights: ThemeFontWeights = {
 };
 
 export const theme: Theme = {
-  colorPrimary: '#27B161',
-  colorDarkGrey: '#A4AAB3',
-  colorShadow: '#000000',
-  colorLightBlack: '#061F33',
-  colorPrimaryDark: '#148443',
-  colorBlack: '#061f33',
-  colorPrimaryEmphasis: '#148443',
-  colorDanger: '#FF7183',
-  colorDangerDark: '#ff001f',
-  colorLightGrey: '#f3f3f3',
+  colorHeading: "#466BAF",
+  colorDefault: "#273456",
+  colorDefaultLight: "#96A6CF",
+  colorShadow: "#000000",
+  colorBackground: "#F5F7F8",
+  colorHighlight: "#C0DDEB", 
+  colorPrimary: "#466BAF",
+  colorPrimaryEmphasis: "#2C436D",
+  colorSecondary: "#F2C14A",
+  colorSecondaryEmphasis: "#F5A623",
+  colorDanger: "#CC5767",
+  colorDangerEmphasis: "#9C303E",
+  colorDangerLight: "#E7B1B8",
+  colorInfo: "#466BAF",
+  colorSuccess: "#27B161",
+  colorDarkGrey: "#696D7E",
+  colorLightGrey: "#E8EBEE",
   // Elevation theme
   elevation: {
     // What property to use to apply depth

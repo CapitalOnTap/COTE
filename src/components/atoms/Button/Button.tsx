@@ -4,13 +4,20 @@ import styled, { css, keyframes, withTheme } from 'styled-components';
 import withRipples from '../../../hocs/withRipples';
 import elevationMixin from '../../../mixins/elevation';
 import { Theme } from '../../../styles/types';
-import { hexToRgbA } from '../../../utils/index';
+import { hexToRgbA, isColorDark } from '../../../utils/index';
 import Icon from '../Icon/Icon';
 
 const primary = css`
   color: ${props => props.theme.colorPrimary};
   &:hover {
     background-color: ${props => hexToRgbA(props.theme.colorPrimary, 0.08)};
+  }
+`;
+
+const secondary = css`
+  color: ${props => props.theme.colorSecondary};
+  &:hover {
+    background-color: ${props => hexToRgbA(props.theme.colorSecondary, 0.08)};
   }
 `;
 
@@ -24,17 +31,18 @@ const danger = css`
 const outline = css<{
   disabled?: boolean;
   primary?: boolean;
+  secondary?: boolean;
   danger?: boolean;
 }>`
   ${props =>
     `
-      border: 1px solid ${props.theme.colorBlack};
+      border: 1px solid ${props.theme.colorDefault};
   `};
 
   ${props =>
     props.disabled &&
     `
-      border: 1px solid rgba(0, 0, 0, .26);
+      border: 1px solid ${props.theme.colorLightGrey};
   `};
 
   ${props =>
@@ -43,6 +51,15 @@ const outline = css<{
       border: 1px solid ${props.theme.colorPrimary};
       &:hover{
         background-color: ${props => hexToRgbA(props.theme.colorPrimary, 0.08)};
+      }
+  `};
+
+  ${props =>
+    props.secondary &&
+    `
+      border: 1px solid ${props.theme.colorSecondary};
+      &:hover{
+        background-color: ${props => hexToRgbA(props.theme.colorSecondary, 0.08)};
       }
   `};
 
@@ -56,64 +73,61 @@ const outline = css<{
   `};
 `;
 
-const solid = css<{ primary?: boolean; danger?: boolean; disabled?: boolean }>`
+const solid = css<{
+  primary?: boolean; secondary?:
+  boolean; danger?: boolean;
+  disabled?: boolean;
+  selected?: boolean; // Set if button is part of ButtonGroup and selected
+}>`
   ${elevationMixin(2)}
 
   &:active{
     ${elevationMixin(8)}
   }
-
-  ${props =>
-    `
-    color: white;
-    background-color: ${hexToRgbA(props.theme.colorBlack, 0.7)};
-    &:before {
-      color: black;
+  
+  ${props => {
+    if (props.disabled) {
+      return `
+  background-color: rgba(0, 0, 0, .12);
+  pointer-events: none;
+`;
     }
 
-    &:hover{
-      background-color: ${props.theme.colorBlack};
-    }
-  `}
+    let backgroundColor = props.selected ? props.theme.colorDefault : hexToRgbA(props.theme.colorDefault, 0.7);
+    let hoverBackgroundColor = props.theme.colorDefault;
 
-  ${props =>
-    props.primary &&
-    `
-    color: white;
-    background-color: ${props.theme.colorPrimary};
-    &:before {
-      color: black;
+    if (props.primary) {
+      backgroundColor = props.theme.colorPrimary;
+      hoverBackgroundColor = props.theme.colorPrimaryEmphasis;
     }
-
-     &&:hover{
-      background-color: ${props.theme.colorPrimaryEmphasis};
+    if (props.secondary) {
+      backgroundColor = props.theme.colorSecondary;
+      hoverBackgroundColor = props.theme.colorSecondaryEmphasis;
     }
-  `}
-
-  ${props =>
-    props.danger &&
-    `
-    color: white !important;
-    background-color: ${props.theme.colorDanger};
-    &:before {
-      color: black;
+    if (props.danger) {
+      backgroundColor = props.theme.colorDanger;
+      hoverBackgroundColor = props.theme.colorDangerEmphasis;
     }
+    
+    const textColor = isColorDark(backgroundColor) ? 'white' : props.theme.colorDefault;
 
-     &&:hover{
-      background-color: ${props.theme.colorDangerDark} ;
-    }
-  `}
+    return `
+  color: ${textColor};
+  background-color: ${backgroundColor};
+  &:before {
+    color: black;
+  }
 
-  ${props =>
-    props.disabled &&
-    `
-    background-color: rgba(0, 0, 0, .12);
-    pointer-events: none;
-  `}
+  &:hover{
+    background-color: ${hoverBackgroundColor};
+  }
+`;
+  }}
 `;
 
 interface StyledButtonProps {
   primary?: boolean;
+  secondary?: boolean;
   solid?: boolean;
   danger?: boolean;
   outline?: boolean;
@@ -122,10 +136,11 @@ interface StyledButtonProps {
   full?: boolean;
   elevation?: number;
   disabled?: boolean;
+  selected?: boolean;
 }
 
 export const StyledButton = styled.button<StyledButtonProps>`
-  color: ${props => props.theme.colorBlack};
+  color: ${props => props.theme.colorDefault};
   display: inline-block;
   position: relative;
   min-width: 88px;
@@ -150,17 +165,18 @@ export const StyledButton = styled.button<StyledButtonProps>`
 
   &:hover {
     cursor: pointer;
-    background-color: ${props => hexToRgbA(props.theme.colorBlack, 0.08)};
+    background-color: ${props => hexToRgbA(props.theme.colorDefault, 0.08)};
   }
   &::-moz-focus-inner {
     padding: 0;
     border: 0;
   }
 
-  ${props => props.primary && primary}
   ${props => props.solid && solid}
-  ${props => props.danger && danger}
   ${props => props.outline && outline}
+  ${props => !props.solid && !props.outline && props.primary && primary}
+  ${props => !props.solid && !props.outline && props.secondary && secondary}
+  ${props => !props.solid && !props.outline && props.danger && danger}
   ${props =>
     props.small &&
     `padding: 0px 8px;
@@ -223,15 +239,11 @@ interface RippleButtonProps extends StyledButtonProps {
 }
 
 const getRippleColor = (buttonProps: RippleButtonProps) => {
-  if (buttonProps.primary && buttonProps.solid)
-    return buttonProps.theme.colorPrimary;
-  if (buttonProps.danger && buttonProps.solid)
-    return buttonProps.theme.colorDanger;
-  if (!buttonProps.danger && !buttonProps.primary && buttonProps.solid)
-    return buttonProps.theme.colorDarkGrey;
-
   if (buttonProps.danger) return buttonProps.theme.colorDanger;
   if (buttonProps.primary) return buttonProps.theme.colorPrimary;
+  if (buttonProps.secondary) return buttonProps.theme.colorSecondary;
+  if (!buttonProps.danger && !buttonProps.primary && buttonProps.solid)
+    return buttonProps.theme.colorDarkGrey;
 
   return 'rgba(0, 0, 0, 0.06)';
 };
@@ -304,7 +316,9 @@ Button.propTypes = {
   loadingText: PropTypes.string,
   //** Adds material design shadow elevation */
   elevation: PropTypes.number,
-  danger: PropTypes.bool
+  danger: PropTypes.bool,
+  //** True if in ButtonGroup and selected */
+  selected: PropTypes.bool
 };
 
 Button.defaultProps = {
@@ -316,7 +330,8 @@ Button.defaultProps = {
   type: 'button',
   icon: '',
   full: false,
-  danger: false
+  danger: false,
+  selected: false
 };
 
 export default withTheme(Button);

@@ -11,7 +11,7 @@ const handleClick = () => {
 
 const AddIcon = styled(Icon)`
   color: ${props =>
-    props.theme.colorPrimary ? props.theme.colorPrimary : defaultColors.black};
+    props.theme.colorPrimary ? props.theme.colorPrimary : defaultColors.default};
 `;
 
 const StyledLink = styled.a`

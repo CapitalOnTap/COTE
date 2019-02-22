@@ -12,12 +12,12 @@ interface WrapperProps {
 const Wrapper = styled.div<WrapperProps>`
   width: ${props => (props.full ? '100%' : '232px')};
   height: 48px;
-  border: ${props => (props.border ? `1px solid ${defaultColors.black}` : '0')};
+  border: ${props => (props.border ? `1px solid ${defaultColors.default}` : '0')};
   border-bottom: ${props =>
     props.underline
       ? `1px solid #eeeeee`
       : props.border
-      ? '1px solid ${defaultColors.black}'
+      ? '1px solid ${defaultColors.default}'
       : '0'};
   display: flex;
   flex-direction: row;
