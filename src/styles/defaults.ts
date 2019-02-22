@@ -10,6 +10,7 @@ export const colors: ThemeColors = {
   defaultLight: "#96A6CF",
   danger: "#CC5767",
   dangerEmphasis: "#9C303E",
+  info: "#466BAF",
   success: "#27B161",
   shadow: "#000000",
   darkGrey: "#696D7E",

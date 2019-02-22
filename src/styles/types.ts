@@ -6,7 +6,8 @@ export interface ThemeColors {
   default: string;
   defaultLight: string;
   danger: string;
-  dangerEmphasis;
+  dangerEmphasis: string;
+  info: string;
   success: string;
   shadow: string;
   darkGrey: string;

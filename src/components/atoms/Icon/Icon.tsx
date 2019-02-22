@@ -7,29 +7,55 @@ const StyledIcon = styled.i<{ reverse: boolean; solid: boolean } & any>`
   color: ${props => {
     if (props.reverse || props.solid) return "#fff";
 
-    if (props.primary && props.theme) return props.theme.colorPrimary;
-
-    if (props.error && props.theme) return props.theme.colorDanger;
+    if (props.info) {
+      return props.theme ? props.theme.colorInfo : defaultColors.info;
+    }
+    if (props.error) {
+      return props.theme ? props.theme.colorDanger : defaultColors.danger;
+    }
+    if (props.success) {
+      return props.theme ? props.theme.colorSuccess : defaultColors.success;
+    }
+    if (props.primary){
+      return props.theme ? props.theme.colorPrimary : defaultColors.primary;
+    }
 
     return defaultColors.darkGrey;
   }};
   padding: ${props => (props.circle ? "8px" : null)};
   border: ${props => {
-    if (props.primary && props.theme && props.circle && !props.solid)
-      return `1px solid ${props.theme.colorPrimary}`;
-
-    if (props.primary && props.circle && !props.solid)
-      return `1px solid ${defaultColors.primary}`;
-
-    if (props.circle && !props.solid) return `1px solid ${defaultColors.darkGrey}`;
-
+    if (props.circle && !props.solid) {
+      if (props.info) {
+        return `1px solid ${props.theme ? props.theme.colorInfo : defaultColors.info}`;
+      }
+      if (props.error) {
+        return `1px solid ${props.theme ? props.theme.colorDanger : defaultColors.danger}`;
+      }
+      if (props.success) {
+        return `1px solid ${props.theme ? props.theme.colorSuccess : defaultColors.success}`;
+      }
+      if (props.primary) {
+        return `1px solid ${props.theme ? props.theme.colorPrimary : defaultColors.primary}`;
+      }
+      return `1px solid ${defaultColors.darkGrey}`;
+    }
     return null;
   }};
   border-radius: ${props => (props.circle ? "50%" : null)};
   background-color: ${props => {
-    if (props.circle && props.solid && props.theme)
-      return props.theme.colorPrimary;
-    if (props.circle && props.solid) return defaultColors.primary;
+    if (props.circle && props.solid) {
+      if (props.info) {
+        return props.theme ? props.theme.colorInfo : defaultColors.info;
+      }
+      if (props.error) {
+        return props.theme ? props.theme.colorDanger : defaultColors.danger;
+      }
+      if (props.success) {
+        return props.theme ? props.theme.colorSuccess : defaultColors.success;
+      }
+
+      return props.theme ? props.theme.colorPrimary : defaultColors.primary;
+    }
     return null;
   }};
 `;
@@ -42,6 +68,8 @@ interface Props extends React.HTMLAttributes<{}> {
   /** Render icon in a circle shape */
   circle?: boolean;
   error?: boolean;
+  success?: boolean;
+  info?: boolean;
   solid?: boolean;
   className?: string;
 }
@@ -50,6 +78,8 @@ const Icon: React.SFC<Props> = ({
   name,
   primary,
   error,
+  success,
+  info,
   circle,
   solid,
   className,
@@ -63,6 +93,8 @@ const Icon: React.SFC<Props> = ({
       circle={circle}
       solid={solid}
       error={error}
+      success={success}
+      info={info}
       reverse={reverse}
       {...props}
     >
