@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Icon from '../atoms/Icon/Icon';
 import { colors as defaultColors } from '../../styles/defaults';
+import { isColorDark } from 'utils';
 
 const Wrapper = styled.div`
   display: flex;
@@ -31,7 +32,27 @@ const Item = styled.div<{ width: number }>`
 
 const StyledIcon = styled(Icon)`
   margin-right: 1em;
+  color: ${props => {
+    var backgroundColor = props.theme ? props.theme.colorHighlight : defaultColors.highlight;
+    if (isColorDark(backgroundColor)) {
+      return '#fff';
+    } else {
+      return props.theme ? props.theme.colorDefault : defaultColors.default;
+    }
+  }};
 `;
+
+const StyledText = styled.span`
+  color: ${props => {
+    var backgroundColor = props.theme ? props.theme.colorHighlight : defaultColors.highlight;
+    if (isColorDark(backgroundColor)) {
+      return '#fff';
+    } else {
+      return props.theme ? props.theme.colorDefault : defaultColors.default;
+    }
+  }};
+`;
+
 interface Props {
   items: Item[];
   id: string;
@@ -48,8 +69,8 @@ const HighlightsBar: React.SFC<Props> = (props: Props) => {
     <Wrapper id={id}>
       {items.map((item, i) => (
         <Item width={100 / items.length} key={i}>
-          <StyledIcon name={item.icon} defaultColor />
-          <span style={{ fontWeight: 'bold' }}>{item.name}</span>
+          <StyledIcon name={item.icon} />
+          <StyledText style={{ fontWeight: 'bold' }}>{item.name}</StyledText>
         </Item>
       ))}
     </Wrapper>
