@@ -21,7 +21,7 @@ const Wrapper = styled.div<{ disabled?: boolean; isActive?: boolean }>`
     }
     return props.theme ? props.theme.colorDanger : defaultColors.danger;
   }};
-
+  cursor: pointer;
   transition: background 150ms ease-in;
 `;
 
