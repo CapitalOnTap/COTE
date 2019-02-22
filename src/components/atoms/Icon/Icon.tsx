@@ -19,6 +19,9 @@ const StyledIcon = styled.i<{ reverse: boolean; solid: boolean } & any>`
     if (props.primary){
       return props.theme ? props.theme.colorPrimary : defaultColors.primary;
     }
+    if (props.defaultColor){
+      return props.theme ? props.theme.colorDefault : defaultColors.default;
+    }
 
     return defaultColors.darkGrey;
   }};
@@ -37,6 +40,10 @@ const StyledIcon = styled.i<{ reverse: boolean; solid: boolean } & any>`
       if (props.primary) {
         return `1px solid ${props.theme ? props.theme.colorPrimary : defaultColors.primary}`;
       }
+      if (props.defaultColor){
+        return `1px solid ${props.theme ? props.theme.colorDefault : defaultColors.default}`;
+      }
+  
       return `1px solid ${defaultColors.darkGrey}`;
     }
     return null;
@@ -52,6 +59,9 @@ const StyledIcon = styled.i<{ reverse: boolean; solid: boolean } & any>`
       }
       if (props.success) {
         return props.theme ? props.theme.colorSuccess : defaultColors.success;
+      }
+      if (props.defaultColor){
+        return props.theme ? props.theme.colorDefault : defaultColors.default;
       }
 
       return props.theme ? props.theme.colorPrimary : defaultColors.primary;
@@ -72,6 +82,7 @@ interface Props extends React.HTMLAttributes<{}> {
   info?: boolean;
   solid?: boolean;
   className?: string;
+  defaultColor?: boolean;
 }
 
 const Icon: React.SFC<Props> = ({
@@ -84,6 +95,7 @@ const Icon: React.SFC<Props> = ({
   solid,
   className,
   reverse,
+  defaultColor,
   ...props
 }) => {
   return (
@@ -96,6 +108,7 @@ const Icon: React.SFC<Props> = ({
       success={success}
       info={info}
       reverse={reverse}
+      defaultColor={defaultColor}
       {...props}
     >
       {name}

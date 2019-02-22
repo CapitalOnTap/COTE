@@ -12,6 +12,8 @@ export interface ThemeColors {
   shadow: string;
   darkGrey: string;
   lightGrey: string;
+  highlight: string;
+  navigationBackground: string;
 }
 
 export interface ThemeFontWeights {
@@ -39,6 +41,7 @@ export interface Theme {
   colorSuccess: string,
   colorDarkGrey: string,
   colorLightGrey: string,
+  colorNavigationBackground: string,
   // Elevation theme
   elevation: {
     // What property to use to apply depth

@@ -10,7 +10,7 @@ const Wrapper = styled.div`
   padding: 1em;
   height: 64px;
   background-color: ${props =>
-    props.theme ? props.theme.colorPrimary : defaultColors.primary};
+    props.theme ? props.theme.colorHighlight : defaultColors.highlight};
   box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14);
 `;
 
@@ -32,12 +32,6 @@ const Item = styled.div<{ width: number }>`
 const StyledIcon = styled(Icon)`
   margin-right: 1em;
 `;
-
-const Name = styled.span`
-  color: #fff;
-  font-weight: bold;
-`;
-
 interface Props {
   items: Item[];
   id: string;
@@ -54,8 +48,8 @@ const HighlightsBar: React.SFC<Props> = (props: Props) => {
     <Wrapper id={id}>
       {items.map((item, i) => (
         <Item width={100 / items.length} key={i}>
-          <StyledIcon name={item.icon} reverse />
-          <Name style={{ color: '#fff' }}>{item.name}</Name>
+          <StyledIcon name={item.icon} defaultColor />
+          <span style={{ fontWeight: 'bold' }}>{item.name}</span>
         </Item>
       ))}
     </Wrapper>

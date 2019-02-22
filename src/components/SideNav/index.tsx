@@ -76,7 +76,7 @@ const Nav = styled(PaperWrapper.withComponent('nav'))<{
   position: fixed;
   top: 0;
   bottom: 0;
-  background: ${props => (props.theme ? props.theme.colorDefault : defaultColors.default)};
+  background: ${props => (props.theme ? props.theme.colorNavigationBackground : defaultColors.navigationBackground)};
   border-radius: 0;
   ${props => {
     if (props.isOpen) {
