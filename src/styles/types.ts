@@ -24,7 +24,6 @@ export interface ThemeFontWeights {
 }
 
 export interface Theme {
-  colorHeading: string,
   colorDefault: string,
   colorDefaultLight: string,
   colorShadow: string,

@@ -38,7 +38,7 @@ const WidgetBox: React.SFC<Props> = ({
         <RenderTitleWrapper>{renderTitle()}</RenderTitleWrapper>
       ) : (
         <TitleWrapper>
-          <Title bold>{title}</Title>
+          <Title primary bold>{title}</Title>
         </TitleWrapper>
       )}
       {children}
