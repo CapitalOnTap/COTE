@@ -66,7 +66,7 @@ const Widget: React.SFC<Props> = ({
     <Wrapper {...props}>
       <WidgetTopWrapper>
         <StyledIcon name={icon} primary />
-        <Heading3>{title}</Heading3>
+        <Heading3 defaultColor>{title}</Heading3>
         {description && <p style={{ marginTop: '16px' }}>{description}</p>}
       </WidgetTopWrapper>
       {items.length ? (

@@ -7,7 +7,7 @@ import { isColorDark } from '../../utils/index';
 
 const NavButton = styled(StyledLinkButton)`
   ${props => {
-    const backgroundColor = props.theme ? props.theme.colorDefault : defaultColors.default;
+    const backgroundColor = props.theme ? props.theme.colorNavigationBackground : defaultColors.navigationBackground;
     if (isColorDark(backgroundColor)) {
       return 'border: 1px solid white !important;';
     }
@@ -41,7 +41,7 @@ const Nav = styled.nav<NavProps>`
   justify-content: space-between;
   align-items: center;
   height: 72px;
-  background-color: ${props => (props.theme ? props.theme.colorDefault : defaultColors.default)};
+  background-color: ${props => (props.theme ? props.theme.colorNavigationBackground : defaultColors.navigationBackground)};
   max-width: ${props => (props.maxWidth ? props.maxWidth : '928px')};
   margin: 0 auto;
   @media only screen and (max-width: 960px) {
@@ -71,7 +71,7 @@ const NavRight = styled.div`
 
 const Container = styled.div`
   width: 100%;
-  background-color: ${props => (props.theme ? props.theme.colorDefault : defaultColors.default)};
+  background-color: ${props => (props.theme ? props.theme.colorNavigationBackground : defaultColors.navigationBackground)};
 `;
 
 interface Props extends LogoProps, NavProps {
