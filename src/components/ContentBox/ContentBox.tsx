@@ -42,7 +42,7 @@ const ContentBox: React.SFC<Props> = ({
   return (
     <Wrapper className={className} {...props} id={id}>
       <TitleWrapper>
-        <Title bold>{title}</Title>
+        <Title primary bold>{title}</Title>
       </TitleWrapper>
       <ContentWrapper noPadding={noPadding}>{children}</ContentWrapper>
     </Wrapper>

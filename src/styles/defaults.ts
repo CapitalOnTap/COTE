@@ -27,7 +27,6 @@ export const fontWeights: ThemeFontWeights = {
 };
 
 export const theme: Theme = {
-  colorHeading: "#466BAF",
   colorDefault: "#273456",
   colorDefaultLight: "#96A6CF",
   colorShadow: "#000000",
