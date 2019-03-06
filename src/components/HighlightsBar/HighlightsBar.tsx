@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Icon from '../atoms/Icon/Icon';
 import { colors as defaultColors } from '../../styles/defaults';
-import { isColorDark } from 'utils';
+import { isColorDark } from '../../utils';
 
 const Wrapper = styled.div`
   display: flex;
@@ -33,7 +33,9 @@ const Item = styled.div<{ width: number }>`
 const StyledIcon = styled(Icon)`
   margin-right: 1em;
   color: ${props => {
-    var backgroundColor = props.theme ? props.theme.colorHighlight : defaultColors.highlight;
+    var backgroundColor = props.theme
+      ? props.theme.colorHighlight
+      : defaultColors.highlight;
     if (isColorDark(backgroundColor)) {
       return '#fff';
     } else {
@@ -44,7 +46,9 @@ const StyledIcon = styled(Icon)`
 
 const StyledText = styled.span`
   color: ${props => {
-    var backgroundColor = props.theme ? props.theme.colorHighlight : defaultColors.highlight;
+    var backgroundColor = props.theme
+      ? props.theme.colorHighlight
+      : defaultColors.highlight;
     if (isColorDark(backgroundColor)) {
       return '#fff';
     } else {
