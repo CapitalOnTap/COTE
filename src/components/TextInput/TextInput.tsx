@@ -131,7 +131,7 @@ const TextInput: React.SFC<Props> = ({
         name={name}
         {...props}
         invalid={required}
-        mask={mask ? mask : false}
+        mask={mask ? mask : rawValue => Array(rawValue.length).fill(/./)}
         guide={guide}
         full={full}
         onChange={onChange}
