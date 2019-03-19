@@ -1,15 +1,15 @@
-import PropTypes from 'prop-types';
-import React, { Component } from 'react';
-import styled, { withTheme } from 'styled-components';
-import { colors as defaultColors } from '../../styles/defaults';
-import OutsideAlerter from '../OutsideAlerter/OutsideAlerter';
-import Badge from '../atoms/Badge/Badge';
-import Icon from '../atoms/Icon/Icon';
+import PropTypes from "prop-types";
+import React, { Component } from "react";
+import styled, { withTheme } from "styled-components";
+import { colors as defaultColors } from "../../styles/defaults";
+import OutsideAlerter from "../OutsideAlerter/OutsideAlerter";
+import Badge from "../atoms/Badge/Badge";
+import Icon from "../atoms/Icon/Icon";
 
 const ArrowIcon = styled(Icon)`
   z-index: 2;
   color: ${props => {
-    if (props.reverse) return '#fff';
+    if (props.reverse) return "#fff";
     return props.theme ? props.theme.colorPrimary : defaultColors.primary;
   }};
   cursor: pointer;
@@ -18,7 +18,7 @@ const ArrowIcon = styled(Icon)`
 const ArrowWrapper = styled.div<{ small?: boolean }>`
   display: inline-block;
   position: relative;
-  top: ${props => props.small ? '6px' : '2px'};
+  top: ${props => (props.small ? "6px" : "2px")};
 `;
 
 const DropdownWrapper = styled.div`
@@ -41,7 +41,7 @@ const FirstName = styled.p<{ reverse?: boolean }>`
   display: inline-block;
   ${props => {
     if (props.reverse) {
-      return 'color: #fff;'
+      return "color: #fff;";
     }
     return null;
   }}
@@ -53,7 +53,7 @@ const BadgeWrapper = styled.div`
 
 const MenuWrapper = styled.div<{ right?: boolean; isOpen?: boolean }>`
   right: ${props => (props.right ? 0 : null)};
-  display: ${props => (props.isOpen ? 'block' : 'none')};
+  display: ${props => (props.isOpen ? "block" : "none")};
   margin-top: 5px;
   position: absolute;
   background-color: white;
@@ -64,12 +64,12 @@ const MenuWrapper = styled.div<{ right?: boolean; isOpen?: boolean }>`
 `;
 
 const MenuBox = styled.div<{ last?: boolean; hover?: boolean }>`
-  padding: 16px 16px ${props => (props.last ? '16px' : '0')} 16px;
+  padding: 16px 16px ${props => (props.last ? "16px" : "0")} 16px;
   display: block;
-  cursor: ${props => (props.hover ? 'pointer' : 'auto')};
+  cursor: ${props => (props.hover ? "pointer" : "auto")};
   &:hover {
-    background: ${props => (props.hover ? props.theme.colorPrimary : 'white')};
-    color: ${props => (props.hover ? 'white' : 'inherit')};
+    background: ${props => (props.hover ? props.theme.colorPrimary : "white")};
+    color: ${props => (props.hover ? "white" : "inherit")};
   }
 `;
 
@@ -81,7 +81,7 @@ const MenuEntry = styled.p`
 `;
 
 const Link = styled.a<{ reverse?: boolean }>`
-  color: ${props => (props.reverse ? '#fff' : props.theme.colorPrimary)};
+  color: ${props => (props.reverse ? "#fff" : props.theme.colorPrimary)};
 `;
 
 const Separator = styled.hr`
@@ -98,6 +98,10 @@ interface Props {
   reverse?: boolean;
   small?: boolean;
   theme?: any;
+  customerReferenceLabel: string;
+  detailLabel: string;
+  logOutLabel: string;
+  showDetailLink: boolean;
 }
 
 interface State {
@@ -130,7 +134,11 @@ class MenuDropdown extends Component<Props, State> {
       logOutClick,
       reverse,
       small,
-      theme
+      theme,
+      customerReferenceLabel,
+      detailLabel,
+      logOutLabel,
+      showDetailLink
     } = this.props;
 
     const initial = firstName[0] + lastName[0];
@@ -142,10 +150,10 @@ class MenuDropdown extends Component<Props, State> {
           <DropdownButton onClick={this.handleClick}>
             <BadgeWrapper>
               <Badge
-                content={initial || ''}
+                content={initial || ""}
                 size={badgeSize}
-                background={reverse ? '#fff' : theme.colorPrimary}
-                color={reverse ? theme.colorPrimary : '#fff'}
+                background={reverse ? "#fff" : theme.colorPrimary}
+                color={reverse ? theme.colorPrimary : "#fff"}
               />
             </BadgeWrapper>
             {!small && <FirstName reverse={reverse}>{firstName}</FirstName>}
@@ -164,20 +172,22 @@ class MenuDropdown extends Component<Props, State> {
                 <b>{legalName}</b>
               </MenuEntry>
             </MenuBox>
-            <MenuBox>
-              <MenuEntry>Customer Reference: </MenuEntry>
+            <MenuBox last={!showDetailLink}>
+              <MenuEntry>{customerReferenceLabel}</MenuEntry>
               <MenuEntry>
                 <b>{locatorId}</b>
               </MenuEntry>
             </MenuBox>
-            <MenuBox last>
-              <MenuEntry>
-                <Link href={detailUrl}>View your details</Link>
-              </MenuEntry>
-            </MenuBox>
+            {showDetailLink && (
+              <MenuBox last>
+                <MenuEntry>
+                  <Link href={detailUrl}>{detailLabel}</Link>
+                </MenuEntry>
+              </MenuBox>
+            )}
             <Separator />
             <MenuBox last hover>
-              <MenuEntry onClick={logOutClick}>Log Out</MenuEntry>
+              <MenuEntry onClick={logOutClick}>{logOutLabel}</MenuEntry>
             </MenuBox>
           </MenuWrapper>
         </DropdownWrapper>
@@ -193,17 +203,25 @@ class MenuDropdown extends Component<Props, State> {
   locatorId: PropTypes.string.isRequired,
   detailUrl: PropTypes.string,
   logOutClick: PropTypes.func,
-  small: PropTypes.bool
+  small: PropTypes.bool,
+  customerReferenceLabel: PropTypes.string.isRequired,
+  detailLabel: PropTypes.string.isRequired,
+  logOutLabel: PropTypes.string.isRequired,
+  showDetailLink: PropTypes.bool
 };
 
 (MenuDropdown as any).defaultProps = {
-  detailUrl: 'http://google.com',
+  detailUrl: "http://google.com",
   logOutClick: () => {
-    console.log('Logout!');
+    console.log("Logout!");
   },
   small: false,
-  firstName: '',
-  lastName: ''
+  firstName: "",
+  lastName: "",
+  customerReferenceLabel: "Customer Reference: ",
+  detailLabel: "View your details",
+  logOutLabel: "Log Out",
+  showDetailLink: true
 };
 
 export default withTheme(MenuDropdown);
