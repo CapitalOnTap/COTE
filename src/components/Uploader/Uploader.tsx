@@ -1,12 +1,14 @@
-import * as React from "react";
-import Dropzone from "react-dropzone";
-import styled from "styled-components";
-import { colors as defaultColors } from "../../styles/defaults";
-import Button from "../atoms/Button/Button";
-import Icon from "../atoms/Icon/Icon";
-import { Title } from "../atoms/Typography/index";
+import * as React from 'react';
+import Dropzone, { DropzoneProps } from 'react-dropzone';
+import styled from 'styled-components';
+import { colors as defaultColors } from '../../styles/defaults';
+import Button from '../atoms/Button/Button';
+import Icon from '../atoms/Icon/Icon';
+import { Title } from '../atoms/Typography/index';
 
-const StyledDropZone = styled(Dropzone)`
+const StyledDropZone = styled(Dropzone)<
+  DropzoneProps & { children: React.ReactNode }
+>`
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -30,17 +32,18 @@ const ContentWrapper = styled.div`
   }
 `;
 
-interface Props {
+interface Props extends DropzoneProps {
   icon: string;
   // TODO: type the theme
   theme: any;
   buttonText: string;
   title: string;
   subtitle?: string;
+  children: any;
 }
 
 class Uploader extends React.Component<Props> {
-  dropzone: React.Ref<any>;
+  dropzone: Dropzone | null;
 
   onOpenClick = () => {
     this.dropzone && (this.dropzone as any).open();
@@ -81,10 +84,10 @@ class Uploader extends React.Component<Props> {
 }
 
 (Uploader as any).defaultProps = {
-  icon: "add_circle_outline",
-  buttonText: "Choose files",
-  title: "Drag and drop files here",
-  subtitle: ""
+  icon: 'add_circle_outline',
+  buttonText: 'Choose files',
+  title: 'Drag and drop files here',
+  subtitle: ''
 };
 
 export default Uploader;
