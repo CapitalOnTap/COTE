@@ -1,4 +1,4 @@
 export interface Option {
-  title: string;
+  title: any;
   value: any;
 }

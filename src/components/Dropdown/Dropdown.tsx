@@ -29,8 +29,7 @@ const Wrapper = styled.div<WrapperProps>`
   min-width: 66px;
   width: ${props => (props.full ? "100%" : "232px")};
   border: ${props => {
-    if (props.error && props.theme)
-      return `1px solid ${props.theme.colorDanger}`;
+    if (props.error && props.theme) return `1px solid ${props.theme.colorDanger}`;
     if (props.error) return `1px solid ${defaultColors.danger}`;
 
     return `1px solid ${defaultColors.default}`;
@@ -44,7 +43,7 @@ interface Props extends WrapperProps {
   selectedOption?: Option;
   handleValueChange?: (value: any) => void;
   options: Option[];
-  title?: string;
+  title?: any;
   label?: string;
   lastOption?: Option;
 }
@@ -66,9 +65,7 @@ class Dropdown extends Component<Props, State> {
   handleOptionChange = (option: Option) => {
     this.setState(
       { selectedOption: option },
-      () =>
-        this.props.handleValueChange &&
-        this.props.handleValueChange(option.value)
+      () => this.props.handleValueChange && this.props.handleValueChange(option.value)
     );
   };
 
@@ -84,23 +81,10 @@ class Dropdown extends Component<Props, State> {
 
   render() {
     const { isOpen, selectedOption } = this.state;
-    const {
-      options,
-      title,
-      error,
-      full,
-      label,
-      lastOption,
-      id,
-      disabled,
-      ...props
-    } = this.props;
+    const { options, title, error, full, label, lastOption, id, disabled, ...props } = this.props;
 
     return (
-      <OutsideAlerter
-        handleClickOutsideElement={this.handleClickOutsideDropdown}
-        {...props}
-      >
+      <OutsideAlerter handleClickOutsideElement={this.handleClickOutsideDropdown} {...props}>
         {label && <Label required={error} text={label} />}
 
         <Wrapper
@@ -111,11 +95,7 @@ class Dropdown extends Component<Props, State> {
           {...this.props}
           tabIndex={0}
         >
-          {selectedOption ? (
-            <span>{selectedOption.title}</span>
-          ) : (
-            <span>{title}</span>
-          )}
+          {selectedOption ? <span>{selectedOption.title}</span> : <span>{title}</span>}
           {!isOpen && !disabled && (
             <ArrowIcon name="keyboard_arrow_down" onClick={this.handleClick} />
           )}
@@ -138,16 +118,12 @@ class Dropdown extends Component<Props, State> {
 
 (Dropdown as any).propTypes = {
   /** Title of select box */
-  title: PropTypes.string.isRequired,
+  title: PropTypes.any.isRequired,
   /** Possible options and their values */
   options: PropTypes.arrayOf(
     PropTypes.shape({
-      title: PropTypes.string.isRequired,
-      value: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.number,
-        PropTypes.bool
-      ])
+      title: PropTypes.any.isRequired,
+      value: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool])
     })
   ),
   /** Callback to retrieve value of option selected */
@@ -158,20 +134,12 @@ class Dropdown extends Component<Props, State> {
   label: PropTypes.string,
   /** An item added at the end of the results list - can be used for "can't find my option" scenarios */
   lastOption: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    value: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.number,
-      PropTypes.bool
-    ])
+    title: PropTypes.any.isRequired,
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool])
   }),
   selectedOption: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    value: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.number,
-      PropTypes.bool
-    ])
+    title: PropTypes.any.isRequired,
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool])
   }),
   disabled: PropTypes.bool
 };

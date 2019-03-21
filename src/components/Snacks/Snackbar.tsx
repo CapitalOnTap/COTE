@@ -1,9 +1,9 @@
-import * as React from 'react';
-import styled, { css } from 'styled-components';
-import Paper from '../Paper/Paper';
-import Button from '../atoms/Button/Button';
-import Icon from '../atoms/Icon/Icon';
-import { SnackbarStatus } from './types';
+import * as React from "react";
+import styled, { css } from "styled-components";
+import Paper from "../Paper/Paper";
+import Button from "../atoms/Button/Button";
+import Icon from "../atoms/Icon/Icon";
+import { SnackbarStatus } from "./types";
 
 const active = css`
   transform: translate(-50%, -20%);
@@ -52,7 +52,7 @@ const Wrapper = styled(Paper)<IWrapperProps>`
 
 const Flex = styled.div<{ justify?: string }>`
   display: flex;
-  ${props => (props.justify ? `flex-justify: ${props.justify}` : '')}
+  ${props => (props.justify ? `flex-justify: ${props.justify}` : "")}
 `;
 
 const ActionButton = styled(Button)`
@@ -98,10 +98,10 @@ const Action = styled.div`
 export interface SnackbarProps {
   delay: number;
   clearSnack: () => void;
-  message: string;
+  message: any;
   action?: () => void;
   actionText: string;
-  title: string;
+  title: any;
   icon: string;
   status: SnackbarStatus;
 }
@@ -110,10 +110,10 @@ export default class Snackbar extends React.Component<SnackbarProps, any> {
   static defaultProps: SnackbarProps = {
     delay: 4000,
     clearSnack: () => {},
-    actionText: 'DISMISS',
-    message: '',
-    title: '',
-    icon: '',
+    actionText: "DISMISS",
+    message: "",
+    title: "",
+    icon: "",
     status: SnackbarStatus.Info
   };
 

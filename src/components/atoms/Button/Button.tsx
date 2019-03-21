@@ -1,11 +1,11 @@
-import PropTypes from 'prop-types';
-import React from 'react';
-import styled, { css, keyframes, withTheme } from 'styled-components';
-import withRipples from '../../../hocs/withRipples';
-import elevationMixin from '../../../mixins/elevation';
-import { Theme } from '../../../styles/types';
-import { hexToRgbA, isColorDark } from '../../../utils/index';
-import Icon from '../Icon/Icon';
+import PropTypes from "prop-types";
+import React from "react";
+import styled, { css, keyframes, withTheme } from "styled-components";
+import withRipples from "../../../hocs/withRipples";
+import elevationMixin from "../../../mixins/elevation";
+import { Theme } from "../../../styles/types";
+import { hexToRgbA, isColorDark } from "../../../utils/index";
+import Icon from "../Icon/Icon";
 
 const primary = css`
   color: ${props => props.theme.colorPrimary};
@@ -74,17 +74,18 @@ const outline = css<{
 `;
 
 const solid = css<{
-  primary?: boolean; secondary?:
-  boolean; danger?: boolean;
+  primary?: boolean;
+  secondary?: boolean;
+  danger?: boolean;
   disabled?: boolean;
   selected?: boolean; // Set if button is part of ButtonGroup and selected
 }>`
   ${elevationMixin(2)}
 
-  &:active{
+  &:active {
     ${elevationMixin(8)}
   }
-  
+
   ${props => {
     if (props.disabled) {
       return `
@@ -93,7 +94,9 @@ const solid = css<{
 `;
     }
 
-    let backgroundColor = props.selected ? props.theme.colorDefault : hexToRgbA(props.theme.colorDefault, 0.7);
+    let backgroundColor = props.selected
+      ? props.theme.colorDefault
+      : hexToRgbA(props.theme.colorDefault, 0.7);
     let hoverBackgroundColor = props.theme.colorDefault;
 
     if (props.primary) {
@@ -108,8 +111,8 @@ const solid = css<{
       backgroundColor = props.theme.colorDanger;
       hoverBackgroundColor = props.theme.colorDangerEmphasis;
     }
-    
-    const textColor = isColorDark(backgroundColor) ? 'white' : props.theme.colorDefault;
+
+    const textColor = isColorDark(backgroundColor) ? "white" : props.theme.colorDefault;
 
     return `
   color: ${textColor};
@@ -207,7 +210,7 @@ ${props => props.full && `width: 100%;`}
   ${props => props.elevation && elevationMixin(props.elevation)}
 `;
 
-export const StyledLinkButton = styled(StyledButton.withComponent('a'))<
+export const StyledLinkButton = styled(StyledButton.withComponent("a"))<
   React.LinkHTMLAttributes<{}>
 >``;
 
@@ -223,7 +226,7 @@ const rotate360 = keyframes`
 
 const LoadingIcon = styled(Icon)<{ withText?: boolean }>`
   color: inherit;
-  margin-right: ${props => (props.withText ? '8px' : null)};
+  margin-right: ${props => (props.withText ? "8px" : null)};
   animation: ${rotate360} 2s linear infinite;
   /* font-size: inherit; */
 `;
@@ -245,7 +248,7 @@ const getRippleColor = (buttonProps: RippleButtonProps) => {
   if (!buttonProps.danger && !buttonProps.primary && buttonProps.solid)
     return buttonProps.theme.colorDarkGrey;
 
-  return 'rgba(0, 0, 0, 0.06)';
+  return "rgba(0, 0, 0, 0.06)";
 };
 
 const ButtonWithRipple = withRipples(StyledButton);
@@ -255,25 +258,16 @@ interface Props extends RippleButtonProps, React.ButtonHTMLAttributes<{}> {
   className?: string;
   href?: string;
   loading?: boolean;
-  loadingText?: string;
+  loadingText?: any;
 }
 
 const Button: React.SFC<Props> = (props: Props) => {
-  const {
-    children,
-    icon,
-    className,
-    disabled,
-    href,
-    loading,
-    loadingText,
-    id
-  } = props;
+  const { children, icon, className, disabled, href, loading, loadingText, id } = props;
 
   if (href) {
     return (
       <StyledLinkButton {...props} disabled={disabled} href={href} id={id}>
-        {loading && <LoadingIcon name={'refresh'} />}
+        {loading && <LoadingIcon name={"refresh"} />}
         {children}
         {icon && <Icon className={`fa fa-${icon} ${className}`} />}
       </StyledLinkButton>
@@ -325,10 +319,10 @@ Button.defaultProps = {
   elevation: 0,
   primary: false,
   solid: false,
-  href: '',
+  href: "",
   disabled: false,
-  type: 'button',
-  icon: '',
+  type: "button",
+  icon: "",
   full: false,
   danger: false,
   selected: false
