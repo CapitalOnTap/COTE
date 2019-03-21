@@ -1,8 +1,8 @@
-import PropTypes from 'prop-types';
-import React, { ReactNode } from 'react';
-import styled from 'styled-components';
-import Paper from '../Paper/Paper';
-import { Title } from '../atoms/Typography';
+import PropTypes from "prop-types";
+import React, { ReactNode } from "react";
+import styled from "styled-components";
+import Paper from "../Paper/Paper";
+import { Title } from "../atoms/Typography";
 
 const Wrapper = styled(Paper)<React.HTMLAttributes<{}>>`
   padding: 0;
@@ -18,27 +18,22 @@ const RenderTitleWrapper = styled.div`
 `;
 
 interface Props {
-  title?: string;
+  title?: any;
   renderTitle?: () => ReactNode;
   className?: string;
   id?: string;
 }
 
-const WidgetBox: React.SFC<Props> = ({
-  children,
-  title,
-  className,
-  id,
-  renderTitle,
-  ...props
-}) => {
+const WidgetBox: React.SFC<Props> = ({ children, title, className, id, renderTitle, ...props }) => {
   return (
     <Wrapper className={className} {...props} id={id}>
       {renderTitle ? (
         <RenderTitleWrapper>{renderTitle()}</RenderTitleWrapper>
       ) : (
         <TitleWrapper>
-          <Title primary bold>{title}</Title>
+          <Title primary bold>
+            {title}
+          </Title>
         </TitleWrapper>
       )}
       {children}
@@ -47,13 +42,13 @@ const WidgetBox: React.SFC<Props> = ({
 };
 
 (WidgetBox as any).propTypes = {
-  title: PropTypes.string,
+  title: PropTypes.any,
   renderTitle: PropTypes.func
 };
 
 (WidgetBox as any).defaultProps = {
-  title: 'Title',
-  children: 'The content goes here'
+  title: "Title",
+  children: "The content goes here"
 };
 
 export default WidgetBox;
