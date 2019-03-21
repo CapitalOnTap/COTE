@@ -1,14 +1,14 @@
-import * as React from 'react';
-import { ThemeProvider } from 'styled-components';
-import GlobalStyle from '../src/styles/GlobalStyle';
-import { hexToRgbA } from '../src/utils/index';
+import * as React from "react";
+import { ThemeProvider } from "styled-components";
+import GlobalStyle from "../src/styles/GlobalStyle";
+import { hexToRgbA } from "../src/utils/index";
 
 const theme = {
   colorDefault: "#273456",
   colorDefaultLight: "#96A6CF",
   colorShadow: "#000000",
   colorBackground: "#F5F7F8",
-  colorHighlight: "#C0DDEB", 
+  colorHighlight: "#C0DDEB",
   colorPrimary: "#466BAF",
   colorPrimaryEmphasis: "#2C436D",
   colorSecondary: "#F2C14A",
@@ -20,26 +20,27 @@ const theme = {
   colorSuccess: "#27B161",
   colorDarkGrey: "#696D7E",
   colorLightGrey: "#E8EBEE",
+  colorNavigationBackground: "#273456",
   // Elevation theme
   elevation: {
     // What property to use to apply depth
-    property: 'box-shadow',
+    property: "box-shadow",
     // Transition for animating buttons
     transition: {
-      duration: '280ms',
-      effect: 'cubic-bezier(.4, 0, .2, 1)'
+      duration: "280ms",
+      effect: "cubic-bezier(.4, 0, .2, 1)"
     },
     colors: {
-      umbra: hexToRgbA('#000000', 0.2),
-      penumbra: hexToRgbA('#000000', 0.14),
-      ambient: hexToRgbA('#000000', 0.12)
+      umbra: hexToRgbA("#000000", 0.2),
+      penumbra: hexToRgbA("#000000", 0.14),
+      ambient: hexToRgbA("#000000", 0.12)
     }
   }
 };
 
 const styles = {
-  margin: '100px auto',
-  maxWidth: '1024px'
+  margin: "100px auto",
+  maxWidth: "1024px"
 };
 
 const LayoutDecorator = (storyFn: Function) => (

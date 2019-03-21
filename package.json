@@ -1,6 +1,6 @@
 {
   "name": "cot-experience",
-  "version": "0.14.3",
+  "version": "0.14.5",
   "description": "Capital On Tap Experience is an end to end design language to create application's at Capital On Tap.",
   "main": "dist/main.js",
   "module": "dist/main.es.js",
@@ -42,6 +42,7 @@
     "@storybook/react": "^4.0.0",
     "@storybook/storybook-deployer": "^2.2.0",
     "@types/jest": "^23.3.10",
+    "@types/react-dropzone": "4.2.2",
     "@types/react-text-mask": "5.4.1",
     "@types/storybook-addon-jsx": "^5.4.0",
     "@types/storybook__addon-info": "^3.4.2",
