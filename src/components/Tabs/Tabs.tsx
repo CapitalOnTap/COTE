@@ -1,8 +1,8 @@
-import PropTypes from "prop-types";
-import React, { Component } from "react";
-import styled from "styled-components";
-import { colors as defaultColors } from "../../styles/defaults";
-import { Title } from "../atoms/Typography/index";
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
+import styled from 'styled-components';
+import { colors as defaultColors } from '../../styles/defaults';
+import { Title } from '../atoms/Typography/index';
 
 const TabsWrapper = styled.div`
   position: relative;
@@ -18,7 +18,7 @@ const TabMarker = styled.div<{ width: number; position: number }>`
   top: 30px;
 `;
 
-const TabTitle = styled(Title.withComponent("a"))<{ isActive?: boolean }>`
+const TabTitle = styled(Title.withComponent('a'))<{ isActive?: boolean }>`
   cursor: pointer;
   color: ${props =>
     props.isActive ? defaultColors.default : defaultColors.darkGrey};
@@ -37,13 +37,13 @@ const TabsHeaders = styled.div`
 `;
 
 const TabsContainer = styled.div<{ margin?: string }>`
-  margin: ${props => props.margin || "1.4rem"};
+  margin: ${props => props.margin || '1.4rem'};
   display: flex;
   overflow: hidden;
 `;
 
 interface TabProps {
-  title?: string;
+  title?: React.ReactNode;
 }
 
 interface Props {
@@ -61,7 +61,7 @@ class Tabs extends Component<Props, State> {
   static getDerivedStateFromProps(nextProps: Props, state: State) {
     const { controlledActiveIndex } = nextProps;
     if (
-      typeof controlledActiveIndex == "number" &&
+      typeof controlledActiveIndex == 'number' &&
       controlledActiveIndex !== state.activeIndex
     ) {
       return { activeIndex: controlledActiveIndex };
