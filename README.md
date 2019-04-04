@@ -1,6 +1,6 @@
 # COTE
 
-Capital On Tap Experience is an end to end design language to create application's at Capital On Tap.
+Capital On Tap Experience is an end to end design language to create applications at Capital On Tap.
 
 ## Icons
 
