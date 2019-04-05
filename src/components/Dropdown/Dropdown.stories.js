@@ -1,7 +1,7 @@
 import { storiesOf } from "@storybook/react";
 import React from "react";
-import Dropdown from "./Dropdown";
 import Icon from "../atoms/Icon/Icon";
+import Dropdown from "./Dropdown";
 
 const options = [
   { title: "Option 1", value: 1 },
@@ -117,9 +117,14 @@ const test = [
 
 storiesOf("Dropdown", module)
   .add("Normal", () => <Dropdown options={test} />)
+  .add("Searchable", () => <Dropdown options={test} searchable={true} />)
   .add("Controlled", () => <Dropdown options={test} selectedOption={test[0]} />)
   .add("Error", () => (
-    <Dropdown error="Show this error message" options={options} onBlur={e => console.log(e)} />
+    <Dropdown
+      error="Show this error message"
+      options={options}
+      onBlur={e => console.log(e)}
+    />
   ))
   .add("Full width", () => <Dropdown options={options} full />)
   .add("With label", () => <Dropdown label="My dropdown" options={options} />)
