@@ -1,5 +1,5 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
 const TabWrapper = styled.div<{ position: number }>`
   width: 100%;
@@ -10,10 +10,10 @@ const TabWrapper = styled.div<{ position: number }>`
 
 interface Props {
   position: number;
-  title: string;
+  title: React.ReactNode;
 }
 
-const Tab: React.SFC<Props> = ({ children, ...props }) => {
+const Tab: React.SFC<Props> = ({ children, title, ...props }) => {
   return <TabWrapper {...props}>{children}</TabWrapper>;
 };
 
