@@ -51,7 +51,7 @@ const ListItem = styled.li<{ selected?: boolean }>`
 
 const Logo = styled.img`
   width: 64px;
-  height: 100%;
+  height: 64px;
   margin-top: 2rem;
   margin-bottom: 3rem;
 `;
