@@ -1,0 +1,7 @@
+{
+  "editor.formatOnSave": true,
+  "typescript.preferences.importModuleSpecifier": "relative",
+  "javascript.preferences.importModuleSpecifier": "relative",
+  "html.format.wrapLineLength": 100,
+  "prettier.eslintIntegration": true
+}
