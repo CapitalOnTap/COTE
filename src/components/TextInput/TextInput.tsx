@@ -20,7 +20,8 @@ export const StyledInput = styled.input<InputProps>`
   }
   margin-bottom: ${props => (props.invalid ? "8px" : null)};
   border: ${props => {
-    if (props.invalid && props.theme.colorDanger) return `1px solid ${props.theme.colorDanger}`;
+    if (props.invalid && props.theme.colorDanger)
+      return `1px solid ${props.theme.colorDanger}`;
 
     if (props.invalid) return "solid 1px red";
 
@@ -39,7 +40,8 @@ const Input = styled(MaskedInput)<{ invalid?: boolean; full?: boolean }>`
   }
   margin-bottom: ${props => (props.invalid ? "8px" : null)};
   border: ${props => {
-    if (props.invalid && props.theme.colorDanger) return `1px solid ${props.theme.colorDanger}`;
+    if (props.invalid && props.theme.colorDanger)
+      return `1px solid ${props.theme.colorDanger}`;
 
     if (props.invalid) return "solid 1px red";
 
@@ -103,13 +105,20 @@ const TextInput: React.SFC<Props> = ({
           justifyContent: "space-between"
         }}
       >
-        {labelText && <Label required={required} text={labelText} htmlFor={name} />}
+        {labelText && (
+          <Label required={required} text={labelText} htmlFor={name} />
+        )}
         {tooltip && (
           <Tooltip
             arrow
             inertia
             theme="light"
-            html={<TooltipContent title={tooltip.title} description={tooltip.description} />}
+            html={
+              <TooltipContent
+                title={tooltip.title}
+                description={tooltip.description}
+              />
+            }
           >
             <TooltipIcon name="info" />
           </Tooltip>

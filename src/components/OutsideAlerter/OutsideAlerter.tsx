@@ -2,8 +2,8 @@
  * Component that alerts if you click outside of it
  */
 
-import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import PropTypes from "prop-types";
+import React, { Component } from "react";
 
 interface Props {
   handleClickOutsideElement: () => void;
@@ -20,11 +20,11 @@ class OutsideAlerter extends Component<Props> {
   }
 
   componentDidMount() {
-    document.addEventListener('mousedown', this.handleClickOutside);
+    document.addEventListener("mousedown", this.handleClickOutside);
   }
 
   componentWillUnmount() {
-    document.removeEventListener('mousedown', this.handleClickOutside);
+    document.removeEventListener("mousedown", this.handleClickOutside);
   }
 
   /**
