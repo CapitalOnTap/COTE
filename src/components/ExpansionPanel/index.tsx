@@ -13,6 +13,10 @@ const closed = css`
   max-height: 0;
 `;
 
+const highlight = css`
+  background: ${props => props.theme.colorHighlight};
+`;
+
 const primary = css`
   background: ${props => hexToRgbA(props.theme.colorPrimary, 0.1)};
 `;
@@ -21,8 +25,13 @@ const danger = css`
   background: ${props => hexToRgbA(props.theme.colorDanger, 0.1)};
 `;
 
-const Wrapper = styled.div<{ primary?: string; danger?: string }>`
+const Wrapper = styled.div<{
+  primary?: string;
+  danger?: string;
+  highlight?: string;
+}>`
   padding: 0;
+  ${props => props.highlight && highlight}
   ${props => props.primary && primary}
   ${props => props.danger && danger}
 `;
@@ -82,8 +91,7 @@ class ExpansionPanel extends PureComponent<Props, State> {
     isOpen: false
   };
 
-  toggleOpen = () =>
-    this.setState(prevState => ({ isOpen: !prevState.isOpen }));
+  toggleOpen = () => this.setState(prevState => ({ isOpen: !prevState.isOpen }));
 
   render() {
     const { title, icon, children } = this.props;
@@ -109,6 +117,7 @@ class ExpansionPanel extends PureComponent<Props, State> {
   title: PropTypes.string,
   /** Icon name per material design icons */
   icon: PropTypes.string,
+  highlight: PropTypes.bool,
   primary: PropTypes.bool,
   danger: PropTypes.bool
 };
@@ -116,6 +125,7 @@ class ExpansionPanel extends PureComponent<Props, State> {
 (ExpansionPanel as any).defaultProps = {
   title: 'Expansion Panel 1',
   icon: 'keyboard_arrow_down',
+  highlight: false,
   primary: false,
   danger: false
 };
