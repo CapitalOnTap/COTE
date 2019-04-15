@@ -38,21 +38,23 @@ interface Props {
   captionBackgroundColor: string;
   icon: string;
   caption: string;
+  alt?: string;
 }
 
 const CaptionedImageBox: React.SFC<Props> = ({
   imageSrc,
   captionBackgroundColor,
   icon,
-  caption
+  caption,
+  alt
 }) => {
   return (
     <Wrapper>
       <ImageBox>
-        <img src={imageSrc} />
+        <img src={imageSrc} alt={alt} />
       </ImageBox>
       <CaptionBox backgroundColor={captionBackgroundColor}>
-        <Icon name={icon} circle reverse />
+        <Icon name={icon} reverse />
         <StyledHeading3>{caption}</StyledHeading3>
       </CaptionBox>
     </Wrapper>
@@ -63,7 +65,8 @@ const CaptionedImageBox: React.SFC<Props> = ({
   imageSrc: PropTypes.string,
   captionBackgroundColor: PropTypes.string,
   icon: PropTypes.string,
-  caption: PropTypes.string
+  caption: PropTypes.string,
+  alt: PropTypes.string
 };
 
 CaptionedImageBox.defaultProps = {
