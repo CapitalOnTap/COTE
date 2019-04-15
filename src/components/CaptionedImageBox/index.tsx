@@ -73,7 +73,7 @@ CaptionedImageBox.defaultProps = {
   imageSrc: 'http://via.placeholder.com/320x176',
   captionBackgroundColor: '#27b161',
   icon: 'check_circle',
-  caption: 'CORRECT',
+  caption: 'CORRECT'
 };
 
 export default CaptionedImageBox;
