@@ -1,5 +1,8 @@
 import { Box, Flex } from '@rebass/grid';
-import { Button, Label, ResultsList, TextInput } from '../../';
+import Button from '../atoms/Button/Button';
+import Label from '../atoms/Typography/Label';
+import ResultsList from '../ResultsList/ResultsList';
+import TextInput from '../TextInput/TextInput';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import styled from 'styled-components';
