@@ -134,13 +134,6 @@ class AddressSelector extends Component<Props, State> {
     return false;
   };
 
-  anyResult = array => {
-    if (array === null || array === [] || (array.length !== undefined && array.length === 0)) {
-      return false;
-    }
-    return true;
-  };
-
   render() {
     const { showAddressFields } = this.state;
     const {
@@ -167,8 +160,6 @@ class AddressSelector extends Component<Props, State> {
     } = this.props;
 
     if (!showAddressFields && !selectedAddress) {
-      const anyAddress = this.anyResult(results);
-
       return (
         <AddressRow flexWrap="wrap" style={{ postion: 'relative' }} id={id}>
           <Box width={1}>
@@ -196,7 +187,7 @@ class AddressSelector extends Component<Props, State> {
                   : null
               }
               onKeyPress={e => {
-                if (e.key === 'Enter' && !searching && postCodeSearch && !anyAddress) {
+                if (e.key === 'Enter' && !searching && postCodeSearch) {
                   this.handleSearch(e, postCodeSearch, flatNumberFilter);
                 }
               }}
@@ -207,7 +198,7 @@ class AddressSelector extends Component<Props, State> {
               id={searchButtonId}
               full
               solid
-              disabled={!postCodeSearch || searching || anyAddress}
+              disabled={!postCodeSearch || searching}
               primary
               loadingText="Searching..."
               loading={searching}
