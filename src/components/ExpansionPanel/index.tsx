@@ -41,7 +41,7 @@ const Header = styled.header<{
   tooltip?: object;
 }>`
   display: flex;
-  justify-content: ${props => props.tooltip ? 'flex-start' : 'space-between' };
+  justify-content: ${props => (props.tooltip ? 'flex-start' : 'space-between')};
   border-bottom: 1px solid ${defaultColors.lightGrey};
   ::after {
     border-bottom: 1px solid ${defaultColors.lightGrey};
