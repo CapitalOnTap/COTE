@@ -104,7 +104,7 @@ class ExpansionPanel extends PureComponent<Props, State> {
 
     return (
       <Wrapper {...this.props}>
-        <Header onClick={this.toggleOpen} {...this.props}>
+        <Header onClick={this.toggleOpen} tooltip={tooltip}>
           <StyledTitle bold>{title}</StyledTitle>
           {tooltip && (
             <Tooltip 

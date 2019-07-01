@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import { Flex } from '@rebass/grid';
 import { Tooltip as CotTooltip }  from 'react-tippy';
 import TooltipContent from '../TooltipContent/index';
 import Icon from '../atoms/Icon/Icon';
-import styled from 'styled-components';
-import { Flex } from '@rebass/grid';
 
 const TooltipIcon = styled(Icon)`  
   cursor: pointer;
