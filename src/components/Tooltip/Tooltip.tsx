@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Flex } from '@rebass/grid';
 import { Tooltip as CotTooltip }  from 'react-tippy';
+import "react-tippy/dist/tippy.css";
 import TooltipContent from '../TooltipContent/index';
 import Icon from '../atoms/Icon/Icon';
 
