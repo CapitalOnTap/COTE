@@ -5,6 +5,7 @@ import { colors as defaultColors } from '../../styles/defaults';
 import { hexToRgbA } from '../../utils/index';
 import Icon from '../atoms/Icon/Icon';
 import { Title } from '../atoms/Typography/index';
+import Tooltip from '../Tooltip/Tooltip';
 
 const rotate = css`
   transform: rotate(180deg);
@@ -36,9 +37,11 @@ const Wrapper = styled.div<{
   ${props => props.danger && danger}
 `;
 
-const Header = styled.header`
+const Header = styled.header<{
+  tooltip?: object;
+}>`
   display: flex;
-  justify-content: space-between;
+  justify-content: ${props => props.tooltip ? 'flex-start' : 'space-between' };
   border-bottom: 1px solid ${defaultColors.lightGrey};
   ::after {
     border-bottom: 1px solid ${defaultColors.lightGrey};
@@ -69,6 +72,7 @@ const Content = styled.div<{ isOpen?: boolean }>`
 
 const IconWrapper = styled.div`
   width: 24px;
+  margin-left: auto;
 `;
 
 const StyledTitle = styled(Title)`
@@ -80,6 +84,7 @@ const StyledTitle = styled(Title)`
 interface Props {
   title?: string;
   icon?: string;
+  tooltip?: { title: string; description: string };
 }
 
 interface State {
@@ -94,18 +99,25 @@ class ExpansionPanel extends PureComponent<Props, State> {
   toggleOpen = () => this.setState(prevState => ({ isOpen: !prevState.isOpen }));
 
   render() {
-    const { title, icon, children } = this.props;
+    const { title, icon, tooltip, children } = this.props;
     const { isOpen } = this.state;
 
     return (
       <Wrapper {...this.props}>
-        <Header onClick={this.toggleOpen}>
+        <Header onClick={this.toggleOpen} {...this.props}>
           <StyledTitle bold>{title}</StyledTitle>
+          {tooltip && (
+            <Tooltip 
+              title={tooltip.title} 
+              description={tooltip.description}
+              withoutLabel
+            />
+          )}
           {icon && (
             <IconWrapper>
               <ToggleIcon isOpen={isOpen} name={icon} />
             </IconWrapper>
-          )}
+          )}          
         </Header>
         <Content isOpen={isOpen}>{children}</Content>
       </Wrapper>
@@ -119,7 +131,8 @@ class ExpansionPanel extends PureComponent<Props, State> {
   icon: PropTypes.string,
   highlight: PropTypes.bool,
   primary: PropTypes.bool,
-  danger: PropTypes.bool
+  danger: PropTypes.bool,
+  tooltip: PropTypes.object
 };
 
 (ExpansionPanel as any).defaultProps = {
@@ -127,7 +140,7 @@ class ExpansionPanel extends PureComponent<Props, State> {
   icon: 'keyboard_arrow_down',
   highlight: false,
   primary: false,
-  danger: false
+  danger: false  
 };
 
 export default ExpansionPanel;
