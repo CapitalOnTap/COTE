@@ -1,10 +1,6 @@
 {
   "name": "cot-experience",
-<<<<<<< HEAD
-  "version": "1.0.1",
-=======
   "version": "0.14.18",
->>>>>>> b6e880a5ce1bbc5a7e39236f9bcfa7f26aa59645
   "description": "Capital On Tap Experience is an end to end design language to create applications at Capital On Tap.",
   "main": "dist/main.js",
   "module": "dist/main.es.js",
