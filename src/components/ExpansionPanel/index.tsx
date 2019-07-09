@@ -85,7 +85,6 @@ interface Props {
   title?: string;
   icon?: string;
   tooltip?: { title: string; description: string };
-  withoutTitle: Boolean;
 }
 
 interface State {
@@ -100,14 +99,11 @@ class ExpansionPanel extends PureComponent<Props, State> {
   toggleOpen = () => this.setState(prevState => ({ isOpen: !prevState.isOpen }));
 
   render() {
-    const { title, icon, tooltip, withoutTitle, children } = this.props;
+    const { title, icon, tooltip, children, ...props } = this.props;
     const { isOpen } = this.state;
-    let { title: noTitle, ...mainProps } = this.props;
-    if (!withoutTitle) {
-      mainProps = this.props;
-    }
+
     return (
-      <Wrapper {...mainProps}>
+      <Wrapper {...props}>
         <Header onClick={this.toggleOpen} tooltip={tooltip}>
           <StyledTitle bold>{title}</StyledTitle>
           {tooltip && (
@@ -132,8 +128,7 @@ class ExpansionPanel extends PureComponent<Props, State> {
   highlight: PropTypes.bool,
   primary: PropTypes.bool,
   danger: PropTypes.bool,
-  tooltip: PropTypes.object,
-  withoutTitle: PropTypes.bool
+  tooltip: PropTypes.object
 };
 
 (ExpansionPanel as any).defaultProps = {
