@@ -60,6 +60,7 @@ interface Props extends WrapperProps {
   label?: string;
   lastOption?: Option;
   searchable?: boolean;
+  isControllable?: boolean;
 }
 
 interface State {
@@ -96,7 +97,7 @@ class Dropdown extends Component<Props, State> {
   };
 
   render() {
-    const { isOpen, selectedOption } = this.state;
+    const { isOpen } = this.state;
     const {
       options,
       title,
@@ -107,8 +108,12 @@ class Dropdown extends Component<Props, State> {
       id,
       disabled,
       searchable,
+      isControllable,
       ...props
     } = this.props;
+
+    /* Check if this is controlled by the parent, if yes, use the one from the parent */
+    const selectedOption = isControllable ? this.props.selectedOption : this.state.selectedOption;
 
     return (
       <OutsideAlerter handleClickOutsideElement={this.handleClickOutsideDropdown} {...props}>
@@ -163,7 +168,8 @@ class Dropdown extends Component<Props, State> {
     title: PropTypes.any.isRequired,
     value: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool])
   }),
-  disabled: PropTypes.bool
+  disabled: PropTypes.bool,
+  isControllable: PropTypes.bool
 };
 
 (Dropdown as any).defaultProps = {
@@ -175,7 +181,8 @@ class Dropdown extends Component<Props, State> {
   lastOption: null,
   selectedOption: null,
   disabled: false,
-  searchable: false
+  searchable: false,
+  isControllable: false
 };
 
 export default Dropdown;
