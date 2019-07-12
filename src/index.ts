@@ -50,3 +50,4 @@ export { default as Widget } from './components/Widget/Widget';
 export { default as WidgetBox } from './components/WidgetBox/WidgetBox';
 export { theme as defaultTheme } from './styles/defaults';
 export { default as GlobalStyle } from './styles/GlobalStyle';
+export { default as Tooltip } from './components/Tooltip/Tooltip';
