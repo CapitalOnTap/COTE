@@ -149,9 +149,10 @@ storiesOf('ExpansionPanel', module)
     </ScrollableContainer>
   ))
   .add('With Tooltip', () => (
-    <ExpansionPanel tooltip={{
-      title: 'Tooltip title', 
-      description: 'Tooltip description'
+    <ExpansionPanel
+      tooltip={{
+        title: 'Tooltip title',
+        description: 'Tooltip description'
       }}
     >
       <div style={{ padding: '1rem' }}>

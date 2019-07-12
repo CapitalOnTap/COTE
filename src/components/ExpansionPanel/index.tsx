@@ -99,25 +99,21 @@ class ExpansionPanel extends PureComponent<Props, State> {
   toggleOpen = () => this.setState(prevState => ({ isOpen: !prevState.isOpen }));
 
   render() {
-    const { title, icon, tooltip, children } = this.props;
+    const { title, icon, tooltip, children, ...props } = this.props;
     const { isOpen } = this.state;
 
     return (
-      <Wrapper {...this.props}>
+      <Wrapper {...props}>
         <Header onClick={this.toggleOpen} tooltip={tooltip}>
           <StyledTitle bold>{title}</StyledTitle>
           {tooltip && (
-            <Tooltip 
-              title={tooltip.title} 
-              description={tooltip.description}
-              withoutLabel
-            />
+            <Tooltip title={tooltip.title} description={tooltip.description} withoutLabel />
           )}
           {icon && (
             <IconWrapper>
               <ToggleIcon isOpen={isOpen} name={icon} />
             </IconWrapper>
-          )}          
+          )}
         </Header>
         <Content isOpen={isOpen}>{children}</Content>
       </Wrapper>
@@ -140,7 +136,7 @@ class ExpansionPanel extends PureComponent<Props, State> {
   icon: 'keyboard_arrow_down',
   highlight: false,
   primary: false,
-  danger: false  
+  danger: false
 };
 
 export default ExpansionPanel;
