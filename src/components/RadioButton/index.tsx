@@ -20,17 +20,16 @@ const Container = styled.label<{ checked?: boolean; inline?: boolean; disabled?:
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  border: ${props => (props.inline ? '1px solid #273456' : 'none')};
+  border: ${props => (props.inline ? `1px solid ${props.theme.colorDefault}` : 'none')};
   border-radius: ${props => (props.inline ? '4px' : 'none')};
   font-weight: ${props => (props.checked ? '600' : '100')};
   min-width: 108px;
 
   &[disabled] {
-    background-color: rgb(235, 235, 228);
+    background-color: ${defaultColors.disabledColor};
     cursor: default;
-    color: rgb(84, 84, 84);
     span {
-      background-color: rgb(235, 235, 228);
+      background-color: ${defaultColors.disabledColor};
     }
   }
 
