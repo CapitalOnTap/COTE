@@ -110,3 +110,4 @@ class AddressSelectorWrapper extends React.Component {
 }
 
 storiesOf('Address Selector', module).add('Default', () => <AddressSelectorWrapper />);
+storiesOf('Address Selector', module).add('Disabled', () => <AddressSelector disabled />);
