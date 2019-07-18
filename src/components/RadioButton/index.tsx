@@ -26,10 +26,10 @@ const Container = styled.label<{ checked?: boolean; inline?: boolean; disabled?:
   min-width: 108px;
 
   &[disabled] {
-    background-color: ${defaultColors.disabledColor};
+    background-color: ${defaultColors.disabledBackgroundColor};
     cursor: default;
     span {
-      background-color: ${defaultColors.disabledColor};
+      background: transparent;
     }
   }
 

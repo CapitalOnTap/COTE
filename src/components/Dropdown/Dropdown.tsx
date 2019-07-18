@@ -39,6 +39,10 @@ const Wrapper = styled.div<WrapperProps>`
   cursor: ${props => (props.disabled ? 'default' : 'pointer')};
   user-select: none;
   outline: none;
+  &[disabled] {
+    background-color: ${defaultColors.disabledBackgroundColor};
+    color: ${defaultColors.disabledColor};
+  }
 `;
 
 const Title = styled.span``;

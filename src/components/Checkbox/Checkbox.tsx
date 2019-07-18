@@ -15,7 +15,7 @@ const Wrapper = styled.div`
     opacity: 1;
   }
   & input:disabled + span {
-    background-color: ${defaultColors.disabledColor};
+    background-color: ${defaultColors.disabledBackgroundColor};
   }
 `;
 

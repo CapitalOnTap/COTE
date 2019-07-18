@@ -17,7 +17,8 @@ export const colors: ThemeColors = {
   lightGrey: '#f5f7f8',
   highlight: '#C0DDEB',
   navigationBackground: '#273456',
-  disabledColor: '#ebebe4'
+  disabledBackgroundColor: 'rgba(0, 0, 0, .12)',
+  disabledColor: 'rgba(0, 0, 0, 0.26)'
 };
 
 export const fontWeights: ThemeFontWeights = {

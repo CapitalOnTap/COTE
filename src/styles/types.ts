@@ -14,6 +14,7 @@ export interface ThemeColors {
   lightGrey: string;
   highlight: string;
   navigationBackground: string;
+  disabledBackgroundColor: string;
   disabledColor: string;
 }
 
