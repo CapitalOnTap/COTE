@@ -23,3 +23,9 @@ storiesOf('RadioButton', module).add('Inline', () => (
     <RadioButton inline value={2} label="No" />
   </InlineStyles>
 ));
+storiesOf('RadioButton', module).add('Disabled', () => (
+  <InlineStyles>
+    <RadioButton inline disabled value={1} label="Yes" checked />
+    <RadioButton inline disabled value={2} label="No" />
+  </InlineStyles>
+));

@@ -14,6 +14,9 @@ const Wrapper = styled.div`
   & input[type='checkbox']:checked + span > i {
     opacity: 1;
   }
+  & input:disabled + span {
+    background-color: ${props => props.theme.colorLightGrey};
+  }
 `;
 
 const Box = styled.span<{ primary?: boolean; invalid?: boolean }>`
