@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { colors as defaultColors, theme } from '../../styles/defaults';
+import { colors as defaultColors } from '../../styles/defaults';
 import Icon from '../atoms/Icon/Icon';
 import { Caption, Label } from '../atoms/Typography/index';
 import OutsideAlerter from '../OutsideAlerter/OutsideAlerter';
@@ -40,7 +40,7 @@ const Wrapper = styled.div<WrapperProps>`
   user-select: none;
   outline: none;
   &[disabled] {
-    background-color: ${theme.colorLightGrey};
+    background-color: ${props => props.theme.colorLightGrey};
     color: rgba(0, 0, 0, 0.26);
   }
 `;
