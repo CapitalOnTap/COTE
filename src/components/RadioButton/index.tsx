@@ -13,7 +13,7 @@ const Container = styled.label<{ checked?: boolean; inline?: boolean; disabled?:
   display: inline-block;
   position: relative;
   padding: ${props => (props.inline ? '9px 45px 9px 45px' : '0 0 0 35px')};
-  margin: ${props => (props.inline ? '0 1rem 1rem 0' : '0 0 1rem 0')};
+  margin: ${props => (props.inline ? '0 8px 0 0' : '0 0 1rem 0')};
   color: ${props => (props.checked ? 'initial' : defaultColors.darkGrey)};
   cursor: pointer;
   -webkit-user-select: none;
@@ -26,6 +26,7 @@ const Container = styled.label<{ checked?: boolean; inline?: boolean; disabled?:
   min-width: 108px;
 
   &[disabled] {
+    pointer-events: none;
     background-color: ${props => props.theme.colorLightGrey};
     cursor: default;
     span {

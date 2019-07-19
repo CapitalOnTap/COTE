@@ -164,7 +164,7 @@ export const StyledButton = styled.button<StyledButtonProps>`
   box-sizing: border-box;
   -webkit-appearance: none;
   transition: all 250ms ease;
-  background-color: transparent;
+  background-color: ${props => (props.disabled ? props.theme.colorLightGrey : 'transparent')};
 
   &:hover {
     cursor: pointer;
