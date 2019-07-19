@@ -89,7 +89,7 @@ const solid = css<{
   ${props => {
     if (props.disabled) {
       return `
-  background-color: rgba(0, 0, 0, .12);
+  background-color: ${props => props.theme.colorLightGrey};
   pointer-events: none;
 `;
     }

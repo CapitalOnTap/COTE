@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { colors as defaultColors } from '../../styles/defaults';
+import { colors as defaultColors, theme } from '../../styles/defaults';
 
 const Wrapper = styled.div`
   display: block;
@@ -15,7 +15,7 @@ const Wrapper = styled.div`
     opacity: 1;
   }
   & input:disabled + span {
-    background-color: ${defaultColors.disabledBackgroundColor};
+    background-color: ${theme.colorLightGrey};
   }
 `;
 

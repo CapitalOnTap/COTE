@@ -35,7 +35,7 @@ export const StyledInput = styled.input<InputProps>`
 
 const Input = styled(MaskedInput)<{ invalid?: boolean; full?: boolean; disabled?: boolean }>`
   &::placeholder {
-    color: ${props => (props.disabled ? 'rgba(0, 0, 0, 0.26)' : 'lightgrey')};
+    color: lightgrey;
   }
   margin-bottom: ${props => (props.invalid ? '8px' : null)};
   border: ${props => {
@@ -51,7 +51,7 @@ const Input = styled(MaskedInput)<{ invalid?: boolean; full?: boolean; disabled?
   width: ${props => (props.full ? '100%' : null)};
   height: 36px;
   &:disabled {
-    background-color: ${defaultColors.disabledBackgroundColor};
+    background-color: ${props => props.theme.colorLightGrey};
   }
 `;
 

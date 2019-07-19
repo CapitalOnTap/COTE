@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
-import { colors as defaultColors } from '../../styles/defaults';
+import { colors as defaultColors, theme } from '../../styles/defaults';
 
 export const Input = styled.input`
   position: absolute;
@@ -26,7 +26,7 @@ const Container = styled.label<{ checked?: boolean; inline?: boolean; disabled?:
   min-width: 108px;
 
   &[disabled] {
-    background-color: ${defaultColors.disabledBackgroundColor};
+    background-color: ${theme.colorLightGrey};
     cursor: default;
     span {
       background: transparent;
