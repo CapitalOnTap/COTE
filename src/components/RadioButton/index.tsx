@@ -9,10 +9,10 @@ export const Input = styled.input`
   cursor: pointer;
 `;
 
-const Container = styled.label<{ checked?: boolean; inline?: boolean }>`
+const Container = styled.label<{ checked?: boolean; inline?: boolean; disabled?: boolean }>`
   display: inline-block;
   position: relative;
-  padding: ${props => (props.inline ? '9px 30px 9px 45px' : '0 0 0 35px')};
+  padding: ${props => (props.inline ? '9px 45px 9px 45px' : '0 0 0 35px')};
   margin: ${props => (props.inline ? '0 1rem 1rem 0' : '0 0 1rem 0')};
   color: ${props => (props.checked ? 'initial' : defaultColors.darkGrey)};
   cursor: pointer;
@@ -20,10 +20,18 @@ const Container = styled.label<{ checked?: boolean; inline?: boolean }>`
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  border: ${props => (props.inline ? '1px solid' : 'none')};
+  border: ${props => (props.inline ? `1px solid ${props.theme.colorDefault}` : 'none')};
   border-radius: ${props => (props.inline ? '4px' : 'none')};
   font-weight: ${props => (props.checked ? '600' : '100')};
   min-width: 108px;
+
+  &[disabled] {
+    background-color: ${props => props.theme.colorLightGrey};
+    cursor: default;
+    span {
+      background: transparent;
+    }
+  }
 
   input:checked + span:after {
     display: block;
@@ -75,6 +83,7 @@ interface Props {
   onChange?: (value: any) => void;
   value?: any;
   inline?: boolean;
+  disabled?: boolean;
 }
 
 const RadioButton: React.SFC<Props> = ({
@@ -84,17 +93,19 @@ const RadioButton: React.SFC<Props> = ({
   onChange,
   value,
   inline,
+  disabled,
   ...props
 }) => {
   return (
     <Wrapper inline={inline}>
-      <Container {...props} checked={checked} inline={inline}>
+      <Container {...props} checked={checked} inline={inline} disabled={disabled}>
         {label}
         <Input
           type="radio"
           name={name}
           checked={checked}
           value={value}
+          disabled={disabled}
           onChange={e => onChange && onChange(e.target.value)}
         />
         <Checkmark inline={inline} />
@@ -111,7 +122,8 @@ const RadioButton: React.SFC<Props> = ({
   onChange: PropTypes.func,
   /** Value of radio button */
   value: PropTypes.any,
-  inline: PropTypes.bool
+  inline: PropTypes.bool,
+  disabled: PropTypes.bool
 };
 
 RadioButton.defaultProps = {
