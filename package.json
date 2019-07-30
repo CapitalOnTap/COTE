@@ -1,12 +1,12 @@
 {
   "name": "cot-experience",
-  "version": "0.14.25",
+  "version": "0.14.26",
   "description": "Capital On Tap Experience is an end to end design language to create applications at Capital On Tap.",
   "main": "dist/main.js",
   "module": "dist/main.es.js",
   "jsnext:main": "dist/main.es.js",
   "repository": "https://github.com/CapitalOnTap/COTE",
-  "author": "Ricardo Abreu <ricardo.abreu@capitalontap.com>",
+  "author": "Capital On Tap",
   "license": "MIT",
   "types": "dist/index.d.ts",
   "files": [
