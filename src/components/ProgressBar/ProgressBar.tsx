@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { colors as defaultColors } from '../../styles/defaults';
+import { Title } from '../atoms/Typography/Heading';
 
 const Wrapper = styled.div`
   display: flex;
@@ -32,10 +33,14 @@ const TextWrapper = styled.div`
   width: 100%;
 `;
 
+const ActiveStyled = styled(Title)`
+  font-weight: bold;
+`;
+
 interface Props {
   progress: number;
   height: number;
-  data: { title: string; max: number | string; min: number; current: number | string };
+  data: { title: string; max: number | string; min: number | string; current: number | string };
 }
 
 const ProgressBar: React.SFC<Props> = props => {
@@ -45,7 +50,7 @@ const ProgressBar: React.SFC<Props> = props => {
     <Wrapper {...props}>
       <TextWrapper>
         <span>{data.title}</span>
-        <span>{data.current}</span>
+        <ActiveStyled>{data.current}</ActiveStyled>
       </TextWrapper>
       <BarWrapper height={height}>
         <Progress value={progress} />
