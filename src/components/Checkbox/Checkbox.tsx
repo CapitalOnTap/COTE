@@ -19,7 +19,7 @@ const Wrapper = styled.div`
   }
 `;
 
-const Box = styled.span<{ primary?: boolean; invalid?: boolean }>`
+const Box = styled.span<{ primary?: boolean; secondary?: boolean; invalid?: boolean }>`
   color: ${props => {
     if (props.primary) return '#fff';
     return `1px solid ${defaultColors.default}`;
@@ -27,7 +27,7 @@ const Box = styled.span<{ primary?: boolean; invalid?: boolean }>`
   position: relative;
   display: inline-block;
   border: ${props => {
-    if (props.primary && !props.invalid) return null;
+    if ((props.primary || props.secondary) && !props.invalid) return null;
 
     if (props.invalid && props.theme) {
       return `1px solid ${props.theme.colorDanger}`;
@@ -45,8 +45,8 @@ const Box = styled.span<{ primary?: boolean; invalid?: boolean }>`
   float: left;
   margin-right: 0.5em;
   background-color: ${props => {
-    if (props.theme && props.primary) return props.theme.colorPrimary;
-    if (props.primary) return defaultColors.primary;
+    if (props.primary) return props.theme ? props.theme.colorPrimary : defaultColors.primary;
+    if (props.secondary) return props.theme ? props.theme.colorSecondary : defaultColors.secondary;
     return '#fff';
   }};
   transition: background-color 0.3s ease-in;
@@ -81,6 +81,7 @@ interface Props {
   label: string;
   name: string;
   primary?: boolean;
+  secondary?: boolean;
   id?: string;
   invalid?: boolean;
 }
@@ -103,7 +104,7 @@ class Checkbox extends Component<Props, State> {
   };
 
   render() {
-    const { label, name, primary, id, invalid } = this.props;
+    const { label, name, primary, secondary, id, invalid } = this.props;
     const { checked } = this.state;
     return (
       <Wrapper {...this.props} id={id}>
@@ -117,7 +118,7 @@ class Checkbox extends Component<Props, State> {
             value={checked ? 1 : 0}
             {...this.props}
           />
-          <Box primary={primary} invalid={invalid}>
+          <Box primary={primary} secondary={secondary} invalid={invalid}>
             <CheckMark className="material-icons">check</CheckMark>
           </Box>
           <label>{label}</label>
@@ -131,6 +132,7 @@ class Checkbox extends Component<Props, State> {
   label: PropTypes.string,
   handleClicked: PropTypes.func,
   primary: PropTypes.bool,
+  secondary: PropTypes.bool,
   invalid: PropTypes.bool
 };
 
@@ -138,6 +140,7 @@ class Checkbox extends Component<Props, State> {
   label: '',
   handleClicked: val => console.log(val),
   primary: false,
+  secondary: false,
   invalid: false
 };
 
