@@ -26,8 +26,7 @@ const ArrowRight = styled(Icon)<React.HTMLAttributes<{}>>`
 const StyledTitle = styled(Title)<{ primary?: boolean }>`
   font-weight: bold;
   margin-bottom: 8px;
-  color: ${props =>
-    props.theme && props.primary ? props.theme.colorPrimary : '#27b161'};
+  color: ${props => (props.theme && props.primary ? props.theme.colorPrimary : '#27b161')};
   transition: opacity 1s ease-in;
 `;
 
@@ -35,10 +34,8 @@ const Circle = styled.div<{ selected?: boolean }>`
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background-color: ${props =>
-    props.theme && props.selected ? props.theme.colorPrimary : null};
-  border: 1px solid
-    ${props => (props.theme ? props.theme.colorPrimary : '#27b161')};
+  background-color: ${props => (props.theme && props.selected ? props.theme.colorPrimary : null)};
+  border: 1px solid ${props => (props.theme ? props.theme.colorPrimary : '#27b161')};
   margin-right: 16px;
 `;
 
@@ -94,10 +91,7 @@ class HighlightsBarSlider extends Component<Props, State> {
           })}
 
           {this.state.currentOption > 0 && (
-            <ArrowLeft
-              name="keyboard_arrow_left"
-              onClick={this.handlePrevious}
-            />
+            <ArrowLeft name="keyboard_arrow_left" onClick={this.handlePrevious} />
           )}
 
           {this.state.currentOption + 1 < items.length && (
