@@ -49,3 +49,16 @@ storiesOf('Navigation', module).add('Full Width', () => (
     />
   </div>
 ));
+
+storiesOf('Navigation', module).add('Href for Logo', () => (
+  <div style={{ backgroundColor: '#f3f3f3', height: '200px' }}>
+    <Navigation
+      logoHref="https://google.com"
+      items={[
+        {
+          title: 'Hello!'
+        }
+      ]}
+    />
+  </div>
+));
