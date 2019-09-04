@@ -7,7 +7,9 @@ import { isColorDark } from '../../utils/index';
 
 const NavButton = styled(StyledLinkButton)`
   ${props => {
-    const backgroundColor = props.theme ? props.theme.colorNavigationBackground : defaultColors.navigationBackground;
+    const backgroundColor = props.theme
+      ? props.theme.colorNavigationBackground
+      : defaultColors.navigationBackground;
     if (isColorDark(backgroundColor)) {
       return 'border: 1px solid white !important;';
     }
@@ -41,7 +43,8 @@ const Nav = styled.nav<NavProps>`
   justify-content: space-between;
   align-items: center;
   height: 72px;
-  background-color: ${props => (props.theme ? props.theme.colorNavigationBackground : defaultColors.navigationBackground)};
+  background-color: ${props =>
+    props.theme ? props.theme.colorNavigationBackground : defaultColors.navigationBackground};
   max-width: ${props => (props.maxWidth ? props.maxWidth : '928px')};
   margin: 0 auto;
   @media only screen and (max-width: 960px) {
@@ -71,36 +74,27 @@ const NavRight = styled.div`
 
 const Container = styled.div`
   width: 100%;
-  background-color: ${props => (props.theme ? props.theme.colorNavigationBackground : defaultColors.navigationBackground)};
+  background-color: ${props =>
+    props.theme ? props.theme.colorNavigationBackground : defaultColors.navigationBackground};
 `;
 
 interface Props extends LogoProps, NavProps {
   logo: string;
+  logoHref?: string;
   items: { title?: string; url?: string; onClick?: () => void }[];
 }
 
-const Navigation: React.SFC<Props> = ({
-  logo,
-  items,
-  logoHeight,
-  maxWidth
-}) => {
+const Navigation: React.SFC<Props> = ({ logo, logoHref, items, logoHeight, maxWidth }) => {
+  const renderedLogo = <Logo src={logo} alt="logo" logoHeight={logoHeight} />;
+
   return (
     <Container>
       <Nav maxWidth={maxWidth}>
-        <NavLeft>
-          <Logo src={logo} alt="logo" logoHeight={logoHeight} />
-        </NavLeft>
+        <NavLeft>{logoHref ? <a href={logoHref}>{renderedLogo}</a> : renderedLogo}</NavLeft>
         <NavRight>
           {items.map((item, i) => {
             return (
-              <NavButton
-                outline
-                key={`n-${i}`}
-                href={item.url}
-                onClick={item.onClick}
-                solid
-              >
+              <NavButton outline key={`n-${i}`} href={item.url} onClick={item.onClick} solid>
                 {item.title}
               </NavButton>
             );
