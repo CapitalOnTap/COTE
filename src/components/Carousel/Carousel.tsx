@@ -9,7 +9,7 @@ const Wrapper = styled(Flex)`
 `;
 
 const CarouselSlide = styled.div<{ bg?: string }>`
-  background: ${props => (props.bg ? `url(${props.bg})` : props.theme.colorDefault)};
+  background: ${props => (props.bg ? `url(${props.bg})` : props.theme.colorBackground)};
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -36,6 +36,7 @@ const CaptionStyled = styled.div`
 const TitleStyled = styled(Title)`
   font-size: 18px;
   position: relative;
+  font-weight: 600;
 `;
 
 const SubtitleStyled = styled(Subtitle)`
@@ -46,8 +47,8 @@ const Circle = styled.div<{ selected?: boolean }>`
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background-color: ${props => (props.theme && props.selected ? props.theme.colorPrimary : null)};
-  border: 1px solid ${props => (props.theme ? props.theme.colorPrimary : '#27b161')};
+  background-color: ${props => (props.theme && props.selected ? props.theme.colorDefault : null)};
+  border: 1px solid ${props => (props.theme ? props.theme.colorDefault : '#273456')};
   margin-right: 16px;
 `;
 
@@ -71,6 +72,9 @@ const ArrowLeft = styled(Icon)<React.HTMLAttributes<{}>>`
   left: 0;
   top: 50%;
   transform: translateY(-50%);
+  border-style: dashed;
+  border-width: thin;
+  border-color: ${props => (props.theme ? props.theme.colorDarkGrey : '#696D7E')};
 `;
 
 const ArrowRight = styled(Icon)<React.HTMLAttributes<{}>>`
@@ -78,10 +82,13 @@ const ArrowRight = styled(Icon)<React.HTMLAttributes<{}>>`
   right: 0;
   top: 50%;
   transform: translateY(-50%);
+  border-style: dashed;
+  border-width: thin;
+  border-color: ${props => (props.theme ? props.theme.colorDarkGrey : '#696D7E')};
 `;
 
 interface ICarouselSlide {
-  bg?: string;
+  backgroundImage?: string;
   title?: string;
   description?: string;
   smallCaption?: string;
@@ -123,31 +130,35 @@ class Carousel extends Component<ICarouselPage, State> {
     const { slides } = this.props;
     const { currentSlide } = this.state;
     return (
-      <Wrapper width="60%" flexDirection="column" justifyContent="space-between">
-        <CarouselSlide bg={slides[currentSlide].bg}>
-          <Box p={2}>
-            <Heading2>{slides[currentSlide].title}</Heading2>
-          </Box>
-          <Box p={2}>
-            <CaptionStyled>
-              <TitleStyled>{slides[currentSlide].description}</TitleStyled>
-              <SubtitleStyled>{slides[currentSlide].smallCaption}</SubtitleStyled>
-              <RelativeContainer>
-                {slides.length &&
-                  slides.map((op, idx) => {
-                    return <Circle key={idx} selected={idx === currentSlide} />;
-                  })}
+      <Wrapper>
+        <CarouselSlide bg={slides[currentSlide].backgroundImage}>
+          <Flex flexDirection="column" justifyContent="flex-end" style={{ height: '100%' }}>
+            <Box pt={5} pb={5} pr={3} pl={3}>
+              <Heading2>{slides[currentSlide].title}</Heading2>
+            </Box>
+            <Box>
+              <CaptionStyled>
+                <TitleStyled>{slides[currentSlide].description}</TitleStyled>
+                <Box pt={3} pb={4}>
+                  <SubtitleStyled>{slides[currentSlide].smallCaption}</SubtitleStyled>
+                </Box>
+                <RelativeContainer>
+                  {slides.length &&
+                    slides.map((op, idx) => {
+                      return <Circle key={idx} selected={idx === currentSlide} />;
+                    })}
 
-                {slides.length && (
-                  <ArrowLeft name="keyboard_arrow_left" onClick={this.handlePrevious} />
-                )}
+                  {slides.length && (
+                    <ArrowLeft name="keyboard_arrow_left" onClick={this.handlePrevious} />
+                  )}
 
-                {slides.length && (
-                  <ArrowRight name="keyboard_arrow_right" onClick={this.handleNext} />
-                )}
-              </RelativeContainer>
-            </CaptionStyled>
-          </Box>
+                  {slides.length && (
+                    <ArrowRight name="keyboard_arrow_right" onClick={this.handleNext} />
+                  )}
+                </RelativeContainer>
+              </CaptionStyled>
+            </Box>
+          </Flex>
         </CarouselSlide>
       </Wrapper>
     );
@@ -158,7 +169,7 @@ class Carousel extends Component<ICarouselPage, State> {
   interval: 2000,
   slides: [
     {
-      bg: 'https://via.placeholder.com/548x402',
+      backgroundImage: 'https://via.placeholder.com/548x402',
       title: 'Upgrade to reward all business spend with cashback and Avios',
       description: 'Earn points on all card spend redeemable to cashback or Avios',
       smallCaption: 'Upgrade on Rewards tab in your portal'
