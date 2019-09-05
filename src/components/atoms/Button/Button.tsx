@@ -48,6 +48,7 @@ const outline = css<{
   ${props =>
     props.primary &&
     `
+    color:${props.theme.colorPrimary};
       border: 1px solid ${props.theme.colorPrimary};
       &:hover{
         background-color: ${props => hexToRgbA(props.theme.colorPrimary, 0.08)};
@@ -57,6 +58,7 @@ const outline = css<{
   ${props =>
     props.secondary &&
     `
+    color:${props.theme.colorSecondary};
       border: 1px solid ${props.theme.colorSecondary};
       &:hover{
         background-color: ${props => hexToRgbA(props.theme.colorSecondary, 0.08)};
@@ -66,6 +68,7 @@ const outline = css<{
   ${props =>
     props.danger &&
     `
+    color:${props.theme.colorDanger};
       border: 1px solid ${props.theme.colorDanger};
       &:hover{
         background-color: ${props => hexToRgbA(props.theme.colorDanger, 0.08)};

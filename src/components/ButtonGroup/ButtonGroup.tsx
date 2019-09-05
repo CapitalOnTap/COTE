@@ -1,16 +1,16 @@
-import PropTypes from "prop-types";
-import React, { Component } from "react";
-import styled from "styled-components";
-import Button from "../atoms/Button/Button";
-import Label from "../atoms/Typography/Label";
-import { Option } from "../types";
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
+import styled from 'styled-components';
+import Button from '../atoms/Button/Button';
+import Label from '../atoms/Typography/Label';
+import { Option } from '../types';
 
 const StyledButton = styled(Button)<
   React.HTMLAttributes<{}> & { buttonWidth?: number; shouldWrap?: boolean }
 >`
   width: ${props => `${props.buttonWidth}%`};
   @media (max-width: 640px) {
-    width: ${props => (props.shouldWrap ? "50%" : null)};
+    width: ${props => (props.shouldWrap ? '50%' : null)};
   }
 `;
 
@@ -47,7 +47,7 @@ const ButtonGroupWrapper = styled.div<{
       border-top-left-radius: 2px;
       border-top-right-radius: 0;
       border-bottom-right-radius: 0;
-      border-bottom-left-radius: ${props => (props.shouldWrap ? 0 : "2px")};
+      border-bottom-left-radius: ${props => (props.shouldWrap ? 0 : '2px')};
     }
 
     & button:nth-child(2) {
@@ -58,9 +58,7 @@ const ButtonGroupWrapper = styled.div<{
       border-bottom-right-radius: 0;
       border-bottom-left-radius: 0;
       border-right: ${
-        props.solid || props.disabled
-          ? "none"
-          : `1px solid ${props.theme.colorDefault}`
+        props.solid || props.disabled ? 'none' : `1px solid ${props.theme.colorDefault}`
       };`
           : null};
     }
@@ -74,9 +72,7 @@ const ButtonGroupWrapper = styled.div<{
       border-bottom-right-radius: 0;
       border-bottom-left-radius: 2px;
       border-left: ${
-        props.solid || props.disabled
-          ? "none"
-          : `1px solid ${props.theme.colorDefault} !important`
+        props.solid || props.disabled ? 'none' : `1px solid ${props.theme.colorDefault} !important`
       };`
           : null};
     }
@@ -104,6 +100,7 @@ interface Props {
   primary?: boolean;
   id?: string;
   shouldWrap?: boolean;
+  selectedValue?: any;
 }
 
 interface State {
@@ -111,23 +108,25 @@ interface State {
 }
 
 class ButtonGroup extends Component<Props, State> {
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
     this.state = {
-      selectedIndex: 0
+      selectedIndex: props.selectedValue
+        ? props.options.findIndex(o => o.value == props.selectedValue)
+        : 0
     };
   }
 
+  componentDidUpdate(prevProps: Props) {
+    if (prevProps.selectedValue !== this.props.selectedValue) {
+      this.setState({
+        selectedIndex: this.props.options.findIndex(o => o.value == this.props.selectedValue)
+      });
+    }
+  }
+
   render() {
-    const {
-      options,
-      handleOptionSelected,
-      label,
-      error,
-      primary,
-      id,
-      shouldWrap
-    } = this.props;
+    const { options, handleOptionSelected, label, error, primary, id, shouldWrap } = this.props;
     const { selectedIndex } = this.state;
 
     return (
@@ -176,12 +175,12 @@ class ButtonGroup extends Component<Props, State> {
 };
 
 (ButtonGroup as any).defaultProps = {
-  label: "",
+  label: '',
   options: [
-    { title: "LLP", value: "LLP" },
-    { title: "Limited", value: "Limited" },
-    { title: "Partnership", value: "partnership" },
-    { title: "Sole Trader", value: "Sole Trader" }
+    { title: 'LLP', value: 'LLP' },
+    { title: 'Limited', value: 'Limited' },
+    { title: 'Partnership', value: 'partnership' },
+    { title: 'Sole Trader', value: 'Sole Trader' }
   ],
   handleOptionSelected: i => console.log(i),
   selectedIndex: 0,
