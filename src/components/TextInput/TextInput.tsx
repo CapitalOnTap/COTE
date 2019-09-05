@@ -79,67 +79,146 @@ export interface Props extends InputProps {
   isAutoComplete?: boolean;
   disabled?: boolean;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  // ref?: React.Ref<HTMLInputElement>;
 }
 
-const TextInput: React.SFC<Props> = ({
-  labelText,
-  subLabelText,
-  placeholder,
-  isAutoComplete,
-  mask,
-  guide,
-  full,
-  error,
-  required,
-  info,
-  className,
-  name,
-  onChange,
-  tooltip,
-  disabled,
-  ...props
-}) => {
-  return (
-    <InputWrapper full={full}>
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between'
-        }}
-      >
-        {labelText && <Label required={required} text={labelText} htmlFor={name} />}
-        {tooltip && (
-          <Tooltip
-            arrow
-            inertia
-            theme="light"
-            html={<TooltipContent title={tooltip.title} description={tooltip.description} />}
-          >
-            <TooltipIcon name="info" />
-          </Tooltip>
-        )}
-      </div>
-      {subLabelText && <Caption required={required} text={subLabelText} />}
-      <Input
-        className={className}
-        placeholder={placeholder}
-        name={name}
-        {...props}
-        invalid={required}
-        mask={mask ? mask : rawValue => Array(rawValue.length).fill(/./)}
-        guide={guide}
-        full={full}
-        onChange={onChange}
-        autoComplete={isAutoComplete ? 'on' : 'new-password'}
-        disabled={disabled}
-      />
+class TextInput extends React.Component<Props> {
+  private inputRef;
+  constructor(props) {
+    super(props);
+    this.inputRef = React.createRef<HTMLInputElement>();
+  }
 
-      {error && <Caption required={required} text={error} />}
-      {info && <InfoCaption text={info} />}
-    </InputWrapper>
-  );
-};
+  focus() {
+    if (this.inputRef && this.inputRef.current) {
+      console.log(this.inputRef);
+    }
+  }
+
+  render() {
+    const {
+      labelText,
+      subLabelText,
+      placeholder,
+      isAutoComplete,
+      mask,
+      guide,
+      full,
+      error,
+      required,
+      info,
+      className,
+      name,
+      onChange,
+      tooltip,
+      disabled
+    } = this.props;
+
+    return (
+      <InputWrapper full={full}>
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between'
+          }}
+        >
+          {labelText && <Label required={required} text={labelText} htmlFor={name} />}
+          {tooltip && (
+            <Tooltip
+              arrow
+              inertia
+              theme="light"
+              html={<TooltipContent title={tooltip.title} description={tooltip.description} />}
+            >
+              <TooltipIcon name="info" />
+            </Tooltip>
+          )}
+        </div>
+        {subLabelText && <Caption required={required} text={subLabelText} />}
+        <Input
+          ref={inputRef => (this.inputRef = inputRef)}
+          className={className}
+          placeholder={placeholder}
+          name={name}
+          {...this.props}
+          invalid={required}
+          mask={mask ? mask : rawValue => Array(rawValue.length).fill(/./)}
+          guide={guide}
+          full={full}
+          onChange={onChange}
+          autoComplete={isAutoComplete ? 'on' : 'new-password'}
+          disabled={disabled}
+        />
+
+        {error && <Caption required={required} text={error} />}
+        {info && <InfoCaption text={info} />}
+      </InputWrapper>
+    );
+  }
+}
+// const TextInput: React.SFC<Props> = ({
+//   labelText,
+//   subLabelText,
+//   placeholder,
+//   isAutoComplete,
+//   mask,
+//   guide,
+//   full,
+//   error,
+//   required,
+//   info,
+//   className,
+//   name,
+//   onChange,
+//   tooltip,
+//   disabled,
+//   ref,
+//   ...props
+// }) => {
+//   return (
+//     <InputWrapper full={full}>
+//       <div
+//         style={{
+//           display: 'flex',
+//           alignItems: 'center',
+//           justifyContent: 'space-between'
+//         }}
+//       >
+//         {labelText && <Label required={required} text={labelText} htmlFor={name} />}
+//         {tooltip && (
+//           <Tooltip
+//             arrow
+//             inertia
+//             theme="light"
+//             html={<TooltipContent title={tooltip.title} description={tooltip.description} />}
+//           >
+//             <TooltipIcon name="info" />
+//           </Tooltip>
+//         )}
+//       </div>
+//       {subLabelText && <Caption required={required} text={subLabelText} />}
+//       {console.log(ref)}
+//       <MaskedInput
+//         className={className}
+//         placeholder={placeholder}
+//         name={name}
+//         {...props}
+//         // invalid={required}
+//         // mask={mask ? mask : rawValue => Array(rawValue.length).fill(/./)}
+//         // guide={guide}
+//         // full={full}
+//         onChange={onChange}
+//         autoComplete={isAutoComplete ? 'on' : 'new-password'}
+//         disabled={disabled}
+//         render={(ref, props) => <Input ref={ref} {...props} />}
+//       />
+
+//       {error && <Caption required={required} text={error} />}
+//       {info && <InfoCaption text={info} />}
+//     </InputWrapper>
+//   );
+// };
 
 (TextInput as any).propTypes = {
   placeholder: PropTypes.string,
@@ -180,6 +259,9 @@ const TextInput: React.SFC<Props> = ({
   disabled: false
 };
 
-TextInput.displayName = 'TextInput';
+// TextInput.displayName = 'TextInput';
 
+export type Ref = HTMLInputElement;
+
+// export default React.forwardRef<Ref, Props>((props, ref) => <TextInput ref={ref} {...props} />);
 export default TextInput;
