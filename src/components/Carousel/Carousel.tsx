@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { Box, Flex } from '@rebass/grid';
 import Icon from '../atoms/Icon/Icon';
@@ -100,70 +100,51 @@ interface ICarouselPage {
   slides: ICarouselSlide[];
 }
 
-interface State {
-  currentSlide: number;
-  countSlides: number;
-}
+const Carousel: React.FC<ICarouselPage> = props => {
+  const [currentSlide, setCurrentSlide] = React.useState(0);
+  const countSlides = (props.slides && props.slides.length) || 0;
 
-class Carousel extends Component<ICarouselPage, State> {
-  constructor(props) {
-    super(props);
-    this.state = {
-      currentSlide: 0,
-      countSlides: this.props.slides.length || 0
-    };
-  }
-
-  handlePrevious = () => {
-    const { countSlides, currentSlide } = this.state;
+  function handlePrevious() {
     const newCurrentSlide = currentSlide === 0 ? countSlides - 1 : currentSlide - 1;
-    this.setState({ currentSlide: newCurrentSlide });
-  };
-
-  handleNext = () => {
-    const { countSlides, currentSlide } = this.state;
-    const newCurrentSlide = countSlides - 1 === currentSlide ? 0 : currentSlide + 1;
-    this.setState({ currentSlide: newCurrentSlide });
-  };
-
-  render() {
-    const { slides } = this.props;
-    const { currentSlide } = this.state;
-    return (
-      <Wrapper>
-        <CarouselSlide bg={slides[currentSlide].backgroundImage}>
-          <Flex flexDirection="column" justifyContent="flex-end" style={{ height: '100%' }}>
-            <Box pt={5} pb={5} pr={3} pl={3}>
-              <Heading2>{slides[currentSlide].title}</Heading2>
-            </Box>
-            <Box>
-              <CaptionStyled>
-                <TitleStyled>{slides[currentSlide].description}</TitleStyled>
-                <Box pt={3} pb={4}>
-                  <SubtitleStyled>{slides[currentSlide].smallCaption}</SubtitleStyled>
-                </Box>
-                <RelativeContainer>
-                  {slides.length &&
-                    slides.map((op, idx) => {
-                      return <Circle key={idx} selected={idx === currentSlide} />;
-                    })}
-
-                  {slides.length && (
-                    <ArrowLeft name="keyboard_arrow_left" onClick={this.handlePrevious} />
-                  )}
-
-                  {slides.length && (
-                    <ArrowRight name="keyboard_arrow_right" onClick={this.handleNext} />
-                  )}
-                </RelativeContainer>
-              </CaptionStyled>
-            </Box>
-          </Flex>
-        </CarouselSlide>
-      </Wrapper>
-    );
+    setCurrentSlide(newCurrentSlide);
   }
-}
+
+  function handleNext() {
+    const newCurrentSlide = countSlides - 1 === currentSlide ? 0 : currentSlide + 1;
+    setCurrentSlide(newCurrentSlide);
+  }
+
+  const { slides } = props;
+  return (
+    <Wrapper>
+      <CarouselSlide bg={slides[currentSlide].backgroundImage}>
+        <Flex flexDirection="column" justifyContent="flex-end" style={{ height: '100%' }}>
+          <Box pt={5} pb={5} pr={3} pl={3}>
+            <Heading2>{slides[currentSlide].title}</Heading2>
+          </Box>
+          <Box>
+            <CaptionStyled>
+              <TitleStyled>{slides[currentSlide].description}</TitleStyled>
+              <Box pt={3} pb={4}>
+                <SubtitleStyled>{slides[currentSlide].smallCaption}</SubtitleStyled>
+              </Box>
+              <RelativeContainer>
+                {slides.length &&
+                  slides.map((op, idx) => {
+                    return <Circle key={idx} selected={idx === currentSlide} />;
+                  })}
+
+                {slides.length && <ArrowLeft name="keyboard_arrow_left" onClick={handlePrevious} />}
+
+                {slides.length && <ArrowRight name="keyboard_arrow_right" onClick={handleNext} />}
+              </RelativeContainer>
+            </CaptionStyled>
+          </Box>
+        </Flex>
+      </CarouselSlide>
+    </Wrapper>
+  );
+};
 
 (Carousel as any).defaultProps = {
   interval: 2000,
