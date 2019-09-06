@@ -52,3 +52,4 @@ export { default as WidgetBox } from './components/WidgetBox/WidgetBox';
 export { theme as defaultTheme } from './styles/defaults';
 export { default as GlobalStyle } from './styles/GlobalStyle';
 export { default as Tooltip } from './components/Tooltip/Tooltip';
+export { default as Carousel } from './components/Carousel/Carousel';
