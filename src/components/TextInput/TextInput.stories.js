@@ -2,6 +2,7 @@ import { storiesOf } from '@storybook/react';
 import React, { Component } from 'react';
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 import TextInput from './TextInput';
+import Button from '../atoms/Button/Button';
 
 const poundMask = createNumberMask({
   prefix: '£ ',
@@ -15,30 +16,25 @@ const poundMask = createNumberMask({
 class TextInputRef extends Component {
   constructor(props) {
     super(props);
-    this.ref = React.createRef();
+    this.inputRef = React.createRef();
   }
-  componentDidMount() {
-    console.log(this.ref);
-    if (this.ref) {
-      // this.ref.current.inputRef.inputElement.focus();
-      // this.ref.current.focus();
-    }
-  }
+
   handleFocus() {
-    console.log(this.ref);
-    this.ref.current.inputRef.inputElement.focus();
+    if (this.inputRef && this.inputRef.current && this.inputRef.current.inputElement) {
+      this.inputRef.current.inputElement.focus();
+    }
   }
   render() {
     return (
       <div>
-        <TextInput ref={this.ref} />
-        <button onClick={() => this.handleFocus()}>Focus Input</button>
+        <TextInput ref={this.inputRef} />
+        <Button solid onClick={() => this.handleFocus()}>
+          Focus Input
+        </Button>
       </div>
     );
   }
 }
-
-const ref = React.createRef();
 
 storiesOf('Text Input', module)
   .add('Normal', () => <TextInput placeholder="Placeholder value" />)
@@ -112,5 +108,5 @@ storiesOf('Text Input', module)
       />
     </div>
   ))
-  .add('Disabled', () => <TextInput ref={ref} disabled placeholder="Placeholder value" />)
+  .add('Disabled', () => <TextInput disabled placeholder="Placeholder value" />)
   .add('ForwardRef', () => <TextInputRef />);
