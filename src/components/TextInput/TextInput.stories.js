@@ -1,7 +1,8 @@
 import { storiesOf } from '@storybook/react';
-import React from 'react';
+import React, { Component } from 'react';
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 import TextInput from './TextInput';
+import Button from '../atoms/Button/Button';
 
 const poundMask = createNumberMask({
   prefix: '£ ',
@@ -11,6 +12,29 @@ const poundMask = createNumberMask({
   decimalSymbol: '.',
   decimalLimit: 2
 });
+
+class TextInputRef extends Component {
+  constructor(props) {
+    super(props);
+    this.inputRef = React.createRef();
+  }
+
+  handleFocus() {
+    if (this.inputRef && this.inputRef.current && this.inputRef.current.inputElement) {
+      this.inputRef.current.inputElement.focus();
+    }
+  }
+  render() {
+    return (
+      <div>
+        <TextInput ref={this.inputRef} />
+        <Button solid onClick={() => this.handleFocus()}>
+          Focus Input
+        </Button>
+      </div>
+    );
+  }
+}
 
 storiesOf('Text Input', module)
   .add('Normal', () => <TextInput placeholder="Placeholder value" />)
@@ -84,4 +108,5 @@ storiesOf('Text Input', module)
       />
     </div>
   ))
-  .add('Disabled', () => <TextInput disabled placeholder="Placeholder value" />);
+  .add('Disabled', () => <TextInput disabled placeholder="Placeholder value" />)
+  .add('ForwardRef', () => <TextInputRef />);

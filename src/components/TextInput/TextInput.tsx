@@ -79,26 +79,30 @@ export interface Props extends InputProps {
   isAutoComplete?: boolean;
   disabled?: boolean;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  ref: React.RefObject<any>;
 }
 
-const TextInput: React.SFC<Props> = ({
-  labelText,
-  subLabelText,
-  placeholder,
-  isAutoComplete,
-  mask,
-  guide,
-  full,
-  error,
-  required,
-  info,
-  className,
-  name,
-  onChange,
-  tooltip,
-  disabled,
-  ...props
-}) => {
+export type Ref = HTMLInputElement;
+
+const TextInput = React.forwardRef<Ref, Props>((props, ref) => {
+  const {
+    labelText,
+    subLabelText,
+    placeholder,
+    isAutoComplete,
+    mask,
+    guide,
+    full,
+    error,
+    required,
+    info,
+    className,
+    name,
+    onChange,
+    tooltip,
+    disabled
+  } = props;
+
   return (
     <InputWrapper full={full}>
       <div
@@ -122,6 +126,7 @@ const TextInput: React.SFC<Props> = ({
       </div>
       {subLabelText && <Caption required={required} text={subLabelText} />}
       <Input
+        ref={ref}
         className={className}
         placeholder={placeholder}
         name={name}
@@ -139,7 +144,7 @@ const TextInput: React.SFC<Props> = ({
       {info && <InfoCaption text={info} />}
     </InputWrapper>
   );
-};
+});
 
 (TextInput as any).propTypes = {
   placeholder: PropTypes.string,
