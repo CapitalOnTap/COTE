@@ -13,7 +13,7 @@ const CarouselSlide = styled.div<{ bg?: string }>`
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
-  min-height: 386px;
+  min-height: 450px;
 `;
 
 const CaptionStyled = styled.div`
