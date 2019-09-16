@@ -1,7 +1,7 @@
-import PropTypes from "prop-types";
-import React from "react";
-import styled from "styled-components";
-import { colors as defaultColors } from "../../styles/defaults";
+import PropTypes from 'prop-types';
+import React from 'react';
+import styled from 'styled-components';
+import { colors as defaultColors } from '../../styles/defaults';
 
 export const Input = styled.input`
   position: absolute;
@@ -9,25 +9,37 @@ export const Input = styled.input`
   cursor: pointer;
 `;
 
-const Container = styled.label<{ checked?: boolean }>`
+const Container = styled.label<{ checked?: boolean; inline?: boolean; disabled?: boolean }>`
   display: inline-block;
   position: relative;
-  padding-left: 35px;
-  margin-bottom: 1rem;
-  color: ${props => (props.checked ? "initial" : defaultColors.darkGrey)};
+  padding: ${props => (props.inline ? '9px 45px 9px 45px' : '0 0 0 35px')};
+  margin: ${props => (props.inline ? '0 8px 0 0' : '0 0 1rem 0')};
+  color: ${props => (props.checked ? 'initial' : defaultColors.darkGrey)};
   cursor: pointer;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  border: ${props => (props.inline ? `1px solid ${props.theme.colorDefault}` : 'none')};
+  border-radius: ${props => (props.inline ? '4px' : 'none')};
+  font-weight: ${props => (props.checked ? '600' : '100')};
+  min-width: 108px;
+
+  &[disabled] {
+    pointer-events: none;
+    background-color: ${props => props.theme.colorLightGrey};
+    cursor: default;
+    span {
+      background: transparent;
+    }
+  }
 
   input:checked + span:after {
     display: block;
   }
 
   input:checked + span {
-    border: 2px solid
-      ${props => (props.theme ? props.theme.colorPrimary : defaultColors.primary)};
+    border: 2px solid ${props => (props.theme ? props.theme.colorPrimary : defaultColors.primary)};
   }
 
   input:checked & {
@@ -35,11 +47,11 @@ const Container = styled.label<{ checked?: boolean }>`
   }
 `;
 
-const Checkmark = styled.span`
+const Checkmark = styled.span<{ inline?: boolean }>`
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  left: 0;
+  left: ${props => (props.inline ? '10px' : '0')};
   height: 24px;
   width: 24px;
   background-color: #fff;
@@ -55,20 +67,24 @@ const Checkmark = styled.span`
     width: 12px;
     height: 12px;
     border-radius: 50%;
-    background: ${props =>
-      props.theme ? props.theme.colorPrimary : defaultColors.primary};
-    content: "";
+    background: ${props => (props.theme ? props.theme.colorPrimary : defaultColors.primary)};
+    content: '';
     position: absolute;
     display: none;
   }
 `;
 
+const Wrapper = styled.div<{ inline?: boolean }>`
+  display: ${props => (props.inline ? 'inline' : 'block')};
+`;
 interface Props {
   label?: React.ReactNode;
   name?: string;
   checked?: boolean;
   onChange?: (value: any) => void;
   value?: any;
+  inline?: boolean;
+  disabled?: boolean;
 }
 
 const RadioButton: React.SFC<Props> = ({
@@ -77,22 +93,25 @@ const RadioButton: React.SFC<Props> = ({
   checked,
   onChange,
   value,
+  inline,
+  disabled,
   ...props
 }) => {
   return (
-    <div>
-      <Container {...props} checked={checked}>
+    <Wrapper inline={inline}>
+      <Container {...props} checked={checked} inline={inline} disabled={disabled}>
         {label}
         <Input
           type="radio"
           name={name}
           checked={checked}
           value={value}
+          disabled={disabled}
           onChange={e => onChange && onChange(e.target.value)}
         />
-        <Checkmark />
+        <Checkmark inline={inline} />
       </Container>
-    </div>
+    </Wrapper>
   );
 };
 
@@ -103,12 +122,14 @@ const RadioButton: React.SFC<Props> = ({
   /** Returns value of radio button */
   onChange: PropTypes.func,
   /** Value of radio button */
-  value: PropTypes.any
+  value: PropTypes.any,
+  inline: PropTypes.bool,
+  disabled: PropTypes.bool
 };
 
 RadioButton.defaultProps = {
-  label: "label",
-  name: "radio",
+  label: 'label',
+  name: 'radio',
   onChange: value => console.log(value)
 };
 

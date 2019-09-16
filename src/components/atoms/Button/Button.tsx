@@ -1,11 +1,11 @@
-import PropTypes from "prop-types";
-import React from "react";
-import styled, { css, keyframes, withTheme } from "styled-components";
-import withRipples from "../../../hocs/withRipples";
-import elevationMixin from "../../../mixins/elevation";
-import { Theme } from "../../../styles/types";
-import { hexToRgbA, isColorDark } from "../../../utils/index";
-import Icon from "../Icon/Icon";
+import PropTypes from 'prop-types';
+import React from 'react';
+import styled, { css, keyframes, withTheme } from 'styled-components';
+import withRipples from '../../../hocs/withRipples';
+import elevationMixin from '../../../mixins/elevation';
+import { Theme } from '../../../styles/types';
+import { hexToRgbA, isColorDark } from '../../../utils/index';
+import Icon from '../Icon/Icon';
 
 const primary = css`
   color: ${props => props.theme.colorPrimary};
@@ -48,6 +48,7 @@ const outline = css<{
   ${props =>
     props.primary &&
     `
+    color:${props.theme.colorPrimary};
       border: 1px solid ${props.theme.colorPrimary};
       &:hover{
         background-color: ${props => hexToRgbA(props.theme.colorPrimary, 0.08)};
@@ -57,6 +58,7 @@ const outline = css<{
   ${props =>
     props.secondary &&
     `
+    color:${props.theme.colorSecondary};
       border: 1px solid ${props.theme.colorSecondary};
       &:hover{
         background-color: ${props => hexToRgbA(props.theme.colorSecondary, 0.08)};
@@ -66,6 +68,7 @@ const outline = css<{
   ${props =>
     props.danger &&
     `
+    color:${props.theme.colorDanger};
       border: 1px solid ${props.theme.colorDanger};
       &:hover{
         background-color: ${props => hexToRgbA(props.theme.colorDanger, 0.08)};
@@ -89,7 +92,7 @@ const solid = css<{
   ${props => {
     if (props.disabled) {
       return `
-  background-color: rgba(0, 0, 0, .12);
+  background-color: ${props => props.theme.colorLightGrey};
   pointer-events: none;
 `;
     }
@@ -112,7 +115,7 @@ const solid = css<{
       hoverBackgroundColor = props.theme.colorDangerEmphasis;
     }
 
-    const textColor = isColorDark(backgroundColor) ? "white" : props.theme.colorDefault;
+    const textColor = isColorDark(backgroundColor) ? 'white' : props.theme.colorDefault;
 
     return `
   color: ${textColor};
@@ -164,7 +167,7 @@ export const StyledButton = styled.button<StyledButtonProps>`
   box-sizing: border-box;
   -webkit-appearance: none;
   transition: all 250ms ease;
-  background-color: transparent;
+  background-color: ${props => (props.disabled ? props.theme.colorLightGrey : 'transparent')};
 
   &:hover {
     cursor: pointer;
@@ -210,7 +213,7 @@ ${props => props.full && `width: 100%;`}
   ${props => props.elevation && elevationMixin(props.elevation)}
 `;
 
-export const StyledLinkButton = styled(StyledButton.withComponent("a"))<
+export const StyledLinkButton = styled(StyledButton.withComponent('a'))<
   React.LinkHTMLAttributes<{}>
 >``;
 
@@ -226,7 +229,7 @@ const rotate360 = keyframes`
 
 const LoadingIcon = styled(Icon)<{ withText?: boolean }>`
   color: inherit;
-  margin-right: ${props => (props.withText ? "8px" : null)};
+  margin-right: ${props => (props.withText ? '8px' : null)};
   animation: ${rotate360} 2s linear infinite;
   /* font-size: inherit; */
 `;
@@ -248,7 +251,7 @@ const getRippleColor = (buttonProps: RippleButtonProps) => {
   if (!buttonProps.danger && !buttonProps.primary && buttonProps.solid)
     return buttonProps.theme.colorDarkGrey;
 
-  return "rgba(0, 0, 0, 0.06)";
+  return 'rgba(0, 0, 0, 0.06)';
 };
 
 const ButtonWithRipple = withRipples(StyledButton);
@@ -267,7 +270,7 @@ const Button: React.SFC<Props> = (props: Props) => {
   if (href) {
     return (
       <StyledLinkButton {...props} disabled={disabled} href={href} id={id}>
-        {loading && <LoadingIcon name={"refresh"} />}
+        {loading && <LoadingIcon name={'refresh'} />}
         {children}
         {icon && <Icon className={`fa fa-${icon} ${className}`} />}
       </StyledLinkButton>
@@ -319,10 +322,10 @@ Button.defaultProps = {
   elevation: 0,
   primary: false,
   solid: false,
-  href: "",
+  href: '',
   disabled: false,
-  type: "button",
-  icon: "",
+  type: 'button',
+  icon: '',
   full: false,
   danger: false,
   selected: false

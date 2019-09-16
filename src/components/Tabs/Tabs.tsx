@@ -20,8 +20,7 @@ const TabMarker = styled.div<{ width: number; position: number }>`
 
 const TabTitle = styled(Title.withComponent('a'))<{ isActive?: boolean }>`
   cursor: pointer;
-  color: ${props =>
-    props.isActive ? defaultColors.default : defaultColors.darkGrey};
+  color: ${props => (props.isActive ? defaultColors.default : defaultColors.darkGrey)};
 
   font-weight: 700;
   padding: 8px;
@@ -60,10 +59,7 @@ interface State {
 class Tabs extends Component<Props, State> {
   static getDerivedStateFromProps(nextProps: Props, state: State) {
     const { controlledActiveIndex } = nextProps;
-    if (
-      typeof controlledActiveIndex == 'number' &&
-      controlledActiveIndex !== state.activeIndex
-    ) {
+    if (typeof controlledActiveIndex == 'number' && controlledActiveIndex !== state.activeIndex) {
       return { activeIndex: controlledActiveIndex };
     } else {
       return null;
@@ -92,27 +88,21 @@ class Tabs extends Component<Props, State> {
 
     const tabHeaders = React.Children.map(children, (child, index) => {
       return (
-        <TabTitle
-          isActive={activeIndex === index}
-          onClick={() => this.handleTabClicked(index)}
-        >
+        <TabTitle isActive={activeIndex === index} onClick={() => this.handleTabClicked(index)}>
           {child.props.title}
         </TabTitle>
       );
     });
 
     const childTabs = React.Children.map(children, child =>
-      React.cloneElement(child, { position: activeIndex * 100 })
+      React.cloneElement(child as React.ReactElement<any>, { position: activeIndex * 100 })
     );
 
     return (
       <div>
         <TabsWrapper>
           <TabsHeaders>{tabHeaders}</TabsHeaders>
-          <TabMarker
-            width={100 / children.length}
-            position={activeIndex * 100}
-          />
+          <TabMarker width={100 / children.length} position={activeIndex * 100} />
           <TabsContainer margin={contentMargin}>{childTabs}</TabsContainer>
         </TabsWrapper>
       </div>

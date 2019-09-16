@@ -37,6 +37,7 @@ export { default as SearchTextInput } from './components/SearchTextInput/SearchT
 export { default as SideNav } from './components/SideNav';
 export { default as SnackBar } from './components/Snacks/Snackbar';
 export { default as SnacksContainer } from './components/Snacks/SnacksContainer';
+export { default as StepProgressBar } from './components/StepProgressBar/StepProgressBar';
 export * from './components/Snacks/types';
 export { default as Tab } from './components/Tabs/Tab';
 export { default as Tabs } from './components/Tabs/Tabs';
@@ -51,3 +52,4 @@ export { default as WidgetBox } from './components/WidgetBox/WidgetBox';
 export { theme as defaultTheme } from './styles/defaults';
 export { default as GlobalStyle } from './styles/GlobalStyle';
 export { default as Tooltip } from './components/Tooltip/Tooltip';
+export { default as Carousel } from './components/Carousel/Carousel';

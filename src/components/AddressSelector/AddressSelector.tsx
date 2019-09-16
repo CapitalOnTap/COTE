@@ -65,6 +65,7 @@ interface Props {
   street?: string;
   postCode?: string;
   city?: string;
+  disabled?: boolean;
 }
 
 interface State {
@@ -159,7 +160,8 @@ class AddressSelector extends Component<Props, State> {
       buildingName,
       street,
       postCode,
-      city
+      city,
+      disabled
     } = this.props;
 
     if (!showAddressFields && !selectedAddress) {
@@ -174,6 +176,7 @@ class AddressSelector extends Component<Props, State> {
               onChange={onChange}
               full
               placeholder="Flat/House Number"
+              disabled={disabled}
             />
           </Box>
           <Box width={[1, 1, 1 / 3, 1 / 3]} pr={[0, 0, 2, 2]} mb={[2, 2, 0, 0]}>
@@ -194,6 +197,7 @@ class AddressSelector extends Component<Props, State> {
                   this.handleSearch(e, postCodeSearch, flatNumberFilter);
                 }
               }}
+              disabled={disabled}
             />
           </Box>
           <Box width={[1, 1, 1 / 3, 1 / 3]}>
@@ -201,7 +205,7 @@ class AddressSelector extends Component<Props, State> {
               id={searchButtonId}
               full
               solid
-              disabled={!postCodeSearch || searching}
+              disabled={!postCodeSearch || searching || disabled}
               primary
               loadingText="Searching..."
               loading={searching}
@@ -211,7 +215,7 @@ class AddressSelector extends Component<Props, State> {
             </Button>
           </Box>
 
-          {results != null && !showAddressFields && (
+          {results != null && !showAddressFields && !disabled && (
             <AddressResults
               results={results}
               lastItem={{ title: "Can't find my address", value: -1 }}
@@ -378,7 +382,8 @@ class AddressSelector extends Component<Props, State> {
   searchButtonId: PropTypes.string,
   id: PropTypes.string,
   name: PropTypes.string,
-  clearData: PropTypes.func.isRequired
+  clearData: PropTypes.func.isRequired,
+  disabled: PropTypes.bool
 };
 
 (AddressSelector as any).defaultProps = {
@@ -409,7 +414,8 @@ class AddressSelector extends Component<Props, State> {
   label: 'Address',
   searchButtonId: '',
   id: '',
-  name: ''
+  name: '',
+  disabled: false
 };
 
 export default AddressSelector;
