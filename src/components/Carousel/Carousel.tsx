@@ -117,7 +117,7 @@ const Carousel: React.FC<ICarouselPage> = props => {
   const { slides } = props;
   return (
     <Wrapper>
-      <CarouselSlide bg={slides[currentSlide].backgroundImage}>
+      <CarouselSlide bg={slides[currentSlide].backgroundImage} {...props}>
         <Flex flexDirection="column" justifyContent="flex-end" style={{ height: '100%' }}>
           <Box pt={5} pb={5} pr={3} pl={3}>
             <Heading2>{slides[currentSlide].title}</Heading2>
