@@ -43,6 +43,7 @@ const TabsContainer = styled.div<{ margin?: string }>`
 
 interface TabProps {
   title?: React.ReactNode;
+  position?: number;
 }
 
 interface Props {
@@ -86,16 +87,19 @@ class Tabs extends Component<Props, State> {
     const { children, contentMargin } = this.props;
     const { activeIndex } = this.state;
 
-    const tabHeaders = React.Children.map(children, (child, index) => {
-      return (
-        <TabTitle isActive={activeIndex === index} onClick={() => this.handleTabClicked(index)}>
-          {child.props.title}
-        </TabTitle>
-      );
-    });
+    const tabHeaders = React.Children.map(
+      children,
+      (child: React.ReactElement<TabProps>, index) => {
+        return (
+          <TabTitle isActive={activeIndex === index} onClick={() => this.handleTabClicked(index)}>
+            {child.props.title}
+          </TabTitle>
+        );
+      }
+    );
 
-    const childTabs = React.Children.map(children, child =>
-      React.cloneElement(child as React.ReactElement<any>, { position: activeIndex * 100 })
+    const childTabs = React.Children.map(children, (child: React.ReactElement<TabProps>) =>
+      React.cloneElement(child, { position: activeIndex * 100 })
     );
 
     return (

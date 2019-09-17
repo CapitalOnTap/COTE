@@ -1,11 +1,11 @@
-import * as React from "react";
-import styled from "styled-components";
-import { colors as defaultColors } from "../../../styles/defaults";
+import * as React from 'react';
+import styled from 'styled-components';
+import { colors as defaultColors } from '../../../styles/defaults';
 
 const StyledIcon = styled.i<{ reverse: boolean; solid: boolean } & any>`
   font-size: 24px;
   color: ${props => {
-    if (props.reverse || props.solid) return "#fff";
+    if (props.reverse || props.solid) return '#fff';
 
     if (props.info) {
       return props.theme ? props.theme.colorInfo : defaultColors.info;
@@ -16,16 +16,16 @@ const StyledIcon = styled.i<{ reverse: boolean; solid: boolean } & any>`
     if (props.success) {
       return props.theme ? props.theme.colorSuccess : defaultColors.success;
     }
-    if (props.primary){
+    if (props.primary) {
       return props.theme ? props.theme.colorPrimary : defaultColors.primary;
     }
-    if (props.defaultColor){
+    if (props.defaultColor) {
       return props.theme ? props.theme.colorDefault : defaultColors.default;
     }
 
     return defaultColors.darkGrey;
   }};
-  padding: ${props => (props.circle ? "8px" : null)};
+  padding: ${props => (props.circle ? '8px' : null)};
   border: ${props => {
     if (props.circle && !props.solid) {
       if (props.info) {
@@ -40,15 +40,15 @@ const StyledIcon = styled.i<{ reverse: boolean; solid: boolean } & any>`
       if (props.primary) {
         return `1px solid ${props.theme ? props.theme.colorPrimary : defaultColors.primary}`;
       }
-      if (props.defaultColor){
+      if (props.defaultColor) {
         return `1px solid ${props.theme ? props.theme.colorDefault : defaultColors.default}`;
       }
-  
+
       return `1px solid ${defaultColors.darkGrey}`;
     }
     return null;
   }};
-  border-radius: ${props => (props.circle ? "50%" : null)};
+  border-radius: ${props => (props.circle ? '50%' : null)};
   background-color: ${props => {
     if (props.circle && props.solid) {
       if (props.info) {
@@ -60,7 +60,7 @@ const StyledIcon = styled.i<{ reverse: boolean; solid: boolean } & any>`
       if (props.success) {
         return props.theme ? props.theme.colorSuccess : defaultColors.success;
       }
-      if (props.defaultColor){
+      if (props.defaultColor) {
         return props.theme ? props.theme.colorDefault : defaultColors.default;
       }
 
@@ -116,6 +116,6 @@ const Icon: React.SFC<Props> = ({
   );
 };
 
-Icon.displayName = "Icon";
+Icon.displayName = 'Icon';
 
 export default Icon;
