@@ -33,11 +33,11 @@ const ContentWrapper = styled.div`
 `;
 
 interface Props extends DropzoneProps {
-  icon: string;
+  icon?: string;
   // TODO: type the theme
-  theme: any;
-  buttonText: string;
-  title: string;
+  theme?: any;
+  buttonText?: string;
+  title?: string;
   subtitle?: string;
 }
 

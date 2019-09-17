@@ -27,9 +27,9 @@ const danger = css`
 `;
 
 const Wrapper = styled.div<{
-  primary?: string;
-  danger?: string;
-  highlight?: string;
+  primary?: boolean;
+  danger?: boolean;
+  highlight?: boolean;
 }>`
   padding: 0;
   ${props => props.highlight && highlight}
@@ -85,6 +85,9 @@ interface Props {
   title?: string;
   icon?: string;
   tooltip?: { title: string; description: string };
+  highlight?: boolean;
+  primary?: boolean;
+  danger?: boolean;
 }
 
 interface State {
