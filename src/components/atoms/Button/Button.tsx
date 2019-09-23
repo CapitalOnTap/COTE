@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import styled, { css, keyframes, withTheme } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import withRipples from '../../../hocs/withRipples';
 import elevationMixin from '../../../mixins/elevation';
-import { Theme } from '../../../styles/types';
 import { hexToRgbA, isColorDark } from '../../../utils/index';
 import Icon from '../Icon/Icon';
+import { colors as defaultColors } from '../../../styles/defaults';
 
 const primary = css`
   color: ${props => props.theme.colorPrimary};
@@ -240,23 +240,25 @@ const LoadingWrapper = styled.span`
   justify-content: center;
 `;
 
-interface RippleButtonProps extends StyledButtonProps {
-  theme: Theme;
-}
+const ButtonWithRipple = styled(withRipples(StyledButton))<{
+  primary?: boolean;
+  secondary?: boolean;
+  danger?: boolean;
+  solid?: boolean;
+}>`
+  > s {
+    background-color: ${props => {
+      if (props.danger) return props.theme ? props.theme.colorDanger : defaultColors.danger;
+      if (props.primary) return props.theme ? props.theme.colorPrimary : defaultColors.primary;
+      if (props.secondary)
+        return props.theme ? props.theme.colorSecondary : defaultColors.secondary;
+      if (props.solid) return props.theme ? props.theme.colorDarkGrey : defaultColors.darkGrey;
+      return props.theme ? props.theme.colorDefault : defaultColors.default;
+    }};
+  }
+`;
 
-const getRippleColor = (buttonProps: RippleButtonProps) => {
-  if (buttonProps.danger) return buttonProps.theme.colorDanger;
-  if (buttonProps.primary) return buttonProps.theme.colorPrimary;
-  if (buttonProps.secondary) return buttonProps.theme.colorSecondary;
-  if (!buttonProps.danger && !buttonProps.primary && buttonProps.solid)
-    return buttonProps.theme.colorDarkGrey;
-
-  return 'rgba(0, 0, 0, 0.06)';
-};
-
-const ButtonWithRipple = withRipples(StyledButton);
-
-interface Props extends RippleButtonProps, React.ButtonHTMLAttributes<{}> {
+interface Props extends StyledButtonProps, React.ButtonHTMLAttributes<{}> {
   icon?: string;
   className?: string;
   href?: string;
@@ -278,12 +280,7 @@ const Button: React.SFC<Props> = (props: Props) => {
   }
 
   return (
-    <ButtonWithRipple
-      {...props}
-      disabled={disabled || loading}
-      id={id}
-      color={getRippleColor(props)}
-    >
+    <ButtonWithRipple {...props} disabled={disabled || loading} id={id}>
       {loading && (
         <LoadingWrapper>
           <LoadingIcon name="refresh" withText={!!loadingText} /> {loadingText}
@@ -331,4 +328,4 @@ Button.defaultProps = {
   selected: false
 };
 
-export default withTheme(Button);
+export default Button;

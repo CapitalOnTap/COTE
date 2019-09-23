@@ -79,10 +79,9 @@ export interface Props extends InputProps {
   isAutoComplete?: boolean;
   disabled?: boolean;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  ref: React.RefObject<any>;
 }
 
-export type Ref = HTMLInputElement;
+export type Ref = MaskedInput;
 
 const TextInput = React.forwardRef<Ref, Props>((props, ref) => {
   const {
