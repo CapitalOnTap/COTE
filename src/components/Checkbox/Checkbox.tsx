@@ -86,6 +86,7 @@ interface Props {
   secondary?: boolean;
   id?: string;
   invalid?: boolean;
+  beginChecked?: boolean;
 }
 
 interface State {
@@ -93,11 +94,11 @@ interface State {
 }
 
 class Checkbox extends Component<Props, State> {
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
 
     this.state = {
-      checked: false
+      checked: props.beginChecked !== null ? (props.beginChecked as boolean) : false
     };
   }
 
@@ -108,6 +109,7 @@ class Checkbox extends Component<Props, State> {
   render() {
     const { label, name, primary, secondary, id, invalid } = this.props;
     const { checked } = this.state;
+
     return (
       <Wrapper {...this.props} id={id}>
         <WrappingLabel>
@@ -117,6 +119,7 @@ class Checkbox extends Component<Props, State> {
             onChange={e => {
               this.handleValueChange(checked);
             }}
+            checked={checked}
             value={checked ? 1 : 0}
             {...this.props}
           />
