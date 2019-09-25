@@ -86,7 +86,7 @@ interface Props {
   secondary?: boolean;
   id?: string;
   invalid?: boolean;
-  beginChecked?: boolean;
+  checked?: boolean;
 }
 
 interface State {
@@ -98,7 +98,7 @@ class Checkbox extends Component<Props, State> {
     super(props);
 
     this.state = {
-      checked: props.beginChecked !== null ? (props.beginChecked as boolean) : false
+      checked: false
     };
   }
 
@@ -108,7 +108,8 @@ class Checkbox extends Component<Props, State> {
 
   render() {
     const { label, name, primary, secondary, id, invalid } = this.props;
-    const { checked } = this.state;
+    // Use prop instead of state, if provided
+    const checked = this.props.checked || this.state.checked;
 
     return (
       <Wrapper {...this.props} id={id}>
