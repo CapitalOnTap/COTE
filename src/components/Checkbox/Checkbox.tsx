@@ -139,7 +139,8 @@ class Checkbox extends Component<Props, State> {
   handleClicked: PropTypes.func,
   primary: PropTypes.bool,
   secondary: PropTypes.bool,
-  invalid: PropTypes.bool
+  invalid: PropTypes.bool,
+  checked: PropTypes.bool
 };
 
 (Checkbox as any).defaultProps = {
