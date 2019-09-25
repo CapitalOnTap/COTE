@@ -18,4 +18,18 @@ storiesOf('Checkbox', module)
   .add('With overriden margin-top', () => <CheckboxWithMargin label="This is a label." primary />)
   .add('Is required', () => <CheckboxWithMargin label="This is a label." invalid />)
   .add('Disabled', () => <Checkbox disabled />)
-  .add('Begins checked', () => <Checkbox beginChecked />);
+  .add('Checked prop provided by parent element', () => {
+    class Wrapper extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = {
+          checkedStatus: true
+        };
+      }
+      handleClick = value => this.setState({ checkedStatus: value });
+      render() {
+        return <Checkbox checked={this.state.checkedStatus} handleClicked={this.handleClick} />;
+      }
+    }
+    return <Wrapper />;
+  });
