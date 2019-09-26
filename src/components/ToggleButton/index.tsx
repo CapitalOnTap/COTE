@@ -19,7 +19,7 @@ const Wrapper = styled.div<{ disabled?: boolean; isActive?: boolean }>`
     if (props.isActive) {
       return props.theme ? props.theme.colorPrimary : defaultColors.primary;
     }
-    return props.theme ? props.theme.colorDanger : defaultColors.danger;
+    return props.theme ? props.theme.colorLightGrey : defaultColors.lightGrey;
   }};
   cursor: pointer;
   transition: background 150ms ease-in;
@@ -56,10 +56,7 @@ const HiddenInput = styled.input`
 interface Props {
   disabled?: boolean;
   isActive?: boolean;
-  onButtonClicked: (
-    isActive: boolean,
-    event: React.MouseEvent<HTMLDivElement, MouseEvent>
-  ) => void;
+  onButtonClicked: (isActive: boolean, event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 }
 
 interface State {
@@ -83,18 +80,12 @@ class ToggleButton extends PureComponent<Props, State> {
 
   render() {
     const isActive =
-      typeof this.props.isActive !== 'undefined'
-        ? this.props.isActive
-        : this.state.isActive;
+      typeof this.props.isActive !== 'undefined' ? this.props.isActive : this.state.isActive;
 
     const { disabled } = this.props;
 
     return (
-      <Wrapper
-        isActive={isActive}
-        onClick={this.handleButtonClicked}
-        disabled={disabled}
-      >
+      <Wrapper isActive={isActive} onClick={this.handleButtonClicked} disabled={disabled}>
         <Circle isActive={isActive} />
         <HiddenInput type="checkbox" />
       </Wrapper>
