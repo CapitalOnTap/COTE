@@ -98,9 +98,9 @@ interface Props {
   reverse?: boolean;
   small?: boolean;
   theme?: any;
-  customerReferenceLabel: string;
-  detailLabel: string;
-  logOutLabel: string;
+  customerReferenceLabel: React.ReactNode;
+  detailLabel: React.ReactNode;
+  logOutLabel: React.ReactNode;
   showDetailLink: boolean;
 }
 
