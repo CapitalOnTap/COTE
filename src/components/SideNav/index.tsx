@@ -23,7 +23,7 @@ const ListItem = styled.li<{ selected?: boolean }>`
   align-items: left;
   color: ${props => {
     if (!props.selected) {
-      return "white";
+      return 'white';
     }
     return props.theme ? props.theme.colorSecondary : defaultColors.secondary;
   }}
@@ -32,7 +32,9 @@ const ListItem = styled.li<{ selected?: boolean }>`
     if (!props.selected) {
       return null;
     }
-    return props.theme ? `4px solid ${props.theme.colorSecondary}` : `4px solid ${defaultColors.secondary}`;
+    return props.theme
+      ? `4px solid ${props.theme.colorSecondary}`
+      : `4px solid ${defaultColors.secondary}`;
   }};
   a {
     text-decoration: none;
@@ -76,7 +78,8 @@ const Nav = styled(PaperWrapper.withComponent('nav'))<{
   position: fixed;
   top: 0;
   bottom: 0;
-  background: ${props => (props.theme ? props.theme.colorNavigationBackground : defaultColors.navigationBackground)};
+  background: ${props =>
+    props.theme ? props.theme.colorNavigationBackground : defaultColors.navigationBackground};
   border-radius: 0;
   ${props => {
     if (props.isOpen) {
@@ -114,7 +117,7 @@ const CloseIcon = styled(Icon)<{ navWidth: number; isNavOpen?: boolean }>`
 `;
 
 interface Props {
-  width: number;
+  width?: number;
   logoUrl?: string;
   className?: string;
   navItems: {
@@ -123,7 +126,7 @@ interface Props {
     pathname: string;
     isSelected?: boolean;
     icon?: string;
-    title?: string;
+    title?: React.ReactNode;
   }[];
   isOpen?: boolean;
   iconsOnly?: boolean;
@@ -148,26 +151,14 @@ class SideNav extends Component<Props, State> {
   };
 
   render() {
-    const {
-      width,
-      logoUrl,
-      className,
-      navItems,
-      isOpen,
-      iconsOnly,
-      renderLink
-    } = this.props;
+    const { width, logoUrl, className, navItems, isOpen, iconsOnly, renderLink } = this.props;
 
     return (
       <Wrapper>
-        <CloseIcon
-          name="close"
-          navWidth={width}
-          isNavOpen={this.state.isOpen}
-        />
+        <CloseIcon name="close" navWidth={width as number} isNavOpen={this.state.isOpen} />
         <OutsideAlerter handleClickOutsideElement={this.handleClickOutside}>
           <Nav
-            width={width}
+            width={width as number}
             // use props to control if isOpen is different from undefined
             isOpen={isOpen !== undefined ? isOpen : this.state.isOpen}
             className={className}
@@ -193,10 +184,7 @@ class SideNav extends Component<Props, State> {
                     item.rel = 'noopener noreferrer';
                   }
                   return (
-                    <ListItem
-                      key={`snav-${item.pathname}`}
-                      selected={item.isSelected}
-                    >
+                    <ListItem key={`snav-${item.pathname}`} selected={item.isSelected}>
                       {renderLink ? (
                         renderLink(
                           <Fragment>
@@ -206,11 +194,7 @@ class SideNav extends Component<Props, State> {
                           item.pathname
                         )
                       ) : (
-                        <Link
-                          href={item.pathname}
-                          target={item.target}
-                          rel={item.rel}
-                        >
+                        <Link href={item.pathname} target={item.target} rel={item.rel}>
                           {item.icon && <Icon name={item.icon} />}
                           {!iconsOnly && <span>{item.title}</span>}
                         </Link>
