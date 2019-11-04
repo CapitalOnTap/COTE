@@ -21,12 +21,6 @@ const List = styled.ul`
 const ListItem = styled.li<{ selected?: boolean }>`
   display: flex;
   align-items: left;
-  color: ${props => {
-    if (!props.selected) {
-      return 'white';
-    }
-    return props.theme ? props.theme.colorSecondary : defaultColors.secondary;
-  }}
   padding: 1rem;
   border-left: ${props => {
     if (!props.selected) {
@@ -41,6 +35,20 @@ const ListItem = styled.li<{ selected?: boolean }>`
     color: inherit;
     height: 100%;
     width: 100%;
+    color: ${props => {
+      if (!props.selected) {
+        return 'white';
+      }
+      return props.theme ? props.theme.colorSecondary : defaultColors.secondary;
+    }}
+    :visited {
+      color: ${props => {
+        if (!props.selected) {
+          return 'white';
+        }
+        return props.theme ? props.theme.colorSecondary : defaultColors.secondary;
+      }}
+    }
     :hover {
       color: ${props => (props.theme ? props.theme.colorSecondary : defaultColors.secondary)};
     }
