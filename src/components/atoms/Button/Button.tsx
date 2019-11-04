@@ -267,11 +267,11 @@ interface Props extends StyledButtonProps, React.ButtonHTMLAttributes<{}> {
 }
 
 const Button: React.SFC<Props> = (props: Props) => {
-  const { children, icon, className, disabled, href, loading, loadingText, id } = props;
+  const { children, icon, className, disabled, href, loading, loadingText, id, ...rest } = props;
 
   if (href) {
     return (
-      <StyledLinkButton {...props} disabled={disabled} href={href} id={id}>
+      <StyledLinkButton {...rest} disabled={disabled} href={href} id={id}>
         {loading && <LoadingIcon name={'refresh'} />}
         {children}
         {icon && <Icon className={`fa fa-${icon} ${className}`} />}
@@ -280,7 +280,7 @@ const Button: React.SFC<Props> = (props: Props) => {
   }
 
   return (
-    <ButtonWithRipple {...props} disabled={disabled || loading} id={id}>
+    <ButtonWithRipple {...rest} disabled={disabled || loading} id={id}>
       {loading && (
         <LoadingWrapper>
           <LoadingIcon name="refresh" withText={!!loadingText} /> {loadingText}
