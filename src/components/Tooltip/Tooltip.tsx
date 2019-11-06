@@ -9,7 +9,6 @@ import Icon from '../atoms/Icon/Icon';
 
 const TooltipIcon = styled(Icon)`
   cursor: pointer;
-  padding: 0 10px;
   vertical-align: middle;
 `;
 
