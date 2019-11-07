@@ -280,7 +280,7 @@ const Button: React.SFC<Props> = (props: Props) => {
   }
 
   return (
-    <ButtonWithRipple {...rest} disabled={disabled || loading} id={id}>
+    <ButtonWithRipple {...rest} className={className} disabled={disabled || loading} id={id}>
       {loading && (
         <LoadingWrapper>
           <LoadingIcon name="refresh" withText={!!loadingText} /> {loadingText}
