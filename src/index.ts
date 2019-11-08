@@ -1,5 +1,5 @@
 export { default as Accordion } from './components/Accordion/Accordion';
-export { default as AddressSearch } from './components/AddressSelector/AddressSelector';
+export { default as AddressSearch, Address } from './components/AddressSelector/AddressSelector';
 export { default as Badge } from './components/atoms/Badge/Badge';
 export { default as Button } from './components/atoms/Button/Button';
 export { default as Icon } from './components/atoms/Icon/Icon';
