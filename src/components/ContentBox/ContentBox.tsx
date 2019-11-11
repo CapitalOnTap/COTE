@@ -28,7 +28,7 @@ const TitleWrapper = styled.div`
 interface Props extends WrapperProps, React.HTMLAttributes<{}> {
   title: string;
   className?: string;
-  id: string;
+  id?: string;
 }
 
 const ContentBox: React.SFC<Props> = ({
