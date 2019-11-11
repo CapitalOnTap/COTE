@@ -70,8 +70,8 @@ const InfoCaption = styled(Caption)`
 `;
 
 export interface Props extends InputProps {
-  labelText?: string;
-  subLabelText?: string;
+  labelText?: React.ReactNode;
+  subLabelText?: React.ReactNode;
   mask?: any;
   guide?: boolean;
   error?: string;
