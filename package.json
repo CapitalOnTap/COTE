@@ -1,6 +1,6 @@
 {
   "name": "cot-experience",
-  "version": "0.14.46",
+  "version": "0.14.55",
   "description": "Capital On Tap Experience is an end to end design language to create applications at Capital On Tap.",
   "main": "dist/main.js",
   "module": "dist/main.es.js",
@@ -21,8 +21,8 @@
     "build": "yarn clean && yarn build-bundle && yarn build-packages",
     "build-bundle": "rollup -c",
     "build-packages": "babel src/ --out-dir lib/ --copy-files",
-    "clean": "rimraf lib && rimraf dist",
-    "dist": "set NODE_ENV=production && yarn run clean && yarn run build",
+    "clean": "rimraf lib && rimraf dist && rimraf .rpt2_cache",
+    "dist": "set NODE_ENV=production && yarn run build",
     "export-storybook": "build-storybook -c .storybook -o .out-storybook",
     "deploy-storybook": "storybook-to-ghpages",
     "docker-storybook": "docker build -t storybook . && docker run -it storybook",

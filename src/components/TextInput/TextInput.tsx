@@ -14,7 +14,9 @@ interface InputProps extends React.InputHTMLAttributes<{}> {
   full?: boolean;
 }
 
-export const StyledInput = styled.input<InputProps>`
+export const StyledInput = styled(({ full, invalid, ...rest }: InputProps) => <input {...rest} />)<
+  React.InputHTMLAttributes<{}>
+>`
   &::placeholder {
     color: lightgrey;
   }
@@ -33,7 +35,9 @@ export const StyledInput = styled.input<InputProps>`
   height: 36px;
 `;
 
-const Input = styled(MaskedInput)<{ invalid?: boolean; full?: boolean; disabled?: boolean }>`
+const Input = styled(({ invalid, full, disabled, ...rest }) => (
+  <MaskedInput disabled={disabled} {...rest} />
+))`
   &::placeholder {
     color: lightgrey;
   }
@@ -68,8 +72,8 @@ const InfoCaption = styled(Caption)`
 `;
 
 export interface Props extends InputProps {
-  labelText?: string;
-  subLabelText?: string;
+  labelText?: React.ReactNode;
+  subLabelText?: React.ReactNode;
   mask?: any;
   guide?: boolean;
   error?: string;
@@ -99,7 +103,8 @@ const TextInput = React.forwardRef<Ref, Props>((props, ref) => {
     name,
     onChange,
     tooltip,
-    disabled
+    disabled,
+    ...rest
   } = props;
 
   return (
@@ -129,7 +134,7 @@ const TextInput = React.forwardRef<Ref, Props>((props, ref) => {
         className={className}
         placeholder={placeholder}
         name={name}
-        {...props}
+        {...rest}
         invalid={required}
         mask={mask ? mask : rawValue => Array(rawValue.length).fill(/./)}
         guide={guide}
