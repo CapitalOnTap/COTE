@@ -7,19 +7,19 @@ const items = [
   {
     text: 'Freeze',
     onClick: () => {
-      console.log('Freeze');
+      alert('On Click: Freeze');
     }
   },
   {
     text: 'Broken',
     onClick: () => {
-      console.log('Broken');
+      alert('On Click: Broken');
     }
   },
   {
     text: 'Close',
     onClick: () => {
-      console.log('Close');
+      alert('On Click: Close');
     }
   }
 ];
@@ -37,6 +37,11 @@ const elementOptions = [
   }
 ];
 
-storiesOf('DropdownButton', module).add('Normal', () => (
-  <DropdownButton secondary solid text="Actions" items={items} />
-));
+storiesOf('DropdownButton', module)
+  .add('Normal', () => <DropdownButton text="Actions" items={items} />)
+  .add('Primary Outline', () => <DropdownButton primary outline text="Actions" items={items} />)
+  .add('Danger Outline', () => <DropdownButton danger outline text="Actions" items={items} />)
+  .add('Secondary Outline', () => <DropdownButton secondary outline text="Actions" items={items} />)
+  .add('Primary Solid', () => <DropdownButton primary solid text="Actions" items={items} />)
+  .add('Danger Solid', () => <DropdownButton danger solid text="Actions" items={items} />)
+  .add('Secondary Solid', () => <DropdownButton secondary solid text="Actions" items={items} />);
