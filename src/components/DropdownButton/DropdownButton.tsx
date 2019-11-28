@@ -119,7 +119,7 @@ class DropdownButton extends Component<Props, State> {
     // const selectedOption = isControllable ? this.props.selectedOption : this.state.selectedOption;
     return (
       <OutsideAlerter handleClickOutsideElement={this.handleClickOutsideDropdown}>
-        <Wrapper error={error} full={full} id={id} {...this.props} tabIndex={0}>
+        <Wrapper error={error} full={full} id={id} tabIndex={0}>
           <StyledButton
             primary={primary}
             danger={danger}
