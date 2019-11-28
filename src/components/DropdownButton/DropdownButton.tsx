@@ -58,7 +58,7 @@ const StyledButton = styled(Button)`
 `;
 
 interface Props extends WrapperProps {
-  text?: any;
+  text?: React.ReactNode;
   primary?: boolean;
   secondary?: boolean;
   solid?: boolean;
@@ -99,22 +99,33 @@ class DropdownButton extends Component<Props, State> {
     );
   };
 
-  handleItemClick = onClick => {
-    onClick();
-    this.setState({ isOpen: false });
-  };
-
   render() {
     const { isOpen } = this.state;
-    const { children, text, error, full, id, disabled, ...props } = this.props;
+    const {
+      children,
+      text,
+      error,
+      full,
+      id,
+      disabled,
+      primary,
+      danger,
+      secondary,
+      outline,
+      solid
+    } = this.props;
 
     /* Check if this is controlled by the parent, if yes, use the one from the parent */
     // const selectedOption = isControllable ? this.props.selectedOption : this.state.selectedOption;
     return (
-      <OutsideAlerter handleClickOutsideElement={this.handleClickOutsideDropdown} {...props}>
+      <OutsideAlerter handleClickOutsideElement={this.handleClickOutsideDropdown}>
         <Wrapper error={error} full={full} id={id} {...this.props} tabIndex={0}>
           <StyledButton
-            {...props}
+            primary={primary}
+            danger={danger}
+            secondary={secondary}
+            solid={solid}
+            outline={outline}
             onClick={this.handleClick}
             icon={!isOpen ? 'keyboard_arrow_down' : 'keyboard_arrow_up'}
           >
