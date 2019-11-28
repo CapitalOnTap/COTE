@@ -10,7 +10,7 @@ import Paper from '../Paper/Paper';
 
 const ResultWrapper = styled(Paper)<WrapperProps>`
   position: absolute;
-  top: ${props => (props.small ? '20px' : '48px')};
+  top: ${props => (props.small ? '20px' : '36px')};
   min-height: auto;
   max-height: 17em;
   overflow: auto;
