@@ -287,7 +287,7 @@ const Button: React.SFC<Props> = (props: Props) => {
         </LoadingWrapper>
       )}
       {!loading && children}
-      {icon && <Icon name={icon} />}
+      {icon && <Icon name={icon} {...rest} />}
     </ButtonWithRipple>
   );
 };
