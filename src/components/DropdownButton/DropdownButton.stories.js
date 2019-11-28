@@ -63,4 +63,9 @@ storiesOf('DropdownButton', module)
     <DropdownButton secondary solid text="Actions">
       {items}
     </DropdownButton>
+  ))
+  .add('Small Primary Outline', () => (
+    <DropdownButton primary outline small text="Actions">
+      {items}
+    </DropdownButton>
   ));
