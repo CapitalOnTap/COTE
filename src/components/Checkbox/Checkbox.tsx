@@ -43,6 +43,7 @@ const Box = styled.span<{ primary?: boolean; secondary?: boolean; invalid?: bool
   }};
   border-radius: 0.25em;
   width: 24px;
+  min-width: 24px;
   height: 24px;
   float: left;
   margin-right: 0.5em;
