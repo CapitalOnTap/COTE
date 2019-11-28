@@ -8,9 +8,9 @@ import OutsideAlerter from '../OutsideAlerter/OutsideAlerter';
 import Button from '../atoms/Button/Button';
 import Paper from '../Paper/Paper';
 
-const ResultWrapper = styled(Paper)<React.HTMLAttributes<{}>>`
+const ResultWrapper = styled(Paper)<WrapperProps>`
   position: absolute;
-  top: 48px;
+  top: ${props => (props.small ? '20px' : '48px')};
   min-height: auto;
   max-height: 17em;
   overflow: auto;
@@ -19,6 +19,8 @@ const ResultWrapper = styled(Paper)<React.HTMLAttributes<{}>>`
   padding: 0;
   z-index: 999;
   box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14);
+  white-space: nowrap;
+  width: 100%;
 `;
 
 const ArrowIcon = styled(Icon)<React.HTMLAttributes<{}>>`
@@ -35,6 +37,7 @@ interface WrapperProps extends React.HTMLAttributes<{}> {
   full?: boolean;
   error?: string;
   disabled?: boolean;
+  small?: boolean;
 }
 
 const Wrapper = styled.div<WrapperProps>`
@@ -50,10 +53,15 @@ const Wrapper = styled.div<WrapperProps>`
   }
 `;
 const StyledButton = styled(Button)`
+  ${props => (props.small ? 'font-size: 12px' : '')};
+  ${props => (props.small ? 'height: 20px' : '')};
+  ${props => (props.small ? 'line-height: 20px' : '')};
   padding-right: 5px;
   i {
+    ${props => (props.small ? 'font-size: 12px' : '')};
+    ${props => (props.small ? 'line-height: 20px' : '')};
     float: right;
-    padding: 6px 0 0 6px;
+    padding: ${props => (props.small ? '0 0 0 6px' : '6px 0 0 6px')};
   }
 `;
 
@@ -64,6 +72,7 @@ interface Props extends WrapperProps {
   solid?: boolean;
   danger?: boolean;
   outline?: boolean;
+  small?: boolean;
 }
 
 interface State {
@@ -112,7 +121,8 @@ class DropdownButton extends Component<Props, State> {
       danger,
       secondary,
       outline,
-      solid
+      solid,
+      small
     } = this.props;
 
     /* Check if this is controlled by the parent, if yes, use the one from the parent */
@@ -128,11 +138,12 @@ class DropdownButton extends Component<Props, State> {
             outline={outline}
             onClick={this.handleClick}
             icon={!isOpen ? 'keyboard_arrow_down' : 'keyboard_arrow_up'}
+            small={small}
           >
             {text}
           </StyledButton>
           {isOpen && !disabled ? (
-            <ResultWrapper onClick={() => this.setState({ isOpen: false })}>
+            <ResultWrapper small={small} onClick={() => this.setState({ isOpen: false })}>
               {children}
             </ResultWrapper>
           ) : null}
