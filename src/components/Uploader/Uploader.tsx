@@ -38,7 +38,6 @@ interface Props extends DropzoneProps {
   title?: string;
   subtitle?: string;
   multiple?: boolean;
-  onDrop?: () => void;
 }
 
 class Uploader extends React.Component<Props> {
