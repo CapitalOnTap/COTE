@@ -6,9 +6,7 @@ import Button from '../atoms/Button/Button';
 import Icon from '../atoms/Icon/Icon';
 import { Title } from '../atoms/Typography/index';
 
-const StyledDropZone = styled(Dropzone)<
-  DropzoneProps & { children: React.ReactNode }
->`
+const StyledDropZone = styled(Dropzone)<DropzoneProps & { children: React.ReactNode }>`
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -39,6 +37,8 @@ interface Props extends DropzoneProps {
   buttonText?: string;
   title?: string;
   subtitle?: string;
+  multiple?: boolean;
+  onDrop?: () => void;
 }
 
 class Uploader extends React.Component<Props> {
@@ -55,14 +55,10 @@ class Uploader extends React.Component<Props> {
       <StyledDropZone
         {...props}
         activeStyle={{
-          border: `dashed 2px ${
-            theme ? theme.colorPrimary : defaultColors.success
-          }`
+          border: `dashed 2px ${theme ? theme.colorPrimary : defaultColors.success}`
         }}
         rejectStyle={{
-          border: `dashed 2px ${
-            theme ? theme.colorDanger : defaultColors.danger
-          }`
+          border: `dashed 2px ${theme ? theme.colorDanger : defaultColors.danger}`
         }}
         ref={node => {
           this.dropzone = node;
