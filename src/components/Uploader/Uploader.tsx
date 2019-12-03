@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Dropzone, { DropzoneProps } from 'react-dropzone';
+import Dropzone, { DropzoneProps, DropFilesEventHandler } from 'react-dropzone';
 import styled from 'styled-components';
 import { colors as defaultColors } from '../../styles/defaults';
 import Button from '../atoms/Button/Button';
@@ -38,6 +38,7 @@ interface Props extends DropzoneProps {
   title?: string;
   subtitle?: string;
   multiple?: boolean;
+  onDrop?: DropFilesEventHandler;
 }
 
 class Uploader extends React.Component<Props> {
