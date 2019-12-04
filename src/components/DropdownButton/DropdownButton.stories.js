@@ -32,40 +32,113 @@ const elementOptions = [
   }
 ];
 
-storiesOf('DropdownButton', module)
-  .add('Normal', () => <DropdownButton text="Actions">{items}</DropdownButton>)
-  .add('Primary Outline', () => (
+storiesOf('DropdownButton/Normal', module)
+  .add('Primary', () => (
+    <DropdownButton primary text="Actions">
+      {items}
+    </DropdownButton>
+  ))
+  .add('Danger', () => (
+    <DropdownButton danger text="Actions">
+      {items}
+    </DropdownButton>
+  ))
+  .add('Secondary', () => (
+    <DropdownButton secondary text="Actions">
+      {items}
+    </DropdownButton>
+  ))
+  .add('loading', () => (
+    <DropdownButton primary loading text="Actions">
+      {items}
+    </DropdownButton>
+  ))
+  .add('Disabled', () => (
+    <DropdownButton primary disabled text="Actions">
+      {items}
+    </DropdownButton>
+  ))
+  .add('Small', () => (
+    <DropdownButton small primary text="Actions">
+      {items}
+    </DropdownButton>
+  ))
+  .add('Small loading', () => (
+    <DropdownButton small primary loading text="Actions">
+      {items}
+    </DropdownButton>
+  ));
+
+storiesOf('DropdownButton/Outlined', module)
+  .add('Primary', () => (
     <DropdownButton primary outline text="Actions">
       {items}
     </DropdownButton>
   ))
-  .add('Danger Outline', () => (
+  .add('Danger', () => (
     <DropdownButton danger outline text="Actions">
       {items}
     </DropdownButton>
   ))
-  .add('Secondary Outline', () => (
+  .add('Secondary', () => (
     <DropdownButton secondary outline text="Actions">
       {items}
     </DropdownButton>
   ))
-  .add('Primary Solid', () => (
+  .add('loading', () => (
+    <DropdownButton primary loading outline text="Actions">
+      {items}
+    </DropdownButton>
+  ))
+  .add('Disabled', () => (
+    <DropdownButton primary disabled outline text="Actions">
+      {items}
+    </DropdownButton>
+  ))
+  .add('Small', () => (
+    <DropdownButton primary small outline text="Actions">
+      {items}
+    </DropdownButton>
+  ))
+  .add('Small loading', () => (
+    <DropdownButton primary small loading outline text="Actions">
+      {items}
+    </DropdownButton>
+  ));
+
+storiesOf('DropdownButton/Solid', module)
+  .add('Primary', () => (
     <DropdownButton primary solid text="Actions">
       {items}
     </DropdownButton>
   ))
-  .add('Danger Solid', () => (
+  .add('Danger', () => (
     <DropdownButton danger solid text="Actions">
       {items}
     </DropdownButton>
   ))
-  .add('Secondary Solid', () => (
+  .add('Secondary', () => (
     <DropdownButton secondary solid text="Actions">
       {items}
     </DropdownButton>
   ))
-  .add('Small Primary Outline', () => (
-    <DropdownButton primary outline small text="Actions">
+  .add('loading', () => (
+    <DropdownButton primary loading solid text="Actions">
+      {items}
+    </DropdownButton>
+  ))
+  .add('Disabled', () => (
+    <DropdownButton danger disabled solid text="Actions">
+      {items}
+    </DropdownButton>
+  ))
+  .add('Small', () => (
+    <DropdownButton primary small solid text="Actions">
+      {items}
+    </DropdownButton>
+  ))
+  .add('Small loading', () => (
+    <DropdownButton primary small loading solid text="Actions">
       {items}
     </DropdownButton>
   ));

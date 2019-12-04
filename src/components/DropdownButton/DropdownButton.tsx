@@ -55,12 +55,19 @@ const StyledButton = styled(Button)`
   ${props => (props.small ? 'font-size: 12px' : '')};
   ${props => (props.small ? 'height: 20px' : '')};
   ${props => (props.small ? 'line-height: 20px' : '')};
-  padding-right: 5px;
-  i {
+  padding: ${props =>
+    props.small ? (props.loading ? '1px 16px 0 16px' : '1px 8px 0 16px') : '0 8px 0 16px'};
+  > i {
     ${props => (props.small ? 'font-size: 12px' : '')};
     ${props => (props.small ? 'line-height: 20px' : '')};
     float: right;
     padding: ${props => (props.small ? '0 0 0 6px' : '6px 0 0 6px')};
+  }
+  > span {
+    padding: ${props => (props.small ? '0 0 0 6px' : '5px')};
+    i {
+      ${props => (props.small ? 'font-size: 16px' : '')}
+    }
   }
 `;
 
@@ -72,6 +79,8 @@ interface Props extends WrapperProps {
   danger?: boolean;
   outline?: boolean;
   small?: boolean;
+  loading?: boolean;
+  disabled?: boolean;
 }
 
 interface State {
@@ -121,7 +130,8 @@ class DropdownButton extends Component<Props, State> {
       secondary,
       outline,
       solid,
-      small
+      small,
+      loading
     } = this.props;
 
     /* Check if this is controlled by the parent, if yes, use the one from the parent */
@@ -138,6 +148,7 @@ class DropdownButton extends Component<Props, State> {
             onClick={this.handleClick}
             icon={!isOpen ? 'keyboard_arrow_down' : 'keyboard_arrow_up'}
             small={small}
+            loading={loading}
           >
             {text}
           </StyledButton>
@@ -159,7 +170,8 @@ class DropdownButton extends Component<Props, State> {
   solid: PropTypes.bool,
   danger: PropTypes.bool,
   outline: PropTypes.bool,
-  disabled: PropTypes.bool
+  disabled: PropTypes.bool,
+  loading: PropTypes.bool
 };
 
 (DropdownButton as any).defaultProps = {
@@ -168,7 +180,8 @@ class DropdownButton extends Component<Props, State> {
   solid: false,
   danger: false,
   outline: false,
-  disabled: false
+  disabled: false,
+  loading: false
 };
 
 export default DropdownButton;
