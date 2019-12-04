@@ -14,13 +14,12 @@ const ResultWrapper = styled(Paper)<WrapperProps>`
   min-height: auto;
   max-height: 17em;
   overflow: auto;
-  min-width: 65px;
+  min-width: 100%;
   left: 0;
   padding: 0;
   z-index: 999;
   box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14);
   white-space: nowrap;
-  width: 100%;
 `;
 
 const ArrowIcon = styled(Icon)<React.HTMLAttributes<{}>>`
