@@ -153,7 +153,7 @@ class DropdownButton extends Component<Props, State> {
             {text}
           </StyledButton>
           {isOpen && !disabled ? (
-            <ResultWrapper small={small} onClick={() => this.setState({ isOpen: true })}>
+            <ResultWrapper small={small} onClick={() => this.setState({ isOpen: false })}>
               {children}
             </ResultWrapper>
           ) : null}
