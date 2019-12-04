@@ -54,7 +54,7 @@ storiesOf('DropdownButton/Normal', module)
     </DropdownButton>
   ))
   .add('Disabled', () => (
-    <DropdownButton primary disable text="Actions">
+    <DropdownButton primary disabled text="Actions">
       {items}
     </DropdownButton>
   ))
