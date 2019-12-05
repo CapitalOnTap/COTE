@@ -19,6 +19,7 @@ export { default as Checkbox } from './components/Checkbox/Checkbox';
 export { default as ContentBox } from './components/ContentBox/ContentBox';
 export { default as CotCard } from './components/CotCard/CotCard';
 export { default as Dropdown } from './components/Dropdown/Dropdown';
+export { default as DropdownButton } from './components/DropdownButton/DropdownButton';
 export { default as ExpansionPanel } from './components/ExpansionPanel';
 export { default as HighlightsBar } from './components/HighlightsBar/HighlightsBar';
 export {
