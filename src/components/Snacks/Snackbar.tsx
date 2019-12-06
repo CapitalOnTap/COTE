@@ -1,9 +1,11 @@
-import * as React from "react";
-import styled, { css } from "styled-components";
-import Paper from "../Paper/Paper";
-import Button from "../atoms/Button/Button";
-import Icon from "../atoms/Icon/Icon";
-import { SnackbarStatus } from "./types";
+import * as React from 'react';
+import styled, { css } from 'styled-components';
+import Paper from '../Paper/Paper';
+import Button from '../atoms/Button/Button';
+import Icon from '../atoms/Icon/Icon';
+import { SnackbarStatus } from './types';
+import { subPixelFix } from '../../utils';
+import uuidv4 from 'uuid/v4';
 
 const active = css`
   transform: translate(-50%, -20%);
@@ -30,6 +32,8 @@ interface IWrapperProps extends React.HTMLAttributes<{}> {
   isActive?: boolean;
 }
 
+const animationSpeedMs = 250;
+
 const Wrapper = styled(Paper)<IWrapperProps>`
   margin-top: 2rem;
   border-radius: 2px;
@@ -44,7 +48,7 @@ const Wrapper = styled(Paper)<IWrapperProps>`
   position: fixed;
   bottom: 0;
   left: 50%;
-  transition: transform 0.25s cubic-bezier(0.4, 0, 1, 1) 0ms;
+  transition: transform ${animationSpeedMs / 1000}s cubic-bezier(0.4, 0, 1, 1) 0ms;
   pointer-events: auto;
   white-space: pre-line;
   ${props => (props.isActive ? active : notActive)};
@@ -52,7 +56,7 @@ const Wrapper = styled(Paper)<IWrapperProps>`
 
 const Flex = styled.div<{ justify?: string }>`
   display: flex;
-  ${props => (props.justify ? `flex-justify: ${props.justify}` : "")}
+  ${props => (props.justify ? `flex-justify: ${props.justify}` : '')}
 `;
 
 const ActionButton = styled(Button)`
@@ -105,26 +109,31 @@ export interface SnackbarProps {
   icon: string;
   status: SnackbarStatus;
 }
+interface State {
+  visible: boolean;
+}
 
-export default class Snackbar extends React.Component<SnackbarProps, any> {
+export default class Snackbar extends React.Component<SnackbarProps, State> {
   static defaultProps: SnackbarProps = {
     delay: 4000,
     clearSnack: () => {},
-    actionText: "DISMISS",
-    message: "",
-    title: "",
-    icon: "",
+    actionText: 'DISMISS',
+    message: '',
+    title: '',
+    icon: '',
     status: SnackbarStatus.Info
   };
+  constructor(props) {
+    super(props);
+    this.state = { visible: false };
+    this.wrapperId = uuidv4();
+  }
 
+  private wrapperId;
   private timer;
 
-  state = {
-    visible: false
-  };
-
   componentDidMount() {
-    setTimeout(() => this.setState({ visible: true }), 0);
+    setTimeout(() => this.toggleSnackDisplay(true), 0);
     this.setTimer();
   }
 
@@ -132,7 +141,18 @@ export default class Snackbar extends React.Component<SnackbarProps, any> {
     // reset the timer if children are changed
     if (nextProps.children !== this.props.children) {
       this.setTimer();
-      this.setState({ visible: true });
+      this.toggleSnackDisplay(true);
+    }
+  }
+
+  toggleSnackDisplay(visible: boolean) {
+    this.setState({ visible });
+    const snackBar = document.getElementById(this.wrapperId);
+    if (snackBar) {
+      snackBar.style.removeProperty('transform');
+      setTimeout(function() {
+        subPixelFix(snackBar);
+      }, animationSpeedMs);
     }
   }
 
@@ -146,7 +166,8 @@ export default class Snackbar extends React.Component<SnackbarProps, any> {
 
     // hide after `delay` milliseconds
     this.timer = setTimeout(() => {
-      this.setState({ visible: false });
+      this.toggleSnackDisplay(false);
+      console.log('timer expired, should be invis');
       this.timer = null;
       // TODO - work on improving push of next snack
       this.props.clearSnack();
@@ -161,6 +182,7 @@ export default class Snackbar extends React.Component<SnackbarProps, any> {
     const { action, message, actionText, title, icon, status } = this.props;
     return (
       <Wrapper
+        id={this.wrapperId}
         isActive={this.state.visible}
         onMouseEnter={this.clearTimer}
         onMouseLeave={this.setTimer}
