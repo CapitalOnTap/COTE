@@ -167,7 +167,6 @@ export default class Snackbar extends React.Component<SnackbarProps, State> {
     // hide after `delay` milliseconds
     this.timer = setTimeout(() => {
       this.toggleSnackDisplay(false);
-      console.log('timer expired, should be invis');
       this.timer = null;
       // TODO - work on improving push of next snack
       this.props.clearSnack();
