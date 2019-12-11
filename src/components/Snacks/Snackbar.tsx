@@ -32,8 +32,6 @@ interface IWrapperProps extends React.HTMLAttributes<{}> {
   isActive?: boolean;
 }
 
-const animationSpeedMs = 250;
-
 const Wrapper = styled(Paper)<IWrapperProps>`
   margin-top: 2rem;
   border-radius: 2px;
@@ -48,7 +46,7 @@ const Wrapper = styled(Paper)<IWrapperProps>`
   position: fixed;
   bottom: 0;
   left: 50%;
-  transition: transform ${animationSpeedMs / 1000}s cubic-bezier(0.4, 0, 1, 1) 0ms;
+  transition: transform ${250 / 1000}s cubic-bezier(0.4, 0, 1, 1) 0ms;
   pointer-events: auto;
   white-space: pre-line;
   ${props => (props.isActive ? active : notActive)};
@@ -133,7 +131,7 @@ export default class Snackbar extends React.Component<SnackbarProps, State> {
   private timer;
 
   componentDidMount() {
-    setTimeout(() => this.toggleSnackDisplay(true), 0);
+    setTimeout(() => this.setState({ visible: true }), 0);
     this.setTimer();
   }
 
@@ -141,18 +139,7 @@ export default class Snackbar extends React.Component<SnackbarProps, State> {
     // reset the timer if children are changed
     if (nextProps.children !== this.props.children) {
       this.setTimer();
-      this.toggleSnackDisplay(true);
-    }
-  }
-
-  toggleSnackDisplay(visible: boolean) {
-    this.setState({ visible });
-    const snackBar = document.getElementById(this.wrapperId);
-    if (snackBar) {
-      snackBar.style.removeProperty('transform');
-      setTimeout(function() {
-        subPixelFix(snackBar);
-      }, animationSpeedMs);
+      this.setState({ visible: true });
     }
   }
 
@@ -166,7 +153,11 @@ export default class Snackbar extends React.Component<SnackbarProps, State> {
 
     // hide after `delay` milliseconds
     this.timer = setTimeout(() => {
-      this.toggleSnackDisplay(false);
+      const snackBar = document.getElementById(this.wrapperId);
+      if (snackBar) {
+        snackBar.style.removeProperty('transform');
+      }
+      this.setState({ visible: false });
       this.timer = null;
       // TODO - work on improving push of next snack
       this.props.clearSnack();
@@ -185,6 +176,13 @@ export default class Snackbar extends React.Component<SnackbarProps, State> {
         isActive={this.state.visible}
         onMouseEnter={this.clearTimer}
         onMouseLeave={this.setTimer}
+        onTransitionEnd={() => {
+          const snackBar = document.getElementById(this.wrapperId);
+          if (this.state.visible && snackBar) {
+            // Only perform subpixel fix if showing snack
+            subPixelFix(snackBar);
+          }
+        }}
       >
         <Flex>
           {icon && (
