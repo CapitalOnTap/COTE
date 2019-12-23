@@ -17,8 +17,17 @@ const StyledIcon = styled(Icon)`
   margin-right: 1em;
 `;
 
-const StyledTitle = styled(Title)<{ error?: boolean }>`
-  color: ${props => (props.error ? defaultColors.danger : defaultColors.primary)};
+const StyledTitleColor = props => {
+  if (props.error) {
+    return defaultColors.danger;
+  } else if (props.warning) {
+    return defaultColors.secondary;
+  }
+  return defaultColors.primary;
+};
+
+const StyledTitle = styled(Title)<{ warning?: boolean; error?: boolean }>`
+  color: ${props => StyledTitleColor(props)};
 `;
 
 const Actions = styled.div`
@@ -34,6 +43,7 @@ interface Props {
   icon: string;
   title: string;
   buttonText: string;
+  warning?: boolean;
   error?: boolean;
   message: boolean;
   onButtonClick?: () => void;
@@ -43,6 +53,7 @@ const Toast: React.SFC<Props> = ({
   icon,
   title,
   buttonText,
+  warning,
   error,
   message,
   onButtonClick
@@ -50,8 +61,8 @@ const Toast: React.SFC<Props> = ({
   return (
     <Paper>
       <Header>
-        <StyledIcon name={icon} error={error} primary={!error} />{' '}
-        <StyledTitle error={error}>
+        <StyledIcon name={icon} warning={warning} error={error} primary={!error} />{' '}
+        <StyledTitle error={error} warning={warning}>
           <b>{title}</b>
         </StyledTitle>
       </Header>
@@ -66,6 +77,7 @@ const Toast: React.SFC<Props> = ({
 (Toast as any).propTypes = {
   icon: PropTypes.string,
   buttonText: PropTypes.string,
+  warning: PropTypes.bool,
   error: PropTypes.bool,
   onButtonClick: PropTypes.func,
   title: PropTypes.string,
@@ -75,6 +87,7 @@ const Toast: React.SFC<Props> = ({
 (Toast as any).defaultProps = {
   icon: 'check_circle',
   buttonText: 'Dismiss',
+  warning: false,
   error: false,
   title: 'Toast title',
   message: 'Toast message',
