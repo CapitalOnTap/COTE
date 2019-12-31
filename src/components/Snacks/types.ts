@@ -11,5 +11,7 @@ export interface Snacks {
     status: SnackbarStatus;
     icon?: string;
     delay?: number;
+    action?: () => void;
+    actionText?: string;
   };
 }
