@@ -11,7 +11,7 @@ const StyledIcon = styled.i<{ reverse: boolean; solid: boolean } & any>`
       return props.theme ? props.theme.colorInfo : defaultColors.info;
     }
     if (props.warning) {
-      return props.theme ? props.theme.colorSecondary : defaultColors.secondary;
+      return props.theme ? props.theme.colorWarning : defaultColors.secondary;
     }
     if (props.error) {
       return props.theme ? props.theme.colorDanger : defaultColors.danger;
@@ -35,7 +35,7 @@ const StyledIcon = styled.i<{ reverse: boolean; solid: boolean } & any>`
         return `1px solid ${props.theme ? props.theme.colorInfo : defaultColors.info}`;
       }
       if (props.warning) {
-        return `1px solid ${props.theme ? props.theme.colorSecondary : defaultColors.secondary}`;
+        return `1px solid ${props.theme ? props.theme.colorWarning : defaultColors.warning}`;
       }
       if (props.error) {
         return `1px solid ${props.theme ? props.theme.colorDanger : defaultColors.danger}`;

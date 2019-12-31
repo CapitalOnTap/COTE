@@ -21,7 +21,7 @@ const StyledTitleColor = props => {
   if (props.error) {
     return defaultColors.danger;
   } else if (props.warning) {
-    return defaultColors.secondary;
+    return defaultColors.warning;
   }
   return defaultColors.primary;
 };

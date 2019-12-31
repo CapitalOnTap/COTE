@@ -24,7 +24,7 @@ storiesOf('Toast', module)
         icon="check_circle"
         message="A message"
         buttonText="Dismiss"
-        onButtonClick={() => alert('Button clicked')}
+        onButtonClick={() => alert('Custom callback')}
       />
     </div>
   ));
