@@ -21,7 +21,7 @@ export default class SnacksContainer extends React.Component<Props, any> {
         clearSnack={() => this.clearSnackItem(snackId)}
         key={snackId}
         action={
-          snacks[snackId].action ? () => snacks[snackId].action : () => this.clearSnackItem(snackId)
+          snacks[snackId].action ? snacks[snackId].action : () => this.clearSnackItem(snackId)
         }
         actionText={snacks[snackId].actionText}
         message={snacks[snackId].message}
