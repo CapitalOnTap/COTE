@@ -10,6 +10,9 @@ const StyledIcon = styled.i<{ reverse: boolean; solid: boolean } & any>`
     if (props.info) {
       return props.theme ? props.theme.colorInfo : defaultColors.info;
     }
+    if (props.warning) {
+      return props.theme ? props.theme.colorWarning : defaultColors.secondary;
+    }
     if (props.error) {
       return props.theme ? props.theme.colorDanger : defaultColors.danger;
     }
@@ -30,6 +33,9 @@ const StyledIcon = styled.i<{ reverse: boolean; solid: boolean } & any>`
     if (props.circle && !props.solid) {
       if (props.info) {
         return `1px solid ${props.theme ? props.theme.colorInfo : defaultColors.info}`;
+      }
+      if (props.warning) {
+        return `1px solid ${props.theme ? props.theme.colorWarning : defaultColors.warning}`;
       }
       if (props.error) {
         return `1px solid ${props.theme ? props.theme.colorDanger : defaultColors.danger}`;
@@ -54,6 +60,9 @@ const StyledIcon = styled.i<{ reverse: boolean; solid: boolean } & any>`
       if (props.info) {
         return props.theme ? props.theme.colorInfo : defaultColors.info;
       }
+      if (props.warning) {
+        return props.theme ? props.theme.colorSecondary : defaultColors.secondary;
+      }
       if (props.error) {
         return props.theme ? props.theme.colorDanger : defaultColors.danger;
       }
@@ -77,6 +86,7 @@ interface Props extends React.HTMLAttributes<{}> {
   name?: string;
   /** Render icon in a circle shape */
   circle?: boolean;
+  warning?: boolean;
   error?: boolean;
   success?: boolean;
   info?: boolean;
@@ -88,6 +98,7 @@ interface Props extends React.HTMLAttributes<{}> {
 const Icon: React.SFC<Props> = ({
   name,
   primary,
+  warning,
   error,
   success,
   info,
@@ -104,6 +115,7 @@ const Icon: React.SFC<Props> = ({
       primary={primary}
       circle={circle}
       solid={solid}
+      warning={warning}
       error={error}
       success={success}
       info={info}
