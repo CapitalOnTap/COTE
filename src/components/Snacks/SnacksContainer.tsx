@@ -20,7 +20,10 @@ export default class SnacksContainer extends React.Component<Props, any> {
       <Snackbar
         clearSnack={() => this.clearSnackItem(snackId)}
         key={snackId}
-        action={() => this.clearSnackItem(snackId)}
+        action={
+          snacks[snackId].action ? snacks[snackId].action : () => this.clearSnackItem(snackId)
+        }
+        actionText={snacks[snackId].actionText}
         message={snacks[snackId].message}
         title={snacks[snackId].title}
         icon={snacks[snackId].icon}
