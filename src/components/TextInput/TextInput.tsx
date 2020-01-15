@@ -35,9 +35,7 @@ export const StyledInput = styled(({ full, invalid, ...rest }: InputProps) => <i
   height: 36px;
 `;
 
-const Input = styled(({ invalid, full, disabled, ...rest }) => (
-  <MaskedInput disabled={disabled} {...rest} />
-))`
+const Input = styled(MaskedInput)<{ invalid?: boolean; full?: boolean; disabled?: boolean }>`
   &::placeholder {
     color: lightgrey;
   }
