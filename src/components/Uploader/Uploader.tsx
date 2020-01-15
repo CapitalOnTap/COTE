@@ -37,6 +37,7 @@ interface Props extends DropzoneProps {
   buttonText?: string;
   title?: string;
   subtitle?: string;
+  paragraphText?: string;
   multiple?: boolean;
   onDrop?: DropFilesEventHandler;
 }
@@ -49,7 +50,7 @@ class Uploader extends React.Component<Props> {
   };
 
   render() {
-    const { icon, theme, buttonText, title, subtitle, ...props } = this.props;
+    const { icon, theme, buttonText, paragraphText, title, subtitle, ...props } = this.props;
 
     return (
       <StyledDropZone
@@ -68,7 +69,7 @@ class Uploader extends React.Component<Props> {
           <Icon name={icon} />
           <Title bold>{title}</Title>
           <p>{subtitle}</p>
-          <p>or</p>
+          <p>{paragraphText}</p>
         </ContentWrapper>
         <Button primary solid type="button" onClick={this.onOpenClick}>
           {buttonText}
@@ -82,7 +83,8 @@ class Uploader extends React.Component<Props> {
   icon: 'add_circle_outline',
   buttonText: 'Choose files',
   title: 'Drag and drop files here',
-  subtitle: ''
+  subtitle: '',
+  paragraphText: 'or'
 };
 
 export default Uploader;
