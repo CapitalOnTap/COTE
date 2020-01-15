@@ -23,7 +23,7 @@ export const StyledLink = styled.a`
   text-decoration: underline;
 `;
 
-interface Address {
+export interface Address {
   buildingNumber: string;
   unitNumber: string;
   buildingName: string;

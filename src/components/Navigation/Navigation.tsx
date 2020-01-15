@@ -17,8 +17,11 @@ const NavButton = styled(StyledLinkButton)`
   }}
   @media screen and (max-width: 640px) {
     height: 100%;
-    border: none !important;
-    padding: 0;
+    padding: 6px 16px;
+    line-height: normal;
+  }
+  @media screen and (max-width: 420px) {
+    margin-left: 10px;
   }
 `;
 
@@ -31,6 +34,9 @@ const Logo = styled.img<LogoProps>`
   max-height: 55px;
   @media screen and (max-width: 640px) {
     padding: 10px 0px;
+  }
+  @media screen and (max-width: 350px) {
+    width: 200px;
   }
 `;
 

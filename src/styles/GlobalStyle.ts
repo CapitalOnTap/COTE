@@ -25,7 +25,7 @@ time, mark, audio, video, input {
 }
 /* HTML5 display-role reset for older browsers */
 
-html{
+html {
 	-webkit-font-smoothing: subpixel-antialiased;
 }
 
@@ -52,7 +52,7 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
-body{
+body {
 	font-family: 'Lato', sans-serif;
 	@media only screen and (min-width: 640px) {
 		font-size: 14px;
@@ -61,8 +61,12 @@ body{
   color: rgba(6, 31, 51, 1);
 }
 
-h1,h2,h3,h4,h5,h6,p,span{
+h1, h2, h3, h4, h5, h6, p, span {
 	line-height: 1.618;
+}
+
+a {
+	cursor: pointer;
 }
 
 @supports (-webkit-overflow-scrolling: touch) {

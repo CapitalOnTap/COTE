@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
+import styled from 'styled-components';
 
 const wrapStyleDefault = {
   position: 'relative',
@@ -11,15 +12,11 @@ function withRipples(WrappedComponent) {
   return class WithRipples extends PureComponent {
     static propTypes = {
       during: PropTypes.number,
-      color: PropTypes.string,
-
       onClick: PropTypes.func
     };
 
     static defaultProps = {
       during: 600,
-      color: 'rgba(0, 0, 0, .3)',
-
       onClick: () => {}
     };
 
@@ -34,8 +31,7 @@ function withRipples(WrappedComponent) {
           width: 35,
           height: 35,
           transform: 'translate(-50%, -50%)',
-          pointerEvents: 'none',
-          backgroundColor: props.color
+          pointerEvents: 'none'
         }
       };
     }

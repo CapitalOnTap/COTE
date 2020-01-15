@@ -1,15 +1,15 @@
-import PropTypes from "prop-types";
-import React, { Component } from "react";
-import styled, { withTheme } from "styled-components";
-import { colors as defaultColors } from "../../styles/defaults";
-import OutsideAlerter from "../OutsideAlerter/OutsideAlerter";
-import Badge from "../atoms/Badge/Badge";
-import Icon from "../atoms/Icon/Icon";
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
+import styled from 'styled-components';
+import { colors as defaultColors } from '../../styles/defaults';
+import OutsideAlerter from '../OutsideAlerter/OutsideAlerter';
+import Badge from '../atoms/Badge/Badge';
+import Icon from '../atoms/Icon/Icon';
 
 const ArrowIcon = styled(Icon)`
   z-index: 2;
   color: ${props => {
-    if (props.reverse) return "#fff";
+    if (props.reverse) return '#fff';
     return props.theme ? props.theme.colorPrimary : defaultColors.primary;
   }};
   cursor: pointer;
@@ -18,7 +18,7 @@ const ArrowIcon = styled(Icon)`
 const ArrowWrapper = styled.div<{ small?: boolean }>`
   display: inline-block;
   position: relative;
-  top: ${props => (props.small ? "6px" : "2px")};
+  top: ${props => (props.small ? '6px' : '2px')};
 `;
 
 const DropdownWrapper = styled.div`
@@ -41,7 +41,7 @@ const FirstName = styled.p<{ reverse?: boolean }>`
   display: inline-block;
   ${props => {
     if (props.reverse) {
-      return "color: #fff;";
+      return 'color: #fff;';
     }
     return null;
   }}
@@ -53,7 +53,7 @@ const BadgeWrapper = styled.div`
 
 const MenuWrapper = styled.div<{ right?: boolean; isOpen?: boolean }>`
   right: ${props => (props.right ? 0 : null)};
-  display: ${props => (props.isOpen ? "block" : "none")};
+  display: ${props => (props.isOpen ? 'block' : 'none')};
   margin-top: 5px;
   position: absolute;
   background-color: white;
@@ -64,12 +64,12 @@ const MenuWrapper = styled.div<{ right?: boolean; isOpen?: boolean }>`
 `;
 
 const MenuBox = styled.div<{ last?: boolean; hover?: boolean }>`
-  padding: 16px 16px ${props => (props.last ? "16px" : "0")} 16px;
+  padding: 16px 16px ${props => (props.last ? '16px' : '0')} 16px;
   display: block;
-  cursor: ${props => (props.hover ? "pointer" : "auto")};
+  cursor: ${props => (props.hover ? 'pointer' : 'auto')};
   &:hover {
-    background: ${props => (props.hover ? props.theme.colorPrimary : "white")};
-    color: ${props => (props.hover ? "white" : "inherit")};
+    background: ${props => (props.hover ? props.theme.colorPrimary : 'white')};
+    color: ${props => (props.hover ? 'white' : 'inherit')};
   }
 `;
 
@@ -81,7 +81,7 @@ const MenuEntry = styled.p`
 `;
 
 const Link = styled.a<{ reverse?: boolean }>`
-  color: ${props => (props.reverse ? "#fff" : props.theme.colorPrimary)};
+  color: ${props => (props.reverse ? '#fff' : props.theme.colorPrimary)};
 `;
 
 const Separator = styled.hr`
@@ -98,9 +98,9 @@ interface Props {
   reverse?: boolean;
   small?: boolean;
   theme?: any;
-  customerReferenceLabel: string;
-  detailLabel: string;
-  logOutLabel: string;
+  customerReferenceLabel: React.ReactNode;
+  detailLabel: React.ReactNode;
+  logOutLabel: React.ReactNode;
   showDetailLink: boolean;
 }
 
@@ -134,7 +134,6 @@ class MenuDropdown extends Component<Props, State> {
       logOutClick,
       reverse,
       small,
-      theme,
       customerReferenceLabel,
       detailLabel,
       logOutLabel,
@@ -149,12 +148,7 @@ class MenuDropdown extends Component<Props, State> {
         <DropdownWrapper {...this.props}>
           <DropdownButton onClick={this.handleClick}>
             <BadgeWrapper>
-              <Badge
-                content={initial || ""}
-                size={badgeSize}
-                background={reverse ? "#fff" : theme.colorPrimary}
-                color={reverse ? theme.colorPrimary : "#fff"}
-              />
+              <Badge content={initial || ''} size={badgeSize} reverse={reverse} />
             </BadgeWrapper>
             {!small && <FirstName reverse={reverse}>{firstName}</FirstName>}
             <ArrowWrapper small={small}>
@@ -211,17 +205,17 @@ class MenuDropdown extends Component<Props, State> {
 };
 
 (MenuDropdown as any).defaultProps = {
-  detailUrl: "http://google.com",
+  detailUrl: 'http://google.com',
   logOutClick: () => {
-    console.log("Logout!");
+    console.log('Logout!');
   },
   small: false,
-  firstName: "",
-  lastName: "",
-  customerReferenceLabel: "Customer Reference: ",
-  detailLabel: "View your details",
-  logOutLabel: "Log Out",
+  firstName: '',
+  lastName: '',
+  customerReferenceLabel: 'Customer Reference: ',
+  detailLabel: 'View your details',
+  logOutLabel: 'Log Out',
   showDetailLink: true
 };
 
-export default withTheme(MenuDropdown);
+export default MenuDropdown;

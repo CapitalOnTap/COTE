@@ -1,54 +1,44 @@
-import PropTypes from "prop-types";
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
 interface Props {
   size: number;
-  background: string;
-  content: React.ReactNode;
-  color: string;
+  background?: string;
+  content?: React.ReactNode;
+  color?: string;
+  reverse?: boolean;
 }
 
 const StyledBadge = styled.div<{
-  color: string;
+  color?: string;
   size: number;
-  background: string;
+  background?: string;
+  reverse?: boolean;
 }>`
-  height: ${props => props.size + "px"};
-  width: ${props => props.size + "px"};
-  line-height: ${props => props.size + "px"};
-  font-size: ${props => props.size / 2 + "px"};
+  height: ${props => props.size + 'px'};
+  width: ${props => props.size + 'px'};
+  line-height: ${props => props.size + 'px'};
+  font-size: ${props => props.size / 2 + 'px'};
   text-align: center;
-  border-radius: ${props => props.size + "px"};
-  background: ${props => props.background};
-  color: ${props => props.color};
+  border-radius: ${props => props.size + 'px'};
+  background: ${props => {
+    const color = props.color ? props.color : '#fff';
+    const bgColor = props.background ? props.background : props.theme.colorPrimary;
+    return props.reverse === true ? color : bgColor;
+  }};
+  color: ${props => {
+    const color = props.color ? props.color : '#fff';
+    const bgColor = props.background ? props.background : props.theme.colorPrimary;
+    return props.reverse === true ? bgColor : color;
+  }};
 `;
 
-const Badge: React.SFC<Props> = ({
-  content,
-  size,
-  background,
-  color,
-  ...props
-}) => {
+const Badge: React.SFC<Props> = ({ content, size = 48, background, color, reverse, ...props }) => {
   return (
-    <StyledBadge size={size} background={background} color={color} {...props}>
+    <StyledBadge size={size} background={background} color={color} reverse={reverse} {...props}>
       {content}
     </StyledBadge>
   );
-};
-
-(Badge as any).propTypes = {
-  content: PropTypes.string.isRequired,
-  size: PropTypes.number,
-  color: PropTypes.string,
-  background: PropTypes.string
-};
-
-Badge.defaultProps = {
-  size: 48,
-  color: "white",
-  background: "#27b161"
 };
 
 export default Badge;

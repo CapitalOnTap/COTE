@@ -1,14 +1,12 @@
 import * as React from 'react';
-import Dropzone, { DropzoneProps } from 'react-dropzone';
+import Dropzone, { DropzoneProps, DropFilesEventHandler } from 'react-dropzone';
 import styled from 'styled-components';
 import { colors as defaultColors } from '../../styles/defaults';
 import Button from '../atoms/Button/Button';
 import Icon from '../atoms/Icon/Icon';
 import { Title } from '../atoms/Typography/index';
 
-const StyledDropZone = styled(Dropzone)<
-  DropzoneProps & { children: React.ReactNode }
->`
+const StyledDropZone = styled(Dropzone)<DropzoneProps & { children: React.ReactNode }>`
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -33,12 +31,15 @@ const ContentWrapper = styled.div`
 `;
 
 interface Props extends DropzoneProps {
-  icon: string;
+  icon?: string;
   // TODO: type the theme
-  theme: any;
-  buttonText: string;
-  title: string;
+  theme?: any;
+  buttonText?: string;
+  title?: string;
   subtitle?: string;
+  paragraphText?: string;
+  multiple?: boolean;
+  onDrop?: DropFilesEventHandler;
 }
 
 class Uploader extends React.Component<Props> {
@@ -49,20 +50,16 @@ class Uploader extends React.Component<Props> {
   };
 
   render() {
-    const { icon, theme, buttonText, title, subtitle, ...props } = this.props;
+    const { icon, theme, buttonText, paragraphText, title, subtitle, ...props } = this.props;
 
     return (
       <StyledDropZone
         {...props}
         activeStyle={{
-          border: `dashed 2px ${
-            theme ? theme.colorPrimary : defaultColors.success
-          }`
+          border: `dashed 2px ${theme ? theme.colorPrimary : defaultColors.success}`
         }}
         rejectStyle={{
-          border: `dashed 2px ${
-            theme ? theme.colorDanger : defaultColors.danger
-          }`
+          border: `dashed 2px ${theme ? theme.colorDanger : defaultColors.danger}`
         }}
         ref={node => {
           this.dropzone = node;
@@ -72,7 +69,7 @@ class Uploader extends React.Component<Props> {
           <Icon name={icon} />
           <Title bold>{title}</Title>
           <p>{subtitle}</p>
-          <p>or</p>
+          <p>{paragraphText}</p>
         </ContentWrapper>
         <Button primary solid type="button" onClick={this.onOpenClick}>
           {buttonText}
@@ -86,7 +83,8 @@ class Uploader extends React.Component<Props> {
   icon: 'add_circle_outline',
   buttonText: 'Choose files',
   title: 'Drag and drop files here',
-  subtitle: ''
+  subtitle: '',
+  paragraphText: 'or'
 };
 
 export default Uploader;

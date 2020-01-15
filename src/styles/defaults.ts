@@ -16,7 +16,8 @@ export const colors: ThemeColors = {
   darkGrey: '#696D7E',
   lightGrey: '#f5f7f8',
   highlight: '#C0DDEB',
-  navigationBackground: '#273456'
+  navigationBackground: '#273456',
+  warning: '#F5A623'
 };
 
 export const fontWeights: ThemeFontWeights = {
@@ -44,6 +45,7 @@ export const theme: Theme = {
   colorDarkGrey: '#696D7E',
   colorLightGrey: '#E8EBEE',
   colorNavigationBackground: '#273456',
+  colorWarning: '#F5A623',
   // Elevation theme
   elevation: {
     // What property to use to apply depth

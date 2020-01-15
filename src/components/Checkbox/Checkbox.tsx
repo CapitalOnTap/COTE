@@ -43,6 +43,7 @@ const Box = styled.span<{ primary?: boolean; secondary?: boolean; invalid?: bool
   }};
   border-radius: 0.25em;
   width: 24px;
+  min-width: 24px;
   height: 24px;
   float: left;
   margin-right: 0.5em;
@@ -86,6 +87,7 @@ interface Props {
   secondary?: boolean;
   id?: string;
   invalid?: boolean;
+  checked?: boolean;
 }
 
 interface State {
@@ -93,7 +95,7 @@ interface State {
 }
 
 class Checkbox extends Component<Props, State> {
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
 
     this.state = {
@@ -107,7 +109,9 @@ class Checkbox extends Component<Props, State> {
 
   render() {
     const { label, name, primary, secondary, id, invalid } = this.props;
-    const { checked } = this.state;
+    // Use prop instead of state, if provided
+    const checked = this.props.checked || this.state.checked;
+
     return (
       <Wrapper {...this.props} id={id}>
         <WrappingLabel>
@@ -117,6 +121,7 @@ class Checkbox extends Component<Props, State> {
             onChange={e => {
               this.handleValueChange(checked);
             }}
+            checked={checked}
             value={checked ? 1 : 0}
             {...this.props}
           />
@@ -135,7 +140,8 @@ class Checkbox extends Component<Props, State> {
   handleClicked: PropTypes.func,
   primary: PropTypes.bool,
   secondary: PropTypes.bool,
-  invalid: PropTypes.bool
+  invalid: PropTypes.bool,
+  checked: PropTypes.bool
 };
 
 (Checkbox as any).defaultProps = {

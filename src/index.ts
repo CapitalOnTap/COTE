@@ -1,5 +1,5 @@
 export { default as Accordion } from './components/Accordion/Accordion';
-export { default as AddressSearch } from './components/AddressSelector/AddressSelector';
+export { default as AddressSearch, Address } from './components/AddressSelector/AddressSelector';
 export { default as Badge } from './components/atoms/Badge/Badge';
 export { default as Button } from './components/atoms/Button/Button';
 export { default as Icon } from './components/atoms/Icon/Icon';
@@ -19,6 +19,7 @@ export { default as Checkbox } from './components/Checkbox/Checkbox';
 export { default as ContentBox } from './components/ContentBox/ContentBox';
 export { default as CotCard } from './components/CotCard/CotCard';
 export { default as Dropdown } from './components/Dropdown/Dropdown';
+export { default as DropdownButton } from './components/DropdownButton/DropdownButton';
 export { default as ExpansionPanel } from './components/ExpansionPanel';
 export { default as HighlightsBar } from './components/HighlightsBar/HighlightsBar';
 export {
@@ -53,3 +54,5 @@ export { theme as defaultTheme } from './styles/defaults';
 export { default as GlobalStyle } from './styles/GlobalStyle';
 export { default as Tooltip } from './components/Tooltip/Tooltip';
 export { default as Carousel } from './components/Carousel/Carousel';
+
+export { Theme, ThemeColors } from './styles/types';

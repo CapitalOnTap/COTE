@@ -9,7 +9,6 @@ import Icon from '../atoms/Icon/Icon';
 
 const TooltipIcon = styled(Icon)`
   cursor: pointer;
-  padding: 0 10px;
   vertical-align: middle;
 `;
 
@@ -19,9 +18,21 @@ interface Props {
   position?: string;
   withoutLabel?: boolean;
   label?: string;
+  trigger?: string;
+  icon?: string;
+  interactive?: boolean;
 }
 
-const Tooltip: React.SFC<Props> = ({ title, description, position, withoutLabel, label }) => {
+const Tooltip: React.FC<Props> = ({
+  title,
+  description,
+  position,
+  withoutLabel,
+  label,
+  trigger,
+  icon,
+  interactive
+}) => {
   return (
     <Flex alignItems="center">
       {!withoutLabel && label}
@@ -30,9 +41,11 @@ const Tooltip: React.SFC<Props> = ({ title, description, position, withoutLabel,
         inertia
         theme="light"
         position={position}
+        trigger={trigger}
+        interactive={interactive}
         html={<TooltipContent title={title} description={description} />}
       >
-        <TooltipIcon name="info" />
+        <TooltipIcon name={icon} />
       </CotTooltip>
     </Flex>
   );
@@ -49,7 +62,8 @@ Tooltip.defaultProps = {
   title: 'This is some tooltip title.',
   description: 'This is some tooltip description content.',
   position: 'top',
-  label: 'Tooltip label'
+  label: 'Tooltip label',
+  icon: 'info'
 };
 
 export default Tooltip;
