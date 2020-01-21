@@ -11,6 +11,7 @@ interface PaperWrapperProps {
 export const PaperWrapper = styled.div<PaperWrapperProps>`
   border-radius: 4px;
   background-color: #ffffff;
+  overflow: hidden;
  
   ${props => props.elevation && elevationMixin(props.elevation)}
   padding: ${props => (props.padding ? props.padding : '1rem')};

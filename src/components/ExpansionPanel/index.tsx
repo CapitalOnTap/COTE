@@ -82,7 +82,7 @@ const StyledTitle = styled(Title)`
 `;
 
 interface Props {
-  title?: string;
+  title?: React.ReactNode;
   icon?: string;
   tooltip?: { title: string; description: string };
   highlight?: boolean;
