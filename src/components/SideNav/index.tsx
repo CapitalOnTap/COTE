@@ -135,6 +135,7 @@ interface Props {
     isSelected?: boolean;
     icon?: string;
     title?: React.ReactNode;
+    testKey?: string;
   }[];
   isOpen?: boolean;
   iconsOnly?: boolean;
@@ -192,7 +193,11 @@ class SideNav extends Component<Props, State> {
                     item.rel = 'noopener noreferrer';
                   }
                   return (
-                    <ListItem key={`snav-${item.pathname}`} selected={item.isSelected}>
+                    <ListItem
+                      key={`snav-${item.pathname}`}
+                      selected={item.isSelected}
+                      data-testid={item.testKey ? `SideNav-${item.testKey}` : null}
+                    >
                       {renderLink ? (
                         renderLink(
                           <Fragment>
@@ -202,7 +207,13 @@ class SideNav extends Component<Props, State> {
                           item.pathname
                         )
                       ) : (
-                        <Link href={item.pathname} target={item.target} rel={item.rel}>
+                        <Link
+                          href={item.pathname}
+                          target={item.target}
+                          rel={item.rel}
+                          data-testid={item.testKey ? `SideNav-${item.testKey}` : null}
+                        >
+                          test
                           {item.icon && <Icon name={item.icon} />}
                           {!iconsOnly && <span>{item.title}</span>}
                         </Link>
