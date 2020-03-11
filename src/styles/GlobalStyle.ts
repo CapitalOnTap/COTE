@@ -26,6 +26,11 @@ time, mark, audio, video, input {
 
 html {
 	-webkit-font-smoothing: subpixel-antialiased;
+
+	@media only screen and (min-width: 640px) {
+		font-size: 14px;
+	}
+	font-size: 12px;
 }
 
 article, aside, details, figcaption, figure, 
@@ -53,10 +58,6 @@ table {
 }
 body {
 	font-family: 'Lato', sans-serif;
-	@media only screen and (min-width: 640px) {
-		font-size: 14px;
-	}
-	font-size: 12px;
   color: rgba(6, 31, 51, 1);
 }
 
