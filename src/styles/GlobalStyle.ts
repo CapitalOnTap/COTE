@@ -40,6 +40,7 @@ footer, header, hgroup, menu, nav, section {
 body {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+	font-size: 1rem;
 }
 ol, ul {
 	list-style: none;
