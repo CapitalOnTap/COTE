@@ -179,7 +179,7 @@ class MenuDropdown extends Component<Props, State> {
     return (
       <OutsideAlerter handleClickOutsideElement={this.handleClickOutside}>
         <DropdownWrapper {...this.props}>
-          <DropdownButton onClick={this.handleClick} popupDirection>
+          <DropdownButton onClick={this.handleClick} popupDirection={popupDirection}>
             <BadgeWrapper>
               {renderLogo ? (
                 renderLogo()
