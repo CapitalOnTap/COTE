@@ -5,6 +5,7 @@ import { colors as defaultColors } from '../../styles/defaults';
 import OutsideAlerter from '../OutsideAlerter/OutsideAlerter';
 import Badge from '../atoms/Badge/Badge';
 import Icon from '../atoms/Icon/Icon';
+import _ from 'lodash';
 
 const ArrowIcon = styled(Icon)`
   z-index: 2;
@@ -26,11 +27,12 @@ const DropdownWrapper = styled.div`
   position: relative;
 `;
 
-const DropdownButton = styled.div`
+const DropdownButton = styled.div<{ rightPopup?: boolean }>`
   display: inline-block;
   position: relative;
   background-color: inherit;
   font-family: inherit;
+  ${props => props.rightPopup && `cursor: pointer;`}
 `;
 
 const FirstName = styled.p<{ reverse?: boolean }>`
@@ -51,7 +53,11 @@ const BadgeWrapper = styled.div`
   display: inline-block;
 `;
 
-const MenuWrapper = styled.div<{ right?: boolean; isOpen?: boolean }>`
+const MenuWrapper = styled.div<{
+  right?: boolean;
+  isOpen?: boolean;
+  popupDirection?: string;
+}>`
   right: ${props => (props.right ? 0 : null)};
   display: ${props => (props.isOpen ? 'block' : 'none')};
   margin-top: 5px;
@@ -61,6 +67,29 @@ const MenuWrapper = styled.div<{ right?: boolean; isOpen?: boolean }>`
   z-index: 2;
   border: solid 1px #e4e4e4;
   border-radius: 5px;
+  ${props =>
+    props.popupDirection &&
+    `top: -15rem;
+     left: 130px;
+      @media (max-width: 640px) {
+        top: -16.5rem;
+        left: 132px;
+      }
+    &:after, &:before {
+      right: 100%;
+      bottom: 8%;
+      border: solid transparent;
+      content: ' ';
+      height: 0;
+      width: 0;
+      position: absolute;
+      pointer-events: none;
+    }
+    &:before {
+      border-right-color: #ffffff;
+      border-width: 16px;
+	    margin-top: -16px;
+    }`}
 `;
 
 const MenuBox = styled.div<{ last?: boolean; hover?: boolean }>`
@@ -102,6 +131,8 @@ interface Props {
   detailLabel: React.ReactNode;
   logOutLabel: React.ReactNode;
   showDetailLink: boolean;
+  popupDirection?: string;
+  renderLogo?: () => React.ReactNode;
 }
 
 interface State {
@@ -137,7 +168,9 @@ class MenuDropdown extends Component<Props, State> {
       customerReferenceLabel,
       detailLabel,
       logOutLabel,
-      showDetailLink
+      showDetailLink,
+      popupDirection,
+      renderLogo
     } = this.props;
 
     const initial = firstName[0] + lastName[0];
@@ -146,16 +179,22 @@ class MenuDropdown extends Component<Props, State> {
     return (
       <OutsideAlerter handleClickOutsideElement={this.handleClickOutside}>
         <DropdownWrapper {...this.props}>
-          <DropdownButton onClick={this.handleClick}>
+          <DropdownButton onClick={this.handleClick} rightPopup>
             <BadgeWrapper>
-              <Badge content={initial || ''} size={badgeSize} reverse={reverse} />
+              {renderLogo ? (
+                renderLogo()
+              ) : (
+                <Badge content={initial || ''} size={badgeSize} reverse={reverse} />
+              )}
             </BadgeWrapper>
-            {!small && <FirstName reverse={reverse}>{firstName}</FirstName>}
-            <ArrowWrapper small={small}>
-              <ArrowIcon reverse={reverse} name="keyboard_arrow_down" />
-            </ArrowWrapper>
+            {!small && <FirstName reverse={reverse}>{firstName.split(' ')[0]}</FirstName>}
+            {_.isEmpty(popupDirection) && (
+              <ArrowWrapper small={small}>
+                <ArrowIcon reverse={reverse} name="keyboard_arrow_down" />
+              </ArrowWrapper>
+            )}
           </DropdownButton>
-          <MenuWrapper isOpen={this.state.opened} right={small}>
+          <MenuWrapper isOpen={this.state.opened} right={small} popupDirection={popupDirection}>
             <MenuBox>
               <MenuEntry>
                 <b>
@@ -201,7 +240,9 @@ class MenuDropdown extends Component<Props, State> {
   customerReferenceLabel: PropTypes.string.isRequired,
   detailLabel: PropTypes.string.isRequired,
   logOutLabel: PropTypes.string.isRequired,
-  showDetailLink: PropTypes.bool
+  showDetailLink: PropTypes.bool,
+  popupDirection: PropTypes.string,
+  renderLogo: PropTypes.func
 };
 
 (MenuDropdown as any).defaultProps = {
