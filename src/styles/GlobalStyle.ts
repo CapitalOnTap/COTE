@@ -19,7 +19,6 @@ time, mark, audio, video, input {
 	margin: 0;
 	padding: 0;
 	border: 0;
-	font-size: 100%;
   vertical-align: baseline;
   box-sizing: border-box;
 }
@@ -27,6 +26,11 @@ time, mark, audio, video, input {
 
 html {
 	-webkit-font-smoothing: subpixel-antialiased;
+
+	@media only screen and (min-width: 640px) {
+		font-size: 14px;
+	}
+	font-size: 12px;
 }
 
 article, aside, details, figcaption, figure, 
@@ -36,6 +40,7 @@ footer, header, hgroup, menu, nav, section {
 body {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+	font-size: 1rem;
 }
 ol, ul {
 	list-style: none;
@@ -54,10 +59,6 @@ table {
 }
 body {
 	font-family: 'Lato', sans-serif;
-	@media only screen and (min-width: 640px) {
-		font-size: 14px;
-	}
-	font-size: 12px;
   color: rgba(6, 31, 51, 1);
 }
 
