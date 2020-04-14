@@ -27,12 +27,12 @@ const DropdownWrapper = styled.div`
   position: relative;
 `;
 
-const DropdownButton = styled.div<{ rightPopup?: boolean }>`
+const DropdownButton = styled.div<{ popupDirection?: string }>`
   display: inline-block;
   position: relative;
   background-color: inherit;
   font-family: inherit;
-  ${props => props.rightPopup && `cursor: pointer;`}
+  ${props => props.popupDirection && `cursor: pointer;`}
 `;
 
 const FirstName = styled.p<{ reverse?: boolean }>`
@@ -179,7 +179,7 @@ class MenuDropdown extends Component<Props, State> {
     return (
       <OutsideAlerter handleClickOutsideElement={this.handleClickOutside}>
         <DropdownWrapper {...this.props}>
-          <DropdownButton onClick={this.handleClick} rightPopup>
+          <DropdownButton onClick={this.handleClick} popupDirection>
             <BadgeWrapper>
               {renderLogo ? (
                 renderLogo()
