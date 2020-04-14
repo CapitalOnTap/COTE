@@ -70,54 +70,18 @@ storiesOf('SideNav', module)
           <Container>
             <SideNav ref={el => (this.sideNavRef = el)} />
             <div>
-              <p>
-                Eiusmod aute incididunt nisi Lorem nostrud minim officia duis
-                mollit.
-              </p>
-              <p>
-                Eiusmod aute incididunt nisi Lorem nostrud minim officia duis
-                mollit.
-              </p>
-              <p>
-                Eiusmod aute incididunt nisi Lorem nostrud minim officia duis
-                mollit.
-              </p>
-              <p>
-                Eiusmod aute incididunt nisi Lorem nostrud minim officia duis
-                mollit.
-              </p>
-              <p>
-                Eiusmod aute incididunt nisi Lorem nostrud minim officia duis
-                mollit.
-              </p>
-              <p>
-                Eiusmod aute incididunt nisi Lorem nostrud minim officia duis
-                mollit.
-              </p>
-              <p>
-                Eiusmod aute incididunt nisi Lorem nostrud minim officia duis
-                mollit.
-              </p>
-              <p>
-                Eiusmod aute incididunt nisi Lorem nostrud minim officia duis
-                mollit.
-              </p>
-              <p>
-                Eiusmod aute incididunt nisi Lorem nostrud minim officia duis
-                mollit.
-              </p>
-              <p>
-                Eiusmod aute incididunt nisi Lorem nostrud minim officia duis
-                mollit.
-              </p>
-              <p>
-                Eiusmod aute incididunt nisi Lorem nostrud minim officia duis
-                mollit.
-              </p>
-              <p>
-                Eiusmod aute incididunt nisi Lorem nostrud minim officia duis
-                mollit.
-              </p>
+              <p>Eiusmod aute incididunt nisi Lorem nostrud minim officia duis mollit.</p>
+              <p>Eiusmod aute incididunt nisi Lorem nostrud minim officia duis mollit.</p>
+              <p>Eiusmod aute incididunt nisi Lorem nostrud minim officia duis mollit.</p>
+              <p>Eiusmod aute incididunt nisi Lorem nostrud minim officia duis mollit.</p>
+              <p>Eiusmod aute incididunt nisi Lorem nostrud minim officia duis mollit.</p>
+              <p>Eiusmod aute incididunt nisi Lorem nostrud minim officia duis mollit.</p>
+              <p>Eiusmod aute incididunt nisi Lorem nostrud minim officia duis mollit.</p>
+              <p>Eiusmod aute incididunt nisi Lorem nostrud minim officia duis mollit.</p>
+              <p>Eiusmod aute incididunt nisi Lorem nostrud minim officia duis mollit.</p>
+              <p>Eiusmod aute incididunt nisi Lorem nostrud minim officia duis mollit.</p>
+              <p>Eiusmod aute incididunt nisi Lorem nostrud minim officia duis mollit.</p>
+              <p>Eiusmod aute incididunt nisi Lorem nostrud minim officia duis mollit.</p>
             </div>
             <div style={{ textAlign: 'right' }}>
               <button type="button" onClick={this.handleOpenSideNav}>
@@ -130,4 +94,9 @@ storiesOf('SideNav', module)
     }
 
     return <PageContainer />;
-  });
+  })
+  .add('With user navigation', () => (
+    <Container>
+      <SideNav isOpen userNav logoUrl="http://via.placeholder.com/64x64" />
+    </Container>
+  ));
