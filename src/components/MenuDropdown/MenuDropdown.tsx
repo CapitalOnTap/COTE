@@ -5,7 +5,6 @@ import { colors as defaultColors } from '../../styles/defaults';
 import OutsideAlerter from '../OutsideAlerter/OutsideAlerter';
 import Badge from '../atoms/Badge/Badge';
 import Icon from '../atoms/Icon/Icon';
-import _ from 'lodash';
 
 const ArrowIcon = styled(Icon)`
   z-index: 2;
@@ -16,10 +15,10 @@ const ArrowIcon = styled(Icon)`
   cursor: pointer;
 `;
 
-const ArrowWrapper = styled.div<{ small?: boolean }>`
-  display: inline-block;
+const ArrowWrapper = styled.div<{ small?: boolean; popupDirection?: string }>`
+  display: ${props => (props.popupDirection ? 'flex' : 'inline-block')};
   position: relative;
-  top: ${props => (props.small ? '6px' : '2px')};
+  top: ${props => (props.popupDirection ? 'auto' : props.small ? '6px' : '2px')};
 `;
 
 const DropdownWrapper = styled.div`
@@ -28,11 +27,12 @@ const DropdownWrapper = styled.div`
 `;
 
 const DropdownButton = styled.div<{ popupDirection?: string }>`
-  display: inline-block;
+  display: ${props =>
+    props.popupDirection && props.popupDirection == 'down' ? 'flex' : 'inline-block'};
   position: relative;
   background-color: inherit;
   font-family: inherit;
-  ${props => props.popupDirection && `cursor: pointer;`}
+  ${props => props.popupDirection && `cursor: pointer; align-items: center;`}
 `;
 
 const FirstName = styled.p<{ reverse?: boolean }>`
@@ -58,38 +58,64 @@ const MenuWrapper = styled.div<{
   isOpen?: boolean;
   popupDirection?: string;
 }>`
-  right: ${props => (props.right ? 0 : null)};
+  right: ${props => (props.popupDirection || props.right ? 0 : null)};
   display: ${props => (props.isOpen ? 'block' : 'none')};
-  margin-top: 5px;
+  margin-top: ${props => (props.popupDirection ? '20px' : '5px')};
   position: absolute;
   background-color: white;
   min-width: 178px;
   z-index: 2;
   border: solid 1px #e4e4e4;
   border-radius: 5px;
-  ${props =>
-    props.popupDirection &&
-    `top: -15rem;
-     left: 130px;
-      @media (max-width: 640px) {
-        top: -16.5rem;
-        left: 132px;
-      }
-    &:after, &:before {
-      right: 100%;
-      bottom: 8%;
-      border: solid transparent;
-      content: ' ';
-      height: 0;
-      width: 0;
-      position: absolute;
-      pointer-events: none;
+  ${props => {
+    if (props.popupDirection && props.popupDirection == 'right') {
+      return `top: -16rem;
+        left: 130px;
+         @media (max-width: 640px) {
+           top: -16.5rem;
+           left: 132px;
+         }
+       &:after, &:before {
+         right: 100%;
+         bottom: 8%;
+         border: solid transparent;
+         content: ' ';
+         height: 0;
+         width: 0;
+         position: absolute;
+         pointer-events: none;
+       }
+       &:before {
+         border-right-color: #ffffff;
+         border-width: 16px;
+         margin-top: -16px;
+       }`;
     }
-    &:before {
-      border-right-color: #ffffff;
-      border-width: 16px;
-	    margin-top: -16px;
-    }`}
+    if (props.popupDirection && props.popupDirection == 'down') {
+      return `
+       &:after, &:before {
+        bottom: 100%;
+	      left: 70%;
+        border: solid transparent;
+        content: ' ';
+        height: 0;
+        width: 0;
+        position: absolute;
+        pointer-events: none;
+       }
+       &:after {
+        border-bottom-color: #ffffff;
+        border-width: 14px;
+        margin-left: -14px;
+      }
+       &:before {
+        border-bottom-color: #ffffff;
+        border-width: 16px;
+	      margin-left: -16px;
+       }`;
+    }
+    return null;
+  }}
 `;
 
 const MenuBox = styled.div<{ last?: boolean; hover?: boolean }>`
@@ -133,6 +159,7 @@ interface Props {
   showDetailLink: boolean;
   popupDirection?: string;
   renderLogo?: () => React.ReactNode;
+  arrow?: boolean;
 }
 
 interface State {
@@ -170,7 +197,8 @@ class MenuDropdown extends Component<Props, State> {
       logOutLabel,
       showDetailLink,
       popupDirection,
-      renderLogo
+      renderLogo,
+      arrow
     } = this.props;
 
     const initial = firstName[0] + lastName[0];
@@ -188,8 +216,8 @@ class MenuDropdown extends Component<Props, State> {
               )}
             </BadgeWrapper>
             {!small && <FirstName reverse={reverse}>{firstName.split(' ')[0]}</FirstName>}
-            {_.isEmpty(popupDirection) && (
-              <ArrowWrapper small={small}>
+            {arrow && (
+              <ArrowWrapper small={small} popupDirection={popupDirection}>
                 <ArrowIcon reverse={reverse} name="keyboard_arrow_down" />
               </ArrowWrapper>
             )}
@@ -242,7 +270,8 @@ class MenuDropdown extends Component<Props, State> {
   logOutLabel: PropTypes.string.isRequired,
   showDetailLink: PropTypes.bool,
   popupDirection: PropTypes.string,
-  renderLogo: PropTypes.func
+  renderLogo: PropTypes.func,
+  arrow: PropTypes.bool
 };
 
 (MenuDropdown as any).defaultProps = {
@@ -256,7 +285,8 @@ class MenuDropdown extends Component<Props, State> {
   customerReferenceLabel: 'Customer Reference: ',
   detailLabel: 'View your details',
   logOutLabel: 'Log Out',
-  showDetailLink: true
+  showDetailLink: true,
+  arrow: true
 };
 
 export default MenuDropdown;
