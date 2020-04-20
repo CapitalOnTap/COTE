@@ -58,7 +58,8 @@ const MenuWrapper = styled.div<{
   isOpen?: boolean;
   popupDirection?: string;
 }>`
-  right: ${props => (props.popupDirection || props.right ? 0 : null)};
+  right: ${props =>
+    props.popupDirection && props.popupDirection == 'down' ? '50%' : props.right ? 0 : null};
   display: ${props => (props.isOpen ? 'block' : 'none')};
   margin-top: ${props => (props.popupDirection ? '20px' : '5px')};
   position: absolute;
@@ -92,10 +93,11 @@ const MenuWrapper = styled.div<{
        }`;
     }
     if (props.popupDirection && props.popupDirection == 'down') {
-      return `
+      return ` 
+      transform: translateX(50%);
        &:after, &:before {
         bottom: 100%;
-	      left: 70%;
+	      left: 58%;
         border: solid transparent;
         content: ' ';
         height: 0;
