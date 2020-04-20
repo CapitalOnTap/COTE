@@ -21,9 +21,9 @@ const ArrowWrapper = styled.div<{ small?: boolean; popupDirection?: string }>`
   top: ${props => (props.popupDirection ? 'auto' : props.small ? '6px' : '2px')};
 `;
 
-const DropdownWrapper = styled.div`
+const DropdownWrapper = styled.div<{ popupDirection?: string }>`
   display: initial;
-  position: relative;
+  position: ${props => (props.popupDirection ? 'initial' : 'relative')};
 `;
 
 const DropdownButton = styled.div<{ popupDirection?: string }>`
