@@ -30,6 +30,14 @@ const ContentWrapper = styled.div`
   }
 `;
 
+const MobileContentWrapper = styled.div`
+  display: none;
+  text-align: center;
+  @media screen and (max-width: 640px) {
+    display: block;
+  }
+`;
+
 interface Props extends DropzoneProps {
   icon?: string;
   // TODO: type the theme
@@ -40,6 +48,10 @@ interface Props extends DropzoneProps {
   paragraphText?: string;
   multiple?: boolean;
   onDrop?: DropFilesEventHandler;
+  showIconOnMobile?: boolean;
+  showTitleOnMobile?: boolean;
+  showSubtitleOnMobile?: boolean;
+  showParagraphTextOnMobile?: boolean;
 }
 
 class Uploader extends React.Component<Props> {
@@ -50,7 +62,19 @@ class Uploader extends React.Component<Props> {
   };
 
   render() {
-    const { icon, theme, buttonText, paragraphText, title, subtitle, ...props } = this.props;
+    const {
+      icon,
+      theme,
+      buttonText,
+      paragraphText,
+      title,
+      subtitle,
+      showIconOnMobile,
+      showTitleOnMobile,
+      showSubtitleOnMobile,
+      showParagraphTextOnMobile,
+      ...props
+    } = this.props;
 
     return (
       <StyledDropZone
@@ -71,6 +95,12 @@ class Uploader extends React.Component<Props> {
           <p>{subtitle}</p>
           <p>{paragraphText}</p>
         </ContentWrapper>
+        <MobileContentWrapper>
+          {showIconOnMobile && <Icon name={icon} />}
+          {showTitleOnMobile && <Title bold>{title}</Title>}
+          {showSubtitleOnMobile && <p>{subtitle}</p>}
+          {showParagraphTextOnMobile && <p>{paragraphText}</p>}
+        </MobileContentWrapper>
         <Button primary solid type="button" onClick={this.onOpenClick}>
           {buttonText}
         </Button>
@@ -84,7 +114,11 @@ class Uploader extends React.Component<Props> {
   buttonText: 'Choose files',
   title: 'Drag and drop files here',
   subtitle: '',
-  paragraphText: 'or'
+  paragraphText: 'or',
+  showIconOnMobile: false,
+  showTitleOnMobile: false,
+  showSubtitleOnMobile: false,
+  showParagraphTextOnMobile: false
 };
 
 export default Uploader;
