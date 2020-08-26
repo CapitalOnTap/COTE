@@ -1,6 +1,7 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
 import styled from 'styled-components';
+import uuidv4 from 'uuid/v4';
 import Icon from '../atoms/Icon/Icon';
 import { Heading3 } from '../atoms/Typography/index';
 
@@ -55,26 +56,19 @@ interface Props {
   description: string;
 }
 
-const Widget: React.SFC<Props> = ({
-  items,
-  title,
-  icon,
-  description,
-  ...props
-}) => {
+const Widget: React.SFC<Props> = ({ items, title, icon, description, ...props }) => {
   return (
     <Wrapper {...props}>
       <WidgetTopWrapper>
         <StyledIcon name={icon} primary />
         <Heading3>{title}</Heading3>
-        {description && <p style={{ marginTop: '16px' }}>{description}</p>}
+        {description && <p style={{ marginTop: '16px', width: '100%' }}>{description}</p>}
       </WidgetTopWrapper>
       {items.length ? (
         <WidgetBottomWrapper>
-          {items.map((item, i) => {
+          {items.map(item => {
             return (
-              // TODO: fix index as key
-              <ItemWrapper key={`w-${i}`}>
+              <ItemWrapper key={uuidv4()}>
                 <BottomIcon primary name={item.icon} />
                 <ItemTitle>{item.title}</ItemTitle>
               </ItemWrapper>
