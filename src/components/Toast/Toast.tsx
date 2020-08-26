@@ -45,7 +45,7 @@ interface Props {
   buttonText: string;
   warning?: boolean;
   error?: boolean;
-  message: boolean;
+  message: string;
   onButtonClick?: () => void;
 }
 
