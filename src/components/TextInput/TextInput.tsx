@@ -69,6 +69,11 @@ const InfoCaption = styled(Caption)`
   margin-top: '8px';
 `;
 
+const WarningCaption = styled(Caption)`
+  margin-top: '8px';
+  color: ${defaultColors.warning};
+`;
+
 export interface Props extends InputProps {
   labelText?: React.ReactNode;
   subLabelText?: React.ReactNode;
@@ -77,6 +82,7 @@ export interface Props extends InputProps {
   error?: string;
   required?: boolean;
   info?: string;
+  warning?: string;
   tooltip?: { title: string; description: string };
   isAutoComplete?: boolean;
   disabled?: boolean;
@@ -98,6 +104,7 @@ const TextInput = React.forwardRef<Ref, Props>((props, ref) => {
     error,
     required,
     info,
+    warning,
     className,
     name,
     onChange,
@@ -145,6 +152,7 @@ const TextInput = React.forwardRef<Ref, Props>((props, ref) => {
 
       {error && <Caption required={required} text={error} />}
       {info && <InfoCaption text={info} />}
+      {warning && <WarningCaption text={warning} />}
     </InputWrapper>
   );
 });
@@ -155,6 +163,8 @@ const TextInput = React.forwardRef<Ref, Props>((props, ref) => {
   error: PropTypes.string,
   /** Information related to this input field */
   info: PropTypes.string,
+  /** Warning message to show related to this input field */
+  warning: PropTypes.string,
   /** Regex pattern mask array to be applied to the input. E.g. Phone format, address, post code, sort code.*/
   mask: PropTypes.any,
   /** If text input should stretch to fill its parent container */
@@ -178,6 +188,7 @@ const TextInput = React.forwardRef<Ref, Props>((props, ref) => {
   placeholder: 'Type something',
   error: '',
   info: '',
+  warning: '',
   full: false,
   guide: false,
   labelText: '',
