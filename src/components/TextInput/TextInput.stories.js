@@ -48,6 +48,7 @@ storiesOf('Text Input', module)
   .add('With info and error', () => (
     <TextInput info="This is an info to help user." error="Field is required" required />
   ))
+  .add('With warning', () => <TextInput warning="This is a warning to the user." />)
   .add('With mask - Number', () => (
     <TextInput
       placeholder="e.g. 07858585858855"
